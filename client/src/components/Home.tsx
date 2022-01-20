@@ -1,8 +1,13 @@
 
+
+
 function Home(props: any){
+
+ 
+
     return(
         <div>
-            Homepage
+            Homepage 
         </div>
     )
 }
