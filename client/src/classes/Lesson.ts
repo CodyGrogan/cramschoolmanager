@@ -5,6 +5,7 @@ class Lesson{
         this.num = num;
         this.date = date;
         this.lessonplan = '';
+        this.finished = false;
         
         for (let i = 0; i < studentList.length; i++){
             let attendanceinfo = [studentList[i].name, false];
@@ -16,6 +17,7 @@ class Lesson{
     date;
     lessonplan: string;
     attendance: any;
+    finished: boolean;
 
 
 }
