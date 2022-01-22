@@ -1,4 +1,6 @@
 
+
+
 class Student{
     constructor(name: string, age: number, parent1: string, parent2:string, phone:string, email:string){
         this.name = name;

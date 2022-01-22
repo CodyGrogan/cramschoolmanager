@@ -10,18 +10,18 @@ class SchoolClass{
     }
 
     name;
-    teacherList: Teacher[];
-    studentList: Student[];
+    teacherList: string[];
+    studentList: string[];
 
     addStudent(student: Student){
         student.classes.push(this.name);
-        this.studentList.push(student);
+        this.studentList.push(student.name);
 
     }
 
     addTeacher(teacher: Teacher){
         teacher.classes.push(this.name);
-        this.teacherList.push(teacher);
+        this.teacherList.push(teacher.name);
     }
 
 }
