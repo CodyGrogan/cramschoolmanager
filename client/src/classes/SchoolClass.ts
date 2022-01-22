@@ -13,6 +13,16 @@ class SchoolClass{
     teacherList: Teacher[];
     studentList: Student[];
 
+    addStudent(student: Student){
+        student.classes.push(this.name);
+        this.studentList.push(student);
+
+    }
+
+    addTeacher(teacher: Teacher){
+        teacher.classes.push(this.name);
+        this.teacherList.push(teacher);
+    }
 
 }
 
