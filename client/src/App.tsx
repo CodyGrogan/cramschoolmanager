@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home';
 import SchoolManager from './components/SchoolManager';
+import ClassManager from './components/ClassManager';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'; 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/school' element={<SchoolManager/>}/>
+      <Route path='/class' element={<ClassManager/>}/>
 
       </Routes>
       </BrowserRouter>
