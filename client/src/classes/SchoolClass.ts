@@ -12,6 +12,9 @@ class SchoolClass{
     name;
     teacherList: string[];
     studentList: string[];
+    startDate: string = '';
+    endDate: string = '';
+    type: string = '';
 
     addStudent(student: Student){
         student.classes.push(this.name);
