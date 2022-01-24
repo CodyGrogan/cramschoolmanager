@@ -36,6 +36,7 @@ function App() {
     newclass2.addStudent(newstudent3);
     newclass2.addStudent(newstudent4);
     newclass2.addStudent(newstudent5);
+    newclass2.type = "English"
   
     let myschool = new School('myschool');
     myschool.classList.push(newclass);

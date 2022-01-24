@@ -1,18 +1,74 @@
 
+import SchoolClass from "../classes/SchoolClass";
+
 function ClassManager(props: any){
+
+    let schoolClass: SchoolClass = props.class;
+
+    function editPressed(inputType: String){
+        switch(inputType){
+        case 'Type':
+            let newtype = (document.getElementById('classType') as HTMLInputElement).value;
+            schoolClass.type = newtype;
+            console.log(schoolClass.type);
+            
+        }
+
+    }
+
+
     return(
         <div className="container">
             class manager
+
             <div className="row">
-                <div className="col">
-                This will display a summary about the selected schoolclass
+            <h3>Class Information</h3>
+            <div className="col-10">this will quick display information about the selected lesson <br/>
+            
+                <div className="inputBox">
+              <div className="inputDiv"> <label>Type:<input id='classType' type={'text'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label>Start:<input id='classType' type={'date'} placeholder={schoolClass.type}></input></label><button className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label>End:<input id='classType' type={'date'} placeholder={schoolClass.type}></input></label><button className="btn btn-primary">Edit</button></div> 
+              
+                
                 </div>
-                </div>
+            </div>
+        </div>
+
+   
             <div className="row">
             <div  className="col">
-            this section will have an accordion. there will be a grid with students on the y axis and lessonnum on x axis to display attendance data.
-                                the second section will show students on y axis, assignments on x axis, and display the grade for each assignment. clicking the grade will open assignment information
-                 
+                <div className="accordion accordion-flush" id="accordionFlushExample">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingOne">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Attendance
+                        </button>
+                        </h2>
+                        <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div className="accordion-body">
+
+                            this section will include a table with student names on the y axis, lesson nums on the x axis. There will be checkboxs showing if the student attended the class or not.
+
+                        </div>
+                        </div>
+                    </div>
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Grades
+                        </button>
+                        </h2>
+                        <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div className="accordion-body">
+
+                        this section will include a table with student names on the y axis, assignments on the x axis. The grade will be shown for each student for each assignment.
+
+                        </div>
+                        </div>
+                    </div>
+                   
+                </div> 
             </div>    
                           
             </div>

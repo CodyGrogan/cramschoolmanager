@@ -2,6 +2,9 @@ import {useState, useEffect} from 'react';
 import School from '../classes/School';
 import ListItem from './ListItem';
 import ClassSummary from './ClassSummary';
+import ClassManager from './ClassManager';
+import SchoolClass from '../classes/SchoolClass';
+import Navbar from './Navbar';
 
 
 function SchoolManager(props: any){
@@ -11,6 +14,8 @@ function SchoolManager(props: any){
     let schoolInfo: School = props.school;
     let hello: string = 'hello';
     const [summary, setSummary] = useState<JSX.Element[]>();
+    const [manager, setManager] = useState<JSX.Element[]>();
+    const [currentClass, setCurrentClass] = useState<SchoolClass>();
 
     useEffect(()=>{
         console.log('use effect fired')
@@ -25,7 +30,10 @@ function SchoolManager(props: any){
 
         if(schoolInfo.classList[0] !== undefined){
        let newjsx = <ClassSummary class = {schoolInfo.classList[0]} />
+       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} />
        setSummary([newjsx]);
+       setManager([newmanager]);
+
         }
     },
     [props.school]);
@@ -33,7 +41,9 @@ function SchoolManager(props: any){
     useEffect(()=>{
         if(schoolInfo.classList[0] !== undefined){
         let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
+        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} />
        setSummary([newjsx]);
+       setManager([newmanager]);
         }
 
     },
@@ -41,13 +51,19 @@ function SchoolManager(props: any){
 
     return(
         <div>
+            <Navbar/>
             class manager
             <div className="row school-section">
                 <div className="col-2 list-box"><ul>
                     {classList}
                     <button className='btn btn-primary'>New Class</button>
                     </ul></div>
-                <div className="col-10">{summary}</div>
+                <div className="col-10">
+                    
+                    {summary} <br/>
+                    {manager}
+                
+                </div>
             </div>
 
 

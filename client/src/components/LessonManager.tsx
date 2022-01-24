@@ -2,7 +2,7 @@
 function LessonManager(props: any){
     return(
         <div>
-            school manager
+            lesson manager
         </div>
     )
 }

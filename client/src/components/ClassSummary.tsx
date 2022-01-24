@@ -19,7 +19,6 @@ function ClassSummary(props: any){
         End Date:          
         <br/>
         
-        <button className="btn btn-primary">View Class</button>
     
           
           </div>

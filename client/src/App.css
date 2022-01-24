@@ -32,7 +32,7 @@
 .school-section{
   outline: solid black 1px;
   margin: 5px;
-  max-height: 400px;
+
 }
 
 .list-box{
@@ -45,6 +45,18 @@
   color: orange;
   cursor: pointer;
 }
+
+.inputBox{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.inputDiv{
+  margin: 5px;
+  text-align: center;
+}
+
 
 @keyframes App-logo-spin {
   from {
