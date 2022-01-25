@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { JsxEmit } from "typescript";
 import SchoolClass from "../classes/SchoolClass";
+import AttendanceTableHead from "./AttendanceTableHead";
 
 
 function AttendanceTable(props: any){
@@ -10,10 +11,14 @@ function AttendanceTable(props: any){
     const [headArray, setHeadArray] = useState<JSX.Element[]>();
 
     useEffect(()=>{
+        
         console.log('attendance table created')
         console.log('lesson length ' + lessonlength);
         for (let i = 0; i < lessonlength; i++){
-            let newJSX: JSX.Element = <th>{i} {schoolClass.lessonList[i].date}</th>
+            let date = new Date();
+        let datestring = date.toISOString();
+            let key = 'th' + datestring + i;
+            let newJSX: JSX.Element = <AttendanceTableHead date={schoolClass.lessonList[i].date}/>
             console.log(schoolClass.lessonList[i].date);
             thArray.push(newJSX);
         }

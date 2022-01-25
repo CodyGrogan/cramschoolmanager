@@ -1,10 +1,34 @@
 
+import { useEffect, useState } from "react";
 import SchoolClass from "../classes/SchoolClass";
 import AttendanceTable from "./AttendanceTable";
 
 function ClassManager(props: any){
 
+    const [attendanceChart, setAttendanceChart] = useState<JSX.Element>();
+
+
     let schoolClass: SchoolClass = props.class;
+
+    useEffect(()=>{
+        
+        let date = new Date();
+        let datestring = date.toISOString();
+        let key = 'attentable' + datestring;
+        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
+        setAttendanceChart(newchart);
+    },
+    [])
+
+    useEffect(()=>{
+        
+        let date = new Date();
+        let datestring = date.toISOString();
+        let key = 'attentable' + datestring;
+        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
+        setAttendanceChart(newchart);
+    },
+    [props.class])
 
     function editPressed(inputType: String){
         switch(inputType){
@@ -33,6 +57,8 @@ function ClassManager(props: any){
         props.setEditTrue(true);
 
     }
+
+
 
 
     return(
@@ -68,7 +94,7 @@ function ClassManager(props: any){
 
                             this section will include a table with student names on the y axis, lesson nums on the x axis. There will be checkboxs showing if the student attended the class or not.
 
-                            <AttendanceTable schoolClass = {schoolClass}/>
+                            {attendanceChart}
 
 
                         </div>
