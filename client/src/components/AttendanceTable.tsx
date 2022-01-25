@@ -43,9 +43,13 @@ function AttendanceTable(props: any){
 
     return(
         <div>
-            <table className="table">
-                <tbody>
+            <table className="table table-striped">
+               
+                <thead>
                 <tr><th>Name</th>{headArray}</tr>
+                </thead>
+                <tbody>
+
                 {studentArray}
                 </tbody>
             </table>
