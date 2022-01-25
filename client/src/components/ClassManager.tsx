@@ -11,8 +11,25 @@ function ClassManager(props: any){
             let newtype = (document.getElementById('classType') as HTMLInputElement).value;
             schoolClass.type = newtype;
             console.log(schoolClass.type);
+            break;
+        case 'StartDate':
+            
+            let dateinfo = (document.getElementById('StartDate') as HTMLInputElement).value
+            let newdate = new Date(dateinfo);
+            let datestring = newdate.toISOString().split('T')[0];
+            schoolClass.startDate = datestring;
+            break;
+        case 'EndDate':
+            
+            let enddateinfo = (document.getElementById('EndDate') as HTMLInputElement).value
+            let endnewdate = new Date(enddateinfo);
+            let enddatestring = endnewdate.toISOString().split('T')[0];
+            schoolClass.endDate = enddatestring;
+            break;
             
         }
+
+        props.setEditTrue(true);
 
     }
 
@@ -27,8 +44,8 @@ function ClassManager(props: any){
             
                 <div className="inputBox">
               <div className="inputDiv"> <label>Type:<input id='classType' type={'text'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
-              <div className="inputDiv"> <label>Start:<input id='classType' type={'date'} placeholder={schoolClass.type}></input></label><button className="btn btn-primary">Edit</button></div> 
-              <div className="inputDiv"> <label>End:<input id='classType' type={'date'} placeholder={schoolClass.type}></input></label><button className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label>Start:<input id='StartDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label>End:<input id='EndDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('EndDate')} className="btn btn-primary">Edit</button></div> 
               
                 
                 </div>

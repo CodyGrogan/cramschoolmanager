@@ -7,16 +7,16 @@ function ClassSummary(props: any){
         <div>
         <h2>{schoolClass.name}</h2>  
           
-        <h3>Class type info here</h3>
+        <h3>{schoolClass.type}</h3>
           Total Students: {schoolClass.studentList.length}
         <br/>
         Teachers: {schoolClass.teacherList}
         <br/>
         Average Grade: 
         <br/>
-        Start Date:
+        Start Date: {schoolClass.startDate}
         <br/>
-        End Date:          
+        End Date:   {schoolClass.endDate}
         <br/>
         
     

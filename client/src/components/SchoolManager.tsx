@@ -8,13 +8,12 @@ import Navbar from './Navbar';
 
 
 function SchoolManager(props: any){
-    let defArr = [];
     const [classList, setClassList] = useState<JSX.Element[]>();
     const [selectedClass, setSelectedClass] = useState<any>(0);
     let schoolInfo: School = props.school;
-    let hello: string = 'hello';
     const [summary, setSummary] = useState<JSX.Element[]>();
     const [manager, setManager] = useState<JSX.Element[]>();
+    const [editTrue, setEditTrue] = useState<boolean>(false);
     const [currentClass, setCurrentClass] = useState<SchoolClass>();
 
     useEffect(()=>{
@@ -30,7 +29,7 @@ function SchoolManager(props: any){
 
         if(schoolInfo.classList[0] !== undefined){
        let newjsx = <ClassSummary class = {schoolInfo.classList[0]} />
-       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} />
+       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} />
        setSummary([newjsx]);
        setManager([newmanager]);
 
@@ -41,13 +40,26 @@ function SchoolManager(props: any){
     useEffect(()=>{
         if(schoolInfo.classList[0] !== undefined){
         let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
-        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} />
+        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass] } setEditTrue = {setEditTrue} />
        setSummary([newjsx]);
        setManager([newmanager]);
         }
 
     },
-    [selectedClass, schoolInfo])
+    [selectedClass, schoolInfo]);
+
+    useEffect(()=>{
+
+        if(schoolInfo.classList[0] !== undefined){
+            let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
+            let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} />
+           setSummary([newjsx]);
+           setManager([newmanager]);
+        }
+        setEditTrue(false);
+
+    },
+    [editTrue]);
 
     return(
         <div>
