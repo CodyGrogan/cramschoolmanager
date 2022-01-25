@@ -1,5 +1,6 @@
 
 import SchoolClass from "../classes/SchoolClass";
+import AttendanceTable from "./AttendanceTable";
 
 function ClassManager(props: any){
 
@@ -66,6 +67,9 @@ function ClassManager(props: any){
                         <div className="accordion-body">
 
                             this section will include a table with student names on the y axis, lesson nums on the x axis. There will be checkboxs showing if the student attended the class or not.
+
+                            <AttendanceTable schoolClass = {schoolClass}/>
+
 
                         </div>
                         </div>

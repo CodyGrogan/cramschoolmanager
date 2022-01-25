@@ -10,6 +10,7 @@ import School from './classes/School';
 import SchoolClass from './classes/SchoolClass';
 import Student from './classes/Student';
 import Teacher from './classes/Teacher';
+import Lesson from './classes/Lesson';
 
 function App() {
   let defSchool = new School('def');
@@ -47,6 +48,15 @@ function App() {
     myschool.studentList.push(newstudent3);
     myschool.studentList.push(newstudent4);
     myschool.studentList.push(newstudent5);
+    newclass.createLesson('2022-01-01');
+    newclass.createLesson('2022-01-02');
+
+    newclass2.createLesson('2022-01-05');
+    newclass2.createLesson('2022-01-06');
+
+
+
+
     
     setSchool(myschool);
   },
