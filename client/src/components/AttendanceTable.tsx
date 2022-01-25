@@ -28,7 +28,7 @@ function AttendanceTable(props: any){
         }
 
         for (let i = 0; i < schoolClass.studentList.length; i++){
-            let newjsx = <AttendanceTableStudent name = {schoolClass.studentList[i]} lessonlength={lessonlength} />
+            let newjsx = <AttendanceTableStudent name = {schoolClass.studentList[i]} lessonlength={lessonlength} schoolClass={schoolClass} />
             studentArr.push(newjsx);
         }
 
@@ -43,7 +43,7 @@ function AttendanceTable(props: any){
 
     return(
         <div>
-            <table>
+            <table className="table">
                 <tbody>
                 <tr><th>Name</th>{headArray}</tr>
                 {studentArray}
