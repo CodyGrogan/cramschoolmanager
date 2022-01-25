@@ -11,6 +11,7 @@ import SchoolClass from './classes/SchoolClass';
 import Student from './classes/Student';
 import Teacher from './classes/Teacher';
 import Lesson from './classes/Lesson';
+import StudentManager from './components/StudentManager';
 
 function App() {
   let defSchool = new School('def');
@@ -69,7 +70,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/school' element={<SchoolManager school={school}/>}/>
-      <Route path='/class' element={<ClassManager />}/>
+      <Route path='/student' element={<StudentManager school={school} />}/>
 
       </Routes>
       </BrowserRouter>
