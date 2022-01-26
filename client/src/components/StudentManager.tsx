@@ -10,17 +10,43 @@ function StudentManager(props: any){
     let jsxarr: JSX.Element[] = [];
     const [tableData, setTableData] = useState<JSX.Element[]>();
 
+   function buildStudentTable(){
+    jsxarr=[];
+
+    for(let i = 0; i<studentList.length; i++){
+        let newjsx = <StudentTableItem student = {studentList[i]} /> ;
+        jsxarr.push(newjsx);
+
+    }
+    setTableData(jsxarr);
+
+   }
+
     useEffect(()=>{
-
-        for(let i = 0; i<studentList.length; i++){
-            let newjsx = <StudentTableItem student = {studentList[i]} /> ;
-            jsxarr.push(newjsx);
-
-        }
-        setTableData(jsxarr);
-
+     
+        buildStudentTable();
     },
-    [props.school])
+    [studentList]);
+
+    function createStudent(){
+
+       
+        let name:string = (document.getElementById('inputName') as HTMLInputElement).value ;
+        let agestring:string = (document.getElementById('inputName') as HTMLInputElement).value;
+        let age:number = parseInt(agestring);;
+        let phone:string = (document.getElementById('inputPhone') as HTMLInputElement).value ;
+        let parent1:string = (document.getElementById('inputParent1') as HTMLInputElement).value ;
+        let parent2:string = (document.getElementById('inputParent2') as HTMLInputElement).value ;
+        let email:string = (document.getElementById('inputEmail') as HTMLInputElement).value ;
+
+        if (name != null && name != ''){
+            let newstudent = new Student(name, age, parent1, parent2, phone, email);
+            studentList.push(newstudent);
+            buildStudentTable();
+            
+        }
+
+    }
     
     return(
         <div>
@@ -60,29 +86,34 @@ function StudentManager(props: any){
                 <div className="modal-body">
                    
                     <div className="mb-3">
-                        <label  className="form-label">Name</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label  className="form-label" >Name</label>
+                        <input type="text" className="form-control" id="inputName" aria-describedby="emailHelp"/>
+                        
+                    </div>
+                    <div className="mb-3">
+                        <label  className="form-label" id='inputName'>Age</label>
+                        <input type="number" className="form-control" id="inputAge" aria-describedby="emailHelp"/>
                         
                     </div>
 
                     <div className="mb-3">
                         <label  className="form-label">Phone#</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <input type="text" className="form-control"  id='inputPhone' aria-describedby="emailHelp"/>
                         
                     </div>
                     <div className="mb-3">
-                        <label  className="form-label">Parent 1</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label  className="form-label" >Parent 1</label>
+                        <input type="text" className="form-control" id='inputParent1' aria-describedby="emailHelp"/>
                         
                     </div>
                     <div className="mb-3">
-                        <label  className="form-label">Parent 2</label>
-                        <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label  className="form-label" >Parent 2</label>
+                        <input type="text" className="form-control" id='inputParent2' aria-describedby="emailHelp"/>
                         
                     </div>
                     <div className="mb-3">
-                        <label  className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+                        <label  className="form-label" >Email address</label>
+                        <input type="email" className="form-control" id='inputEmail' aria-describedby="emailHelp"/>
                         
                     </div>
                        
@@ -91,7 +122,7 @@ function StudentManager(props: any){
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Add Student</button>
+                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> createStudent()}>Add Student</button>
                 </div>
                 </div>
             </div>
