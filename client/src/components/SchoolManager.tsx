@@ -29,7 +29,7 @@ function SchoolManager(props: any){
 
         if(schoolInfo.classList[0] !== undefined){
        let newjsx = <ClassSummary class = {schoolInfo.classList[0]} />
-       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} />
+       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo} />
        setSummary([newjsx]);
        setManager([newmanager]);
 
@@ -40,7 +40,7 @@ function SchoolManager(props: any){
     useEffect(()=>{
         if(schoolInfo.classList[0] !== undefined){
         let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
-        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass] } setEditTrue = {setEditTrue} />
+        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass] } setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>
        setSummary([newjsx]);
        setManager([newmanager]);
         }
@@ -52,7 +52,7 @@ function SchoolManager(props: any){
 
         if(schoolInfo.classList[0] !== undefined){
             let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
-            let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} />
+            let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>
            setSummary([newjsx]);
            setManager([newmanager]);
         }

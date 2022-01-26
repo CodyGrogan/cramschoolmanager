@@ -30,3 +30,13 @@ test('create student and schoolclass, expect student[0] to be billy', () =>{
   expect(classstudent).toBe('billy');
 });
 
+test('if two students with same name added to class, dont add the student', () =>{
+
+  let newclass = new SchoolClass('myclass');
+  let newstudent = new Student('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
+  let newstudent2 = new Student('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
+  newclass.addStudent(newstudent);
+  newclass.addStudent(newstudent2);
+  let length = newclass.studentList.length;
+  expect(length).toBe(1);
+});

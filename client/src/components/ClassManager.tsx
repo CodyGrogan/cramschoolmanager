@@ -1,13 +1,16 @@
 
 import { useEffect, useState } from "react";
+import School from "../classes/School";
 import SchoolClass from "../classes/SchoolClass";
+import Student from "../classes/Student";
 import AttendanceTable from "./AttendanceTable";
 
 function ClassManager(props: any){
 
     const [attendanceChart, setAttendanceChart] = useState<JSX.Element>();
+    const [optionArr, setOptionArr] = useState<JSX.Element[]>();
 
-
+    let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
 
     useEffect(()=>{
@@ -17,6 +20,7 @@ function ClassManager(props: any){
         let key = 'attentable' + datestring;
         let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
         setAttendanceChart(newchart);
+        populateStudentNames();
     },
     [])
 
@@ -27,6 +31,7 @@ function ClassManager(props: any){
         let key = 'attentable' + datestring;
         let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
         setAttendanceChart(newchart);
+        populateStudentNames();
     },
     [props.class])
 
@@ -58,7 +63,36 @@ function ClassManager(props: any){
 
     }
 
+    function populateStudentNames(){
+        let jsxarr: JSX.Element[] = [];
 
+        for (let i = 0; i < schoolInfo.studentList.length; i++){
+            let newoption = <option>{schoolInfo.studentList[i].name}</option>
+            jsxarr.push(newoption);
+        }
+        setOptionArr(jsxarr);
+
+    }
+
+    function addStudentButton(){
+        let selectStudent = (document.getElementById('selectStudent') as HTMLInputElement);
+        let studentname = selectStudent.value;
+        console.log(studentname);
+        let index = schoolInfo.studentList.findIndex( ({ name }) => name === studentname)
+        schoolClass.addStudent(schoolInfo.studentList[index]);
+        props.setEditTrue(true);
+        resetAttendance();
+
+
+    }
+
+    function resetAttendance(){
+        let date = new Date();
+        let datestring = date.toISOString();
+        let key = 'attentable' + datestring;
+        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
+        setAttendanceChart(newchart);
+    }
 
 
     return(
@@ -73,7 +107,13 @@ function ClassManager(props: any){
               <div className="inputDiv"> <label>Type:<input id='classType' type={'text'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
               <div className="inputDiv"> <label>Start:<input id='StartDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
               <div className="inputDiv"> <label>End:<input id='EndDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('EndDate')} className="btn btn-primary">Edit</button></div> 
-              
+              <div className="inputDiv">
+                <select id='selectStudent'>
+                    {optionArr}
+
+                </select>
+                <button className="btn btn-primary" onClick={()=>addStudentButton()}>Add Student</button>
+              </div>
                 
                 </div>
             </div>

@@ -18,11 +18,15 @@ class SchoolClass{
     endDate: string = '';
     type: string = '';
     lessonList: Lesson[];
+    studentExists: Map<string, boolean> = new Map(); 
 
     addStudent(student: Student){
-        student.classes.push(this.name);
-        this.studentList.push(student.name);
 
+        if (this.studentExists.get(student.name) != true){
+            this.studentExists.set(student.name, true);
+            student.classes.push(this.name);
+            this.studentList.push(student.name);
+        }
     }
 
     addTeacher(teacher: Teacher){
