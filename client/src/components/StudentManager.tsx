@@ -41,7 +41,9 @@ function StudentManager(props: any){
             </tbody>
             </table>
 
+            <div className="centerButton">
             <button className="btn btn-primary">Add Student</button>
+            </div>
 
         </div>
     )

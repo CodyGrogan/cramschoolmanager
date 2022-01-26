@@ -57,6 +57,12 @@
   text-align: center;
 }
 
+.centerButton{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 
 @keyframes App-logo-spin {
   from {
