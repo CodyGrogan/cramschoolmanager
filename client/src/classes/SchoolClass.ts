@@ -1,6 +1,7 @@
 import Teacher from "./Teacher";
 import Student from "./Student";
 import Lesson from "./Lesson";
+import Assignment from "./Assignment";
 
 class SchoolClass{
     constructor(name: string){
@@ -8,6 +9,7 @@ class SchoolClass{
         this.teacherList = [];
         this.studentList = [];
         this.lessonList = [];
+        this.assignmentList = [];
 
     }
 
@@ -18,6 +20,7 @@ class SchoolClass{
     endDate: string = '';
     type: string = '';
     lessonList: Lesson[];
+    assignmentList: Assignment[];
     studentExists: Map<string, boolean> = new Map(); 
 
     addStudent(student: Student){
@@ -39,6 +42,11 @@ class SchoolClass{
         let newLesson = new Lesson(dateString, this.lessonList.length+1, this.studentList);
         this.lessonList.push(newLesson);
 
+    }
+    
+    createAssignment(dateString: string, name: string){
+        let newAssignment = new Assignment(dateString, name, this.studentList);
+        this.assignmentList.push(newAssignment);
     }
 
 }
