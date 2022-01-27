@@ -25,6 +25,8 @@ function App() {
 
   useEffect(()=>{
     console.log('use effect fired')
+
+    //this exists for testing purposes only
     let newclass = new SchoolClass('myclass');
     let newstudent = new Student('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
     let newstudent2 = new Student('sally', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
@@ -32,13 +34,20 @@ function App() {
     newclass.addStudent(newstudent2);
 
     let newclass2 = new SchoolClass('myotherclass');
-    let newstudent3 = new Student('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
-    let newstudent4 = new Student('sally', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
+    let newstudent3 = new Student('paul', 11, 'john', 'mary', '123456', 'hello@fake.com');
+    let newstudent4 = new Student('jenny', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
     let newstudent5 = new Student('alfred', 12, 'jose', 'josie', '456123', 'hello3@fake.com');
     newclass2.addStudent(newstudent3);
     newclass2.addStudent(newstudent4);
     newclass2.addStudent(newstudent5);
     newclass2.type = "English"
+
+    newclass.createAssignment('2022-01-01', 'Lesson1')
+    newclass.createAssignment('2022-01-02', 'Lesson2')
+    
+    newclass2.createAssignment('2022-01-01', 'Lesson1')
+    newclass2.createAssignment('2022-01-02', 'Lesson2')
+
   
     let myschool = new School('myschool');
     myschool.classList.push(newclass);

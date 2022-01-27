@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import School from "../classes/School";
 import SchoolClass from "../classes/SchoolClass";
 import Student from "../classes/Student";
+import AssignmentTable from "./AssignmentTable";
 import AttendanceTable from "./AttendanceTable";
 
 function ClassManager(props: any){
 
     const [attendanceChart, setAttendanceChart] = useState<JSX.Element>();
     const [optionArr, setOptionArr] = useState<JSX.Element[]>();
+    const [assignmentTable, setAssignmentTable] = useState<JSX.Element>();
 
     let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
@@ -20,6 +22,7 @@ function ClassManager(props: any){
         let key = 'attentable' + datestring;
         let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
         setAttendanceChart(newchart);
+        resetAssignment();
         populateStudentNames();
     },
     [])
@@ -31,6 +34,7 @@ function ClassManager(props: any){
         let key = 'attentable' + datestring;
         let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
         setAttendanceChart(newchart);
+        resetAssignment();
         populateStudentNames();
     },
     [props.class])
@@ -94,6 +98,13 @@ function ClassManager(props: any){
         setAttendanceChart(newchart);
     }
 
+    function resetAssignment(){
+        let date = new Date();
+        let datestring = date.toISOString();
+        let key = 'assignments' + datestring;
+        let newchart = <AssignmentTable key={key} schoolClass = {schoolClass}/>
+        setAssignmentTable(newchart);
+    }
 
     return(
         <div className="container">
@@ -150,6 +161,7 @@ function ClassManager(props: any){
                         <div className="accordion-body">
 
                         this section will include a table with student names on the y axis, assignments on the x axis. The grade will be shown for each student for each assignment.
+                        {assignmentTable}
 
                         </div>
                         </div>
@@ -161,9 +173,19 @@ function ClassManager(props: any){
             </div>
         <div className="row">
             <div className="col-2">The list of lessons will go here</div>
-            <div className="col-10">this will quick display information about the selected lesson</div>
+            <div className="col-10">this will quick display information about the selected lesson.
+                clicking on the lesson name should open the lesson manager in a modal. 
+
+                
+            </div>
         </div>
-        
+        <div className="row">
+            <div className="col-2">The list of assignments will go here</div>
+            <div className="col-10">this will quick display information about the selected asssignment
+            clicking on the assignment name should open the assignment manager in a modal. 
+
+            </div>
+        </div>
         
         </div>
     )
