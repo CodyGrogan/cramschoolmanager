@@ -166,24 +166,52 @@ function ClassManager(props: any){
                         </div>
                         </div>
                     </div>
+
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Lessons
+                        </button>
+                        </h2>
+                        <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div className="accordion-body">
+                                <div >The list of lessons will go here</div>
+                                <div >this will quick display information about the selected lesson.
+                                    clicking on the lesson name should open the lesson manager in a modal. 
+
+                                    
+                    </div>
+
+                        </div>
+                        </div>
+                    </div>
+
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Assignments
+                        </button>
+                        </h2>
+                        <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div className="accordion-body">
+
+                            <div >The list of assignments will go here</div>
+                            <div >this will quick display information about the selected asssignment
+                            clicking on the assignment name should open the assignment manager in a modal. 
+
+                        </div>
+                        </div>
+                    </div>
                    
                 </div> 
             </div>    
                           
             </div>
         <div className="row">
-            <div className="col-2">The list of lessons will go here</div>
-            <div className="col-10">this will quick display information about the selected lesson.
-                clicking on the lesson name should open the lesson manager in a modal. 
-
-                
-            </div>
+         
         </div>
         <div className="row">
-            <div className="col-2">The list of assignments will go here</div>
-            <div className="col-10">this will quick display information about the selected asssignment
-            clicking on the assignment name should open the assignment manager in a modal. 
-
+        
             </div>
         </div>
         
