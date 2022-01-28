@@ -5,6 +5,7 @@ import SchoolClass from "../classes/SchoolClass";
 import Student from "../classes/Student";
 import AssignmentTable from "./AssignmentTable";
 import AttendanceTable from "./AttendanceTable";
+import LessonList from "./LessonList";
 
 function ClassManager(props: any){
 
@@ -114,9 +115,14 @@ function ClassManager(props: any){
             <h3>Class Information</h3>
             <div className="col-10">this will quick display information about the selected lesson <br/>
             
-                <div className="inputBox">
+                <div className="inputBox container">
+                <div className="col-sm">
               <div className="inputDiv"> <label>Type:<input id='classType' type={'text'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
               <div className="inputDiv"> <label>Start:<input id='StartDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
+              </div>
+              
+
+              <div className="col-sm">
               <div className="inputDiv"> <label>End:<input id='EndDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('EndDate')} className="btn btn-primary">Edit</button></div> 
               <div className="inputDiv">
                 <select id='selectStudent'>
@@ -124,6 +130,7 @@ function ClassManager(props: any){
 
                 </select>
                 <button className="btn btn-primary" onClick={()=>addStudentButton()}>Add Student</button>
+                </div>
               </div>
                 
                 </div>
@@ -180,7 +187,8 @@ function ClassManager(props: any){
                                     clicking on the lesson name should open the lesson manager in a modal. 
 
                                     
-                    </div>
+                                </div>
+                                <LessonList schoolClass={schoolClass} />
 
                         </div>
                         </div>

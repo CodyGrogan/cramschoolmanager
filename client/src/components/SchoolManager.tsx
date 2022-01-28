@@ -66,7 +66,7 @@ function SchoolManager(props: any){
             <Navbar/>
             class manager
             <div className="row school-section">
-                <div className="col-2 list-box"><ul>
+                <div className="col-sm-2 list-box"><ul>
                     {classList}
                     <button className='btn btn-primary'>New Class</button>
                     </ul></div>

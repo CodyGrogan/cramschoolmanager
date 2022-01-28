@@ -1,9 +1,10 @@
 import Student from "./Student";
 
 class Lesson{
-    constructor(date: string, num: number, studentList: string[]){
+    constructor(date: string, num: number, studentList: string[], name: string){
         this.num = num;
         this.date = date;
+        this.name = name;
         this.lessonplan = '';
         this.finished = false;
         this.attendance = new Map();
@@ -18,7 +19,7 @@ class Lesson{
     lessonplan: string;
     attendance: Map<string, boolean>;
     finished: boolean;
-
+    name;
 
 }
 

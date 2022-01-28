@@ -42,11 +42,11 @@ function App() {
     newclass2.addStudent(newstudent5);
     newclass2.type = "English"
 
-    newclass.createAssignment('2022-01-01', 'Lesson1')
-    newclass.createAssignment('2022-01-02', 'Lesson2')
+    newclass.createAssignment('2022-01-01', 'Assignment1')
+    newclass.createAssignment('2022-01-02', 'Assignment2')
     
-    newclass2.createAssignment('2022-01-01', 'Lesson1')
-    newclass2.createAssignment('2022-01-02', 'Lesson2')
+    newclass2.createAssignment('2022-01-01', 'Assignment1')
+    newclass2.createAssignment('2022-01-02', 'Assignment2')
 
   
     let myschool = new School('myschool');
@@ -58,11 +58,11 @@ function App() {
     myschool.studentList.push(newstudent3);
     myschool.studentList.push(newstudent4);
     myschool.studentList.push(newstudent5);
-    newclass.createLesson('2022-01-01');
-    newclass.createLesson('2022-01-02');
+    newclass.createLesson('2022-01-01', 'Verbs Day 1');
+    newclass.createLesson('2022-01-02', 'Verbs Day 2');
 
-    newclass2.createLesson('2022-01-05');
-    newclass2.createLesson('2022-01-06');
+    newclass2.createLesson('2022-01-05', 'Verbs Day 1');
+    newclass2.createLesson('2022-01-06', 'Verbs Day 2');
 
 
 
