@@ -15,6 +15,11 @@ class School {
     studentList: Student[];
     classList: SchoolClass[];
 
+    createClass(name:string ){
+        let newclass = new SchoolClass(name);
+        this.classList.push(newclass);
+    }
+
 }
 
 export default School;
