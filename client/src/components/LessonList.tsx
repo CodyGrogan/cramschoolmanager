@@ -26,8 +26,9 @@ function LessonList(props: any){
         <div>
             <table className="table table-striped">
                 <thead>
-                    <th>Date</th>
                     <th>Name</th>
+                    <th>Date</th>
+                   
                 </thead>
                 <tbody>
                 {tableItems}
