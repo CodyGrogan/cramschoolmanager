@@ -10,9 +10,9 @@ class SchoolClass{
         this.studentList = [];
         this.lessonList = [];
         this.assignmentList = [];
-
+        this.archived = false;
     }
-
+    archived: boolean;
     name;
     teacherList: string[];
     studentList: string[];
