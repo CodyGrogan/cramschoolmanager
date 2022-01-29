@@ -63,6 +63,10 @@
   justify-content: center;
 }
 
+.tableoverflow{
+  overflow-x: scroll !important;
+}
+
 
 @keyframes App-logo-spin {
   from {

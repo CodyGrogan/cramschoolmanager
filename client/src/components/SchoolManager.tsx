@@ -70,7 +70,7 @@ function SchoolManager(props: any){
                     {classList}
                     <button className='btn btn-primary'>New Class</button>
                     </ul></div>
-                <div className="col-10">
+                <div className="col-sm-10">
                     
                     {summary} <br/>
                     {manager}

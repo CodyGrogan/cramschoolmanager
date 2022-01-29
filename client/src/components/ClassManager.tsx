@@ -154,12 +154,12 @@ function ClassManager(props: any){
     }
 
     return(
-        <div className="container">
+        <div >
             class manager
 
             <div className="row">
             <h3>Class Information</h3>
-            <div className="col-10">this will quick display information about the selected lesson <br/>
+            <div className="col-10-sm">this will quick display information about the selected lesson <br/>
             
                 <div className="inputBox container">
                 <div className="col-sm">

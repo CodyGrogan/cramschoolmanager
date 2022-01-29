@@ -42,6 +42,7 @@ function AttendanceTable(props: any){
     
 
     return(
+        <div className="table-responsive">
         <div>
             <table className="table table-striped">
                
@@ -53,6 +54,7 @@ function AttendanceTable(props: any){
                 {studentArray}
                 </tbody>
             </table>
+        </div>
         </div>
     );
 };

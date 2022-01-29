@@ -43,7 +43,7 @@ function AssignmentTable(props: any){
     [])
     
     return(
-        <div>
+        <div className="table-responsive">
             
             <table className="table table-striped">
                
