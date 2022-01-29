@@ -117,15 +117,16 @@ function ClassManager(props: any){
             
                 <div className="inputBox container">
                 <div className="col-sm">
-              <div className="inputDiv"> <label>Type:<input id='classType' type={'text'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
-              <div className="inputDiv"> <label>Start:<input id='StartDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label className="form-label">Type:</label><input className='form-control' id='classType' type={'text'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label className="form-label">Start:</label><input className='form-control' id='StartDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
               </div>
               
 
               <div className="col-sm">
-              <div className="inputDiv"> <label>End:<input id='EndDate' type={'date'} placeholder={schoolClass.type}></input></label><button onClick={()=> editPressed('EndDate')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label className="form-label">End:</label><input className='form-control' id='EndDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('EndDate')} className="btn btn-primary">Edit</button></div> 
               <div className="inputDiv">
-                <select id='selectStudent'>
+                <label className="form-label">Add Students</label>
+                <select className="form-select" id='selectStudent'>
                     {optionArr}
 
                 </select>
