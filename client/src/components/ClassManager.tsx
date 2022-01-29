@@ -1,9 +1,11 @@
 
 import { useEffect, useState } from "react";
+import { JsxSelfClosingElement } from "typescript";
 import Lesson from "../classes/Lesson";
 import School from "../classes/School";
 import SchoolClass from "../classes/SchoolClass";
 import Student from "../classes/Student";
+import AssignmentList from "./AssignmentList";
 import AssignmentTable from "./AssignmentTable";
 import AttendanceTable from "./AttendanceTable";
 import LessonList from "./LessonList";
@@ -14,6 +16,7 @@ function ClassManager(props: any){
     const [optionArr, setOptionArr] = useState<JSX.Element[]>();
     const [assignmentTable, setAssignmentTable] = useState<JSX.Element>();
     const [lessonList, setLessonList] = useState<JSX.Element>();
+    const [assignmentList, setAssignmentList] = useState<JSX.Element>();
 
     let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
@@ -25,10 +28,10 @@ function ClassManager(props: any){
         let key = 'attentable' + datestring;
         let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
         setAttendanceChart(newchart);
-        resetAssignment();
+        resetAssignmentGrades();
         populateStudentNames();
         resetLessonList();
-    
+        resetAssignmentList();
 
     },
     [])
@@ -40,9 +43,11 @@ function ClassManager(props: any){
         let key = 'attentable' + datestring;
         let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
         setAttendanceChart(newchart);
-        resetAssignment();
+        resetAssignmentGrades();
         populateStudentNames();
         resetLessonList();
+        resetAssignmentList();
+
 
        
     },
@@ -107,7 +112,7 @@ function ClassManager(props: any){
         setAttendanceChart(newchart);
     }
 
-    function resetAssignment(){
+    function resetAssignmentGrades(){
         let date = new Date();
         let datestring = date.toISOString();
         let key = 'assignments' + datestring;
@@ -144,6 +149,24 @@ function ClassManager(props: any){
 
     }
 
+    function newAssignment(){
+
+        console.log('newlesson clicked')
+        let assignName = (document.getElementById('inputAssignmentName') as HTMLInputElement).value;
+        let assignDate = (document.getElementById('inputAssignmentDate') as HTMLInputElement).value;
+        if(assignName != null && assignName !='' && assignDate!=null){
+
+            let newdate = new Date(assignDate);
+            let datestring = newdate.toISOString().split('T')[0];
+            schoolClass.createAssignment(datestring, assignName);
+            resetAssignmentList();
+            resetAssignmentGrades();
+            
+
+        }
+      
+    }
+
     function resetLessonList(){
         let key = schoolClass.lessonList.length.toString() + 'lessonkey';
 
@@ -151,6 +174,16 @@ function ClassManager(props: any){
             console.log(schoolClass.lessonList.length);
 
             setLessonList(lessonlist);
+    }
+
+
+    function resetAssignmentList(){
+        let key = schoolClass.assignmentList.length.toString() + 'assignmentkey';
+
+        let list = <AssignmentList key={key} schoolClass={schoolClass} />
+        
+
+            setAssignmentList(list);
     }
 
     return(
@@ -253,9 +286,11 @@ function ClassManager(props: any){
 
                             <div >The list of assignments will go here</div>
                             <div >this will quick display information about the selected asssignment
-                            clicking on the assignment name should open the assignment manager in a modal. 
+                            clicking on the assignment name should open the assignment manager in a modal.
 
-                            <button className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#assignmentModal">New Lesson</button>
+                            {assignmentList}
+
+                            <button className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#assignmentModal">New Assignment</button>
 
 
                         </div>
@@ -346,7 +381,7 @@ function ClassManager(props: any){
                     </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newLesson()}>Create Lesson</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newAssignment()}>Create Assignment</button>
                         </div>
                 </div>
 
