@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import Lesson from "../classes/Lesson";
 import School from "../classes/School";
 import SchoolClass from "../classes/SchoolClass";
 import Student from "../classes/Student";
@@ -12,6 +13,7 @@ function ClassManager(props: any){
     const [attendanceChart, setAttendanceChart] = useState<JSX.Element>();
     const [optionArr, setOptionArr] = useState<JSX.Element[]>();
     const [assignmentTable, setAssignmentTable] = useState<JSX.Element>();
+    const [lessonList, setLessonList] = useState<JSX.Element>();
 
     let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
@@ -25,6 +27,9 @@ function ClassManager(props: any){
         setAttendanceChart(newchart);
         resetAssignment();
         populateStudentNames();
+        resetLessonList();
+    
+
     },
     [])
 
@@ -37,6 +42,9 @@ function ClassManager(props: any){
         setAttendanceChart(newchart);
         resetAssignment();
         populateStudentNames();
+        resetLessonList();
+
+       
     },
     [props.class])
 
@@ -105,6 +113,44 @@ function ClassManager(props: any){
         let key = 'assignments' + datestring;
         let newchart = <AssignmentTable key={key} schoolClass = {schoolClass}/>
         setAssignmentTable(newchart);
+    }
+
+    function newLesson(){
+        console.log('newlesson clicked')
+        let lessonName = (document.getElementById('inputName') as HTMLInputElement).value;
+        let lessondate = (document.getElementById('inputLessonDate') as HTMLInputElement).value;
+        let lessonplan = (document.getElementById('inputPlan') as HTMLInputElement).value;
+        
+        console.log(lessonName);
+        console.log(lessondate);
+
+        if (lessonName != '' && lessonName != null && lessondate != null){
+
+            let newdate = new Date(lessondate);
+            let datestring = newdate.toISOString().split('T')[0];
+            let num = schoolClass.lessonList.length + 2;  //starts counting from 1 not 0
+
+          //  let newlesson = new Lesson(datestring, num, schoolClass.studentList, lessonName);
+            schoolClass.createLesson(datestring, lessonName);
+           // let index = schoolClass.lessonList.length - 1;
+            //schoolClass.lessonList[index].lessonplan = lessonplan;
+            let key = schoolClass.lessonList.length.toString() + 'lessonkey';
+            let lessonlist = <LessonList key={key} schoolClass={schoolClass} />
+            console.log(schoolClass.lessonList.length);
+
+            setLessonList(lessonlist);
+            resetAttendance();
+        }
+
+    }
+
+    function resetLessonList(){
+        let key = schoolClass.lessonList.length.toString() + 'lessonkey';
+
+        let lessonlist = <LessonList key={key} schoolClass={schoolClass} />
+            console.log(schoolClass.lessonList.length);
+
+            setLessonList(lessonlist);
     }
 
     return(
@@ -189,7 +235,8 @@ function ClassManager(props: any){
 
                                     
                                 </div>
-                                <LessonList schoolClass={schoolClass} />
+                                {lessonList}
+                                <button className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#studentModal">New Lesson</button>
 
                         </div>
                         </div>
@@ -223,6 +270,50 @@ function ClassManager(props: any){
         
             </div>
         </div>
+
+
+        <div className="modal fade" id="studentModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Add Student</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                   
+                    <div className="mb-3">
+                        <label  className="form-label" >Name</label>
+                        <input type="text" className="form-control" id="inputName" aria-describedby="LessonName"/>
+                        
+                    </div>
+                    <div className="mb-3">
+                        <label  className="form-label" id='inputDate'>Date</label>
+                        <input type="date" className="form-control" id="inputLessonDate" aria-describedby="inputdate"/>
+                        
+                    </div>
+
+                    <div className="mb-3">
+                        <label  className="form-label">Lesson Plan</label>
+                        <textarea className="form-control"  id='inputPlan' aria-describedby="inputplan"/>
+                        
+                    </div>
+                  
+                   
+                
+                </div>
+                <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newLesson()}>Create Lesson</button>
+                </div>
+                </div>
+
+
+
+            </div>
+            </div>
+
+
+
         
         </div>
     )
