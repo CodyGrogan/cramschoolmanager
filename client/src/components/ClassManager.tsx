@@ -255,6 +255,9 @@ function ClassManager(props: any){
                             <div >this will quick display information about the selected asssignment
                             clicking on the assignment name should open the assignment manager in a modal. 
 
+                            <button className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#assignmentModal">New Lesson</button>
+
+
                         </div>
                         </div>
                     </div>
@@ -275,41 +278,81 @@ function ClassManager(props: any){
         <div className="modal fade" id="studentModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Add Student</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div className="modal-body">
-                   
-                    <div className="mb-3">
-                        <label  className="form-label" >Name</label>
-                        <input type="text" className="form-control" id="inputName" aria-describedby="LessonName"/>
-                        
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Add Lesson</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div className="mb-3">
-                        <label  className="form-label" id='inputDate'>Date</label>
-                        <input type="date" className="form-control" id="inputLessonDate" aria-describedby="inputdate"/>
-                        
+                    <div className="modal-body">
+                    
+                        <div className="mb-3">
+                            <label  className="form-label" >Name</label>
+                            <input type="text" className="form-control" id="inputName" aria-describedby="LessonName"/>
+                            
+                        </div>
+                        <div className="mb-3">
+                            <label  className="form-label" id='inputDate'>Date</label>
+                            <input type="date" className="form-control" id="inputLessonDate" aria-describedby="inputdate"/>
+                            
+                        </div>
+
+                        <div className="mb-3">
+                            <label  className="form-label">Lesson Plan</label>
+                            <textarea className="form-control"  id='inputPlan' aria-describedby="inputplan"/>
+                            
+                        </div>
+                    
+                    
+                    
                     </div>
-
-                    <div className="mb-3">
-                        <label  className="form-label">Lesson Plan</label>
-                        <textarea className="form-control"  id='inputPlan' aria-describedby="inputplan"/>
-                        
-                    </div>
-                  
-                   
-                
-                </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newLesson()}>Create Lesson</button>
-                </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newLesson()}>Create Lesson</button>
+                        </div>
                 </div>
 
 
 
+                </div>
             </div>
+
+
+
+
+            
+        <div className="modal fade" id="assignmentModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Add Assignment</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                    
+                        <div className="mb-3">
+                            <label  className="form-label" >Name</label>
+                            <input type="text" className="form-control" id="inputAssignmentName" aria-describedby="LessonName"/>
+                            
+                        </div>
+                        <div className="mb-3">
+                            <label  className="form-label" id='inputDate'>Date</label>
+                            <input type="date" className="form-control" id="inputAssignmentDate" aria-describedby="inputdate"/>
+                            
+                        </div>
+
+                        
+                    
+                    
+                    
+                    </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newLesson()}>Create Lesson</button>
+                        </div>
+                </div>
+
+
+
+                </div>
             </div>
 
 

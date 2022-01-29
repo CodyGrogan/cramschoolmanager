@@ -54,21 +54,22 @@ function StudentManager(props: any){
              Student Manager
 
         <div className="school-section">
-           
-            <table className="table table-stripped">
-            <thead>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Parent1</th>
-                <th>Parent2</th>
-                <th>email</th>
+           <div className="table-responsive">
+                <table className="table table-stripped">
+                    <thead>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Parent1</th>
+                        <th>Parent2</th>
+                        <th>email</th>
 
 
-            </thead>
-            <tbody>
-            {tableData}
-            </tbody>
-            </table>
+                    </thead>
+                 <tbody>
+                    {tableData}
+                 </tbody>
+                </table>
+            </div>
 
             <div className="centerButton">
             <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentModal">Add Student</button>
