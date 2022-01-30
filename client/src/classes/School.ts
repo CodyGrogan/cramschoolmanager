@@ -16,7 +16,7 @@ class School {
     classList: SchoolClass[];
 
     createClass(name:string ){
-        let newclass = new SchoolClass(name);
+        let newclass = new SchoolClass(name, this.name);
         this.classList.push(newclass);
     }
 

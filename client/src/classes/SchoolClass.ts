@@ -4,13 +4,14 @@ import Lesson from "./Lesson";
 import Assignment from "./Assignment";
 
 class SchoolClass{
-    constructor(name: string){
+    constructor(name: string, schoolname: string){
         this.name = name;
         this.teacherList = [];
         this.studentList = [];
         this.lessonList = [];
         this.assignmentList = [];
         this.archived = false;
+        this.schoolName = schoolname;
     }
     archived: boolean;
     name;
@@ -22,6 +23,7 @@ class SchoolClass{
     lessonList: Lesson[];
     assignmentList: Assignment[];
     studentExists: Map<string, boolean> = new Map(); 
+    schoolName:string;
 
     addStudent(student: Student){
 

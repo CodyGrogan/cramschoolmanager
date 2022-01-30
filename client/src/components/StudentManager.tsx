@@ -10,11 +10,19 @@ function StudentManager(props: any){
     let jsxarr: JSX.Element[] = [];
     const [tableData, setTableData] = useState<JSX.Element[]>();
 
+    async function setStudentState(student: Student){
+        console.log('student manager setting student state')
+        console.log(student);
+        let setStudentToView = props.setStudentToView;
+        await setStudentToView(student);
+        console.log(props.studentToView);
+    }
+
    function buildStudentTable(){
     jsxarr=[];
 
     for(let i = 0; i<studentList.length; i++){
-        let newjsx = <StudentTableItem student = {studentList[i]} /> ;
+        let newjsx = <StudentTableItem setStudentState={setStudentState} student = {studentList[i]} /> ;
         jsxarr.push(newjsx);
 
     }
