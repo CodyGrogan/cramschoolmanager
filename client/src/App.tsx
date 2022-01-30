@@ -17,6 +17,8 @@ function App() {
   let defSchool = new School('def');
 
   const [school, setSchool] = useState<School>(defSchool);
+  const [lessonToView, setLessonToView] = useState<Lesson>();
+  const [studentToView, setStudentToView] = useState<Student>();
 
   //for testing purposes
   //later class/student/teach info should come from database
