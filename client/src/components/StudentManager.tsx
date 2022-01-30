@@ -10,19 +10,12 @@ function StudentManager(props: any){
     let jsxarr: JSX.Element[] = [];
     const [tableData, setTableData] = useState<JSX.Element[]>();
 
-    async function setStudentState(student: Student){
-        console.log('student manager setting student state')
-        console.log(student);
-        let setStudentToView = props.setStudentToView;
-        await setStudentToView(student);
-        console.log(props.studentToView);
-    }
 
    function buildStudentTable(){
     jsxarr=[];
 
     for(let i = 0; i<studentList.length; i++){
-        let newjsx = <StudentTableItem setStudentState={setStudentState} student = {studentList[i]} /> ;
+        let newjsx = <StudentTableItem student = {studentList[i]} /> ;
         jsxarr.push(newjsx);
 
     }
@@ -63,19 +56,19 @@ function StudentManager(props: any){
 
         <div className="school-section">
            <div className="table-responsive">
-                <table className="table table-stripped">
+                <table className="table table-striped">
                     <thead>
+                    <tr>
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Parent1</th>
                         <th>Parent2</th>
                         <th>email</th>
-
-
+                    </tr>
                     </thead>
-                 <tbody>
-                    {tableData}
-                 </tbody>
+                    <tbody>
+                        {tableData}
+                    </tbody>
                 </table>
             </div>
 

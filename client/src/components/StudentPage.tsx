@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Student from "../classes/Student";
 import {useParams} from 'react-router-dom';
+import Navbar from "./Navbar";
 
 
 //when the backend is implemented, use the student name and school name to check database for info
@@ -17,6 +18,7 @@ function StudentPage(props: any){
 
     return(
         <div>
+            <Navbar/>
             {id}
        
         </div>

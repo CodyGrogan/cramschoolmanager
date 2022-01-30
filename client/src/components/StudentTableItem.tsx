@@ -6,13 +6,10 @@ function StudentTableItem(props: any){
    
     let student: Student = props.student;
     let linkstring = `/studentpage/${student.name}`
-    function setStudentState(){
-        console.log('student name clicked')
-        props.setStudentState(student);
-    }
+ 
     return(
         <tr>
-            <td ><Link onClick={()=>setStudentState()} to={linkstring} >{student.name}</Link></td>
+            <td ><Link to={linkstring} >{student.name}</Link></td>
             <td>{student.phone}</td>
             <td>{student.parent1}</td> 
             <td>{student.parent2}</td>
