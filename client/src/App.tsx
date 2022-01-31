@@ -13,6 +13,7 @@ import Teacher from './classes/Teacher';
 import Lesson from './classes/Lesson';
 import StudentManager from './components/StudentManager';
 import StudentPage from './components/StudentPage';
+import LessonPage from './components/LessonPage';
 
 function App() {
   let defSchool = new School('def');
@@ -93,7 +94,10 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='school' element={<SchoolManager school={school}/>}/>
         <Route path='student' element={<StudentManager school={school} studentToView={studentToView} setStudentToView={setStudentToView} />}/>
-        <Route path='studentpage/:id' element={<StudentPage studentToView={studentToView}/>} />
+        <Route path='studentpage/:id' element={<StudentPage />} />
+        <Route path='lessonpage/:id' element={<LessonPage/>} />
+
+
 
       </Routes>
       </BrowserRouter>
