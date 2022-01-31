@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import School from "../classes/School";
 import Student from "../classes/Student";
 import Navbar from "./Navbar";
 import StudentTableItem from "./StudentTableItem";
 
 function StudentManager(props: any){
-    let school = props.school;
+    let school: School = props.school;
     let studentList: Student[] = [];
     studentList = school.studentList;
     let jsxarr: JSX.Element[] = [];
@@ -41,8 +42,7 @@ function StudentManager(props: any){
         let email:string = (document.getElementById('inputEmail') as HTMLInputElement).value ;
 
         if (name != null && name != ''){
-            let newstudent = new Student(name, age, parent1, parent2, phone, email, 'testid');
-            studentList.push(newstudent);
+            school.addStudent(name, age, parent1, parent2, phone, email)
             buildStudentTable();
             
         }
