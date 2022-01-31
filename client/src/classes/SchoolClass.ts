@@ -41,7 +41,8 @@ class SchoolClass{
 
     createLesson(dateString: string, lessonName: string){
 
-        let newLesson = new Lesson(dateString, this.lessonList.length+1, this.studentList, lessonName);
+        let newid = this.schoolName + dateString + lessonName + this.name;
+        let newLesson = new Lesson(dateString, this.lessonList.length+1, this.studentList, lessonName, newid);
         this.lessonList.push(newLesson);
 
     }

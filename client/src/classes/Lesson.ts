@@ -1,13 +1,14 @@
 import Student from "./Student";
 
 class Lesson{
-    constructor(date: string, num: number, studentList: string[], name: string){
+    constructor(date: string, num: number, studentList: string[], name: string, lessonid: string){
         this.num = num;
         this.date = date;
         this.name = name;
         this.lessonplan = '';
         this.finished = false;
         this.attendance = new Map();
+        this.lessonid = lessonid;
         for (let i = 0; i < studentList.length; i++){
             let attendanceinfo = [studentList[i], false];
             this.attendance.set(studentList[i], false);
@@ -20,6 +21,7 @@ class Lesson{
     attendance: Map<string, boolean>;
     finished: boolean;
     name;
+    lessonid: string;
 
 }
 

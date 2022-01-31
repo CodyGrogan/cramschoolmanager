@@ -100,6 +100,7 @@ function ClassManager(props: any){
         schoolClass.addStudent(schoolInfo.studentList[index]);
         props.setEditTrue(true);
         resetAttendance();
+        resetAssignmentGrades();
 
 
     }
@@ -145,6 +146,7 @@ function ClassManager(props: any){
 
             setLessonList(lessonlist);
             resetAttendance();
+            resetAssignmentGrades();
         }
 
     }
