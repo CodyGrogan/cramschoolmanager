@@ -14,6 +14,13 @@ import Lesson from './classes/Lesson';
 import StudentManager from './components/StudentManager';
 import StudentPage from './components/StudentPage';
 import LessonPage from './components/LessonPage';
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth';
 import { initializeApp } from "firebase/app";
 
 import { getAnalytics } from "firebase/analytics";
@@ -48,9 +55,24 @@ const app = initializeApp(firebaseConfig);
 
 const analytics = getAnalytics(app);
 
+function authStateObserver(user: any) {
+  if (user) {
+    console.log("user is signed in")
+    
+
+  }
+}
+
+function initFirebaseAuth() {
+onAuthStateChanged(getAuth(), authStateObserver);
+
+}
+
 
 
 function App() {
+
+  initFirebaseAuth();
   let defaultSchool = new School('def');
   let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown');
 

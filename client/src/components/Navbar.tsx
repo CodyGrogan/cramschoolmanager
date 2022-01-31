@@ -59,6 +59,40 @@ function Navbar(props: any){
     }
   }
 
+  function signOutUser() {
+ 
+    signOut(getAuth());
+  
+  }
+
+  function navauthStateObserver(user: any) {
+    if (user) {
+      
+  var signInButtonElement = document.getElementById('sign-in') as HTMLInputElement;
+  var signOutButtonElement = document.getElementById('sign-out') as HTMLInputElement;
+
+  
+    signOutButtonElement.addEventListener('click', signOutUser);
+      console.log("user is signed in")
+   
+      signInButtonElement.hidden = true;
+      signOutButtonElement.hidden = false;
+    }
+      
+
+      else{
+
+        var signInButtonElement = document.getElementById('sign-in') as HTMLInputElement;
+        var signOutButtonElement = document.getElementById('sign-out') as HTMLInputElement;
+        signOutButtonElement.addEventListener('click', signOutUser);
+            signInButtonElement.hidden = false;
+            signOutButtonElement.hidden = true;
+            
+          }
+  }  
+  
+onAuthStateChanged(getAuth(), navauthStateObserver);
+
 
     return(
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -86,7 +120,7 @@ function Navbar(props: any){
       <button type="button" data-bs-toggle="modal" data-bs-target="#loginOrSignup" className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in"  >
       <i className="material-icons">account_circle</i>Sign In
     </button>
-    <button hidden type="button" className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
+    <button hidden type="button" onClick={()=>signOutUser()} className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
 
 
     
