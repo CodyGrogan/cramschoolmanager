@@ -5,7 +5,7 @@ function StudentTableItem(props: any){
    
    
     let student: Student = props.student;
-    let linkstring = `/studentpage/${student.name}`
+    let linkstring = `/studentpage/${student.studentID}`
  
     return(
         <tr>

@@ -20,9 +20,11 @@ class School {
         this.classList.push(newclass);
     }
 
-    addStudent(name:string, age:number, parent1: string, parent2: string, phone: string, email:string ){
-        let newid:string = name + this.studentList.length
-        let newstudent = new Student(name, age, parent1, parent2, phone, email, newid);
+    addStudent(studentname:string, age:number, parent1: string, parent2: string, phone: string, email:string ){
+        let newdate = new Date();
+        let datestring = newdate.toISOString();
+        let newid:string = this.name + this.studentList.length+datestring;
+        let newstudent = new Student(studentname, age, parent1, parent2, phone, email, newid);
         this.studentList.push(newstudent);
     }
 
