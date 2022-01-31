@@ -41,7 +41,7 @@ function StudentManager(props: any){
         let email:string = (document.getElementById('inputEmail') as HTMLInputElement).value ;
 
         if (name != null && name != ''){
-            let newstudent = new Student(name, age, parent1, parent2, phone, email);
+            let newstudent = new Student(name, age, parent1, parent2, phone, email, 'testid');
             studentList.push(newstudent);
             buildStudentTable();
             

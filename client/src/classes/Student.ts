@@ -2,7 +2,7 @@
 
 
 class Student{
-    constructor(name: string, age: number, parent1: string, parent2:string, phone:string, email:string){
+    constructor(name: string, age: number, parent1: string, parent2:string, phone:string, email:string, studentID: string){
         this.name = name;
         this.age= age;
         this.parent1 = parent1;
@@ -10,6 +10,7 @@ class Student{
         this.phone = phone;
         this.email = email;
         this.classes = [];
+        this.studentID = studentID;
     }
    name;
    age;
@@ -18,6 +19,7 @@ class Student{
    phone;
    email;
    classes: string[];
+   studentID: string;
    
 }
 

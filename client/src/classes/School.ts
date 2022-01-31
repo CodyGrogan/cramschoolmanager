@@ -20,6 +20,12 @@ class School {
         this.classList.push(newclass);
     }
 
+    addStudent(name:string, age:number, parent1: string, parent2: string, phone: string, email:string ){
+        let newid:string = name + this.studentList.length
+        let newstudent = new Student(name, age, parent1, parent2, phone, email, newid);
+        this.studentList.push(newstudent);
+    }
+
 }
 
 export default School;

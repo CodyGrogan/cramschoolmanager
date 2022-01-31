@@ -16,11 +16,11 @@ import StudentPage from './components/StudentPage';
 import LessonPage from './components/LessonPage';
 
 function App() {
-  let defSchool = new School('def');
-  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown');
+  let defaultSchool = new School('def');
+  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown');
 
 
-  const [school, setSchool] = useState<School>(defSchool);
+  const [school, setSchool] = useState<School>(defaultSchool);
   const [lessonToView, setLessonToView] = useState<Lesson>();
   const [studentToView, setStudentToView] = useState<Student>(defstudent);
 
@@ -39,49 +39,39 @@ function App() {
     
     setStudentToView(defstudent);
 
+    let defSchool = new School('myschool');
 
-    let newclass = new SchoolClass('myclass', 'testschool');
-    let newstudent = new Student('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
-    let newstudent2 = new Student('sally', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
-    newclass.addStudent(newstudent);
-    newclass.addStudent(newstudent2);
 
-    let newclass2 = new SchoolClass('myotherclass', 'testschool');
-    let newstudent3 = new Student('paul', 11, 'john', 'mary', '123456', 'hello@fake.com');
-    let newstudent4 = new Student('jenny', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
-    let newstudent5 = new Student('alfred', 12, 'jose', 'josie', '456123', 'hello3@fake.com');
-    newclass2.addStudent(newstudent3);
-    newclass2.addStudent(newstudent4);
-    newclass2.addStudent(newstudent5);
-    newclass2.type = "English"
+    defSchool.addStudent('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
+    defSchool.addStudent('sally', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
+    defSchool.addStudent('paul', 11, 'john', 'mary', '123456', 'hello@fake.com');
+    defSchool.addStudent('jenny', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
+    defSchool.addStudent('alfred', 12, 'jose', 'josie', '456123', 'hello3@fake.com');
 
-    newclass.createAssignment('2022-01-01', 'Assignment1')
-    newclass.createAssignment('2022-01-02', 'Assignment2')
+    defSchool.createClass('myclass')
+    defSchool.createClass('myotherclass')
+    defSchool.classList[0].createAssignment('2022-01-01', 'Assignment1');
+    defSchool.classList[0].createAssignment('2022-01-02', 'Assignment2');
+
     
-    newclass2.createAssignment('2022-01-01', 'Assignment1')
-    newclass2.createAssignment('2022-01-02', 'Assignment2')
+    defSchool.classList[1].createAssignment('2022-01-04', 'Assignment1');
+    defSchool.classList[1].createAssignment('2022-01-05', 'Assignment2');
+
+    defSchool.classList[0].createLesson('2022-01-01', 'Verbs Day 1');
+    defSchool.classList[0].createLesson('2022-01-02', 'Verbs Day 2');
+
+    
+    defSchool.classList[1].createLesson('2022-01-05', 'Verbs Day 1');
+    defSchool.classList[1].createLesson('2022-01-06', 'Verbs Day 2');
+
 
   
-    let myschool = new School('myschool');
-    myschool.classList.push(newclass);
-    myschool.classList.push(newclass2);
 
-    myschool.studentList.push(newstudent);
-    myschool.studentList.push(newstudent2);
-    myschool.studentList.push(newstudent3);
-    myschool.studentList.push(newstudent4);
-    myschool.studentList.push(newstudent5);
-    newclass.createLesson('2022-01-01', 'Verbs Day 1');
-    newclass.createLesson('2022-01-02', 'Verbs Day 2');
-
-    newclass2.createLesson('2022-01-05', 'Verbs Day 1');
-    newclass2.createLesson('2022-01-06', 'Verbs Day 2');
-
-
+ 
 
 
     
-    setSchool(myschool);
+    setSchool(defSchool);
   },
   [])
 
