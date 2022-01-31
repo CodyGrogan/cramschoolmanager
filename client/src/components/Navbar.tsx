@@ -13,6 +13,27 @@ import {
 
 function Navbar(props: any){
 
+  async function signInEmail() {
+    console.log("sign in email button pressed")
+    let email = (document.getElementById('loginEmail') as HTMLInputElement).value;
+    let password = (document.getElementById('loginPassword') as HTMLInputElement).value;
+    
+    signInWithEmailAndPassword(getAuth(), email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode + errorMessage);
+          console.log(email);
+          alert("Wrong Email or Password")
+        });
+        
+  }
+
   async function emailSignUp(){
     //this function needs to use firebase to determine if the user has already signed up with this email.
     //if yes, send on to signInPasswordModal, if no, send on to signUpFormModal
@@ -174,7 +195,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                     </div>
 
                     <div className='loginDiv'>
-                      <button type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Log In</button>
+                      <button type="button" onClick={()=>signInEmail()} className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Log In</button>
                     </div>
                 
                    
