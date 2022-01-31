@@ -1,7 +1,65 @@
 import { BrowserRouter, Route, Routes, Link} from 'react-router-dom'; 
-
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  EmailAuthProvider,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword
+} from 'firebase/auth';
 
 function Navbar(props: any){
+
+  async function emailSignUp(){
+    //this function needs to use firebase to determine if the user has already signed up with this email.
+    //if yes, send on to signInPasswordModal, if no, send on to signUpFormModal
+
+    console.log('email sign up clicked')
+    let email = (document.getElementById('signupEmail') as HTMLInputElement).value;
+    let name = (document.getElementById('signupName') as HTMLInputElement).value;
+    let password = (document.getElementById('signupPassword') as HTMLInputElement).value;
+
+    if (name.length < 1){
+      alert("Name must have at least one character")
+    }
+
+    else{
+    
+    createUserWithEmailAndPassword(getAuth(), email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user: any = userCredential.user;
+
+        let currentUser = getAuth().currentUser;
+
+        if (currentUser!= null){
+        updateProfile(currentUser, {
+          displayName: name
+        }).then(() => {
+          // Profile updated!
+          // ...
+          console.log('displayname set')
+        }).catch((error) => {
+          // An error occurred
+          // ...
+        });
+        // ...
+      }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+
+        alert("Invalid Email, Password Less than 6 characters, or Already Exists")
+      });
+    }
+  }
+
+
     return(
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
@@ -106,7 +164,7 @@ function Navbar(props: any){
 
                 <div className="mb-3">
                         <label  className="form-label" >Name</label>
-                        <input type="text" className="form-control" id="loginName" aria-describedby="emailHelp"/>
+                        <input type="text" className="form-control" id="signupName" aria-describedby="emailHelp"/>
                         
                     </div>
                    
@@ -122,7 +180,7 @@ function Navbar(props: any){
                     </div>
 
                     <div className='loginDiv'>
-                      <button type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Sign Up</button>
+                      <button onClick={()=>emailSignUp()} type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal">Sign Up</button>
                     </div>
                 
                    
