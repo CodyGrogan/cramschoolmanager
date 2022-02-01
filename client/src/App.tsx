@@ -14,10 +14,67 @@ import Lesson from './classes/Lesson';
 import StudentManager from './components/StudentManager';
 import StudentPage from './components/StudentPage';
 import LessonPage from './components/LessonPage';
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth';
+import { initializeApp } from "firebase/app";
+
+import { getAnalytics } from "firebase/analytics";
+
+// TODO: Add SDKs for Firebase products that you want to use
+
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyD_3M4TI4ENhiQq9eA9yo808FQ1v40B86c",
+
+  authDomain: "cramschoolmanager.firebaseapp.com",
+
+  projectId: "cramschoolmanager",
+
+  storageBucket: "cramschoolmanager.appspot.com",
+
+  messagingSenderId: "843449214028",
+
+  appId: "1:843449214028:web:87e394968f30643b6140e9",
+
+  measurementId: "G-HNW8SPLH80"
+
+};
+const app = initializeApp(firebaseConfig);
+
+const analytics = getAnalytics(app);
+
+function authStateObserver(user: any) {
+  if (user) {
+    console.log("user is signed in")
+    
+
+  }
+}
+
+function initFirebaseAuth() {
+onAuthStateChanged(getAuth(), authStateObserver);
+
+}
+
+
 
 function App() {
+
+  initFirebaseAuth();
   let defaultSchool = new School('def');
-  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown');
+  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown', 'unknown');
 
 
   const [school, setSchool] = useState<School>(defaultSchool);

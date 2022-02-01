@@ -24,7 +24,7 @@ class School {
         let newdate = new Date();
         let datestring = newdate.toISOString();
         let newid:string = this.name + this.studentList.length+datestring;
-        let newstudent = new Student(studentname, age, parent1, parent2, phone, email, newid);
+        let newstudent = new Student(studentname, age, parent1, parent2, phone, email, newid, this.name);
         this.studentList.push(newstudent);
     }
 

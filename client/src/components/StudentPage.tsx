@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 
 
 function StudentPage(props: any){
-    let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'unknownid');
+    let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'unknownid', 'unkown');
     console.log(defstudent);
     const [student, setStudent] = useState<Student>(defstudent);
 
