@@ -74,7 +74,7 @@ function App() {
 
   initFirebaseAuth();
   let defaultSchool = new School('def');
-  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown');
+  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown', 'unknown');
 
 
   const [school, setSchool] = useState<School>(defaultSchool);

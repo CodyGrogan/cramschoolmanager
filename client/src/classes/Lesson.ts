@@ -1,5 +1,3 @@
-import Student from "./Student";
-
 class Lesson{
     constructor(date: string, num: number, studentList: string[], name: string, lessonid: string){
         this.num = num;
@@ -10,7 +8,6 @@ class Lesson{
         this.attendance = new Map();
         this.lessonid = lessonid;
         for (let i = 0; i < studentList.length; i++){
-            let attendanceinfo = [studentList[i], false];
             this.attendance.set(studentList[i], false);
         }
 
