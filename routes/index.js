@@ -13,7 +13,7 @@ router.get('*', function(req, res) {
 });
 
 
-router.get('/', function(req, res, next) {
+router.get('/studentlist', function(req, res, next) {
   
 });
 
