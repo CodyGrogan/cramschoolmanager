@@ -29,6 +29,6 @@ let studentSchema = new Schema({'name': String,
 
 });
 
-let studentModel = mongoose.model('madlib', defmadlibSchema);
+let studentModel = mongoose.model('student', studentSchema);
 
 module.exports = studentModel;
