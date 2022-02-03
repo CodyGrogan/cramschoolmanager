@@ -30,6 +30,27 @@ function StudentManager(props: any){
     },
     [studentList]);
 
+    async function addStudent(newstudent: Student) {
+        let jsonstring = JSON.stringify(newstudent);
+        let postpath: string = '/createstudent';
+
+        fetch(postpath, {
+            method: 'POST', 
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: jsonstring,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    }
+
     function createStudent(){
 
        
@@ -42,8 +63,10 @@ function StudentManager(props: any){
         let email:string = (document.getElementById('inputEmail') as HTMLInputElement).value ;
 
         if (name != null && name != ''){
-            school.addStudent(name, age, parent1, parent2, phone, email)
+            school.addStudent(name, age, parent1, parent2, phone, email);
+            let index = school.studentList.length -1;
             buildStudentTable();
+            addStudent(school.studentList[index]);
             
         }
 
