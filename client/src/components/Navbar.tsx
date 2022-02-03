@@ -35,6 +35,29 @@ function Navbar(props: any){
         
   }
 
+  async function addSchool(newSchool: School) {
+    console.log('adding student to database');
+    let jsonstring = JSON.stringify(newSchool);
+    let postpath: string = '/createschool';
+
+    fetch(postpath, {
+        method: 'POST', 
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: jsonstring,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+}
+
+
   async function emailSignUp(){
     //this function needs to use firebase to determine if the user has already signed up with this email.
     //if yes, send on to signInPasswordModal, if no, send on to signUpFormModal
@@ -67,6 +90,7 @@ function Navbar(props: any){
           let userid: string =getAuth().currentUser?.uid as string;
           console.log(userid);
           let newschool = new School('New School', userid);
+          addSchool(newschool);
           console.log(newschool.name + 'has been created');
           props.setSchool(newschool);
 

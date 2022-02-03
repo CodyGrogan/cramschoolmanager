@@ -16,6 +16,28 @@ function SchoolManager(props: any){
     const [editTrue, setEditTrue] = useState<boolean>(false);
     const [currentClass, setCurrentClass] = useState<SchoolClass>();
 
+    async function editSchool(school: School){
+        console.log('adding student to database');
+        let jsonstring = JSON.stringify(school);
+        let postpath: string = '/editschool';
+
+        fetch(postpath, {
+            method: 'PUT', 
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: jsonstring,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+    }
+
     useEffect(()=>{
         console.log('use effect fired')
         //schoolInfo = props.school;
@@ -48,8 +70,10 @@ function SchoolManager(props: any){
     },
     [selectedClass, schoolInfo]);
 
-    useEffect(()=>{
+    useEffect(()=>{   //this should fire whenever any change to data takes place
 
+
+        editSchool(schoolInfo);
         if(schoolInfo.classList[0] !== undefined){
             let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
             let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>

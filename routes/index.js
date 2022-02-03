@@ -7,6 +7,7 @@ const schoolModel = require('../models/SchoolModel');
 var mongoose = require('mongoose');
 var mongopassword = process.env.MONGOPASS;
 var path = require('path');
+const { query } = require('express');
 let database = process.env.USEDB;
 //in production USEDB = "CramSchool"
 var mongodb = 'mongodb+srv://cg123:'+ mongopassword +'@sandbox.o8c7z.mongodb.net/'+ database +'?retryWrites=true&w=majority';
@@ -41,6 +42,7 @@ router.post('/createstudent', function(req, res, next) {
 });
 
 router.post('/createschool', function(req, res, next) {
+  console.log('creating school')
   let school = req.body;
   let schoolInstance = new schoolModel({
     name: school.name,
@@ -53,11 +55,34 @@ router.post('/createschool', function(req, res, next) {
 
 
 
-  })
+  });
   schoolInstance.save(function(err){if (err) console.log(err);})
 
 });
 
+router.put('/editschool', function(req, res, next){
+
+  console.log('put school information')
+  let school = req.body;
+  console.log(school.schoolID);
+
+ 
+
+  schoolModel.findOne({schoolID: school.schoolID}, function (err, doc){
+    if (err){console.log(err);
+    res.send(err)}
+    else{
+        doc.classList = school.classList;
+        doc.teacherList = school.teacherList;
+        doc.studentList = school.studentList;
+        doc.name = school.name;
+        doc.address = school.address; 
+        doc.save();
+        
+      }
+    });
+
+});
 
 
 module.exports = router;
