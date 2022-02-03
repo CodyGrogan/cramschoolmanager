@@ -77,7 +77,7 @@ function SchoolManager(props: any){
 
     return(
         <div>
-            <Navbar/>
+            <Navbar setSchool = {props.setSchool}/>
             class manager
             <div className="row school-section">
                 <div className="col-sm-2 list-box"><ul>
