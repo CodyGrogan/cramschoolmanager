@@ -65,7 +65,10 @@ function Navbar(props: any){
           // ...
           console.log('displayname set');
           let userid: string =getAuth().currentUser?.uid as string;
-          let newschool = new School('NoName', userid);
+          console.log(userid);
+          let newschool = new School('New School', userid);
+          console.log(newschool.name + 'has been created');
+          props.setSchool(newschool);
 
         }).catch((error) => {
           // An error occurred

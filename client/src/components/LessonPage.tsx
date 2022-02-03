@@ -8,7 +8,7 @@ function LessonPage(props: any){
 
     return(
         <div>
-            <Navbar/>
+            <Navbar setSchool = {props.setSchool}/>
             {id}
         </div>
     )
