@@ -73,6 +73,7 @@ function SchoolManager(props: any){
 
         }
         setClassList(itemArr);
+        setEditTrue(true);
     }
 
     return(
