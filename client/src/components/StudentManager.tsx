@@ -31,6 +31,7 @@ function StudentManager(props: any){
     [studentList]);
 
     async function addStudent(newstudent: Student) {
+        console.log('adding student to database');
         let jsonstring = JSON.stringify(newstudent);
         let postpath: string = '/createstudent';
 
@@ -74,7 +75,7 @@ function StudentManager(props: any){
     
     return(
         <div>
-             <Navbar/>
+             <Navbar setSchool={props.setSchool}/>
              Student Manager
 
         <div className="school-section">

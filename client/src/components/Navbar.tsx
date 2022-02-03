@@ -10,6 +10,7 @@ import {
   updateProfile,
   signInWithEmailAndPassword
 } from 'firebase/auth';
+import School from '../classes/School';
 
 function Navbar(props: any){
 
@@ -62,7 +63,10 @@ function Navbar(props: any){
         }).then(() => {
           // Profile updated!
           // ...
-          console.log('displayname set')
+          console.log('displayname set');
+          let userid: string =getAuth().currentUser?.uid as string;
+          let newschool = new School('NoName', userid);
+
         }).catch((error) => {
           // An error occurred
           // ...
@@ -98,6 +102,7 @@ function Navbar(props: any){
    
       signInButtonElement.hidden = true;
       signOutButtonElement.hidden = false;
+
     }
       
 
@@ -183,21 +188,24 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                 </div>
                 <div className="modal-body">
                    
-                    <div className="mb-3">
+                  <form>
+
+                    <div className="mb-3 form-group">
                         <label  className="form-label" >Email</label>
                         <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
                         
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 form-group">
                         <label  className="form-label" id='passwordlabel'>Password</label>
                         <input type="password" className="form-control" id="loginPassword" aria-describedby="emailHelp"/>
                         
                     </div>
 
-                    <div className='loginDiv'>
+                    <div className='loginDiv form-group'>
                       <button type="button" onClick={()=>signInEmail()} className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Log In</button>
                     </div>
-                
+                  </form>
+
                    
                 
                 </div>
@@ -217,18 +225,20 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                 </div>
                 <div className="modal-body">
 
-                <div className="mb-3">
+
+              <form>
+                <div className="mb-3 form-group">
                         <label  className="form-label" >Name</label>
                         <input type="text" className="form-control" id="signupName" aria-describedby="emailHelp"/>
                         
                     </div>
                    
-                    <div className="mb-3">
+                    <div className="mb-3 form-group">
                         <label  className="form-label" >Email</label>
                         <input type="email" className="form-control" id="signupEmail" aria-describedby="emailHelp"/>
                         
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 form-group">
                         <label  className="form-label" id='loginPassword'>Password</label>
                         <input type="password" className="form-control" id="signupPassword" aria-describedby="emailHelp"/>
                         
@@ -237,7 +247,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                     <div className='loginDiv'>
                       <button onClick={()=>emailSignUp()} type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal">Sign Up</button>
                     </div>
-                
+                </form>
                    
                 
                 </div>

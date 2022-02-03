@@ -73,8 +73,8 @@ onAuthStateChanged(getAuth(), authStateObserver);
 function App() {
 
   initFirebaseAuth();
-  let defaultSchool = new School('def');
-  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown', 'unknown');
+  let defaultSchool = new School('def', 'testid');
+  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown', 'unknown', 'unknown');
 
 
   const [school, setSchool] = useState<School>(defaultSchool);
@@ -96,7 +96,7 @@ function App() {
     
     setStudentToView(defstudent);
 
-    let defSchool = new School('myschool');
+    let defSchool = new School('myschool', 'testid');
 
 
     defSchool.addStudent('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
@@ -139,10 +139,10 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='school' element={<SchoolManager school={school}/>}/>
-        <Route path='student' element={<StudentManager school={school} studentToView={studentToView} setStudentToView={setStudentToView} />}/>
-        <Route path='studentpage/:id' element={<StudentPage />} />
-        <Route path='lessonpage/:id' element={<LessonPage/>} />
+        <Route path='school' element={<SchoolManager school={school} setSchool={setSchool}/>}/>
+        <Route path='student' element={<StudentManager school={school} studentToView={studentToView} setStudentToView={setStudentToView} setSchool={setSchool} />}/>
+        <Route path='studentpage/:id' element={<StudentPage setSchool={setSchool} />} />
+        <Route path='lessonpage/:id' element={<LessonPage setSchool={setSchool}/>} />
 
 
 

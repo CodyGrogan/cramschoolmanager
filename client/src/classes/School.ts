@@ -2,21 +2,23 @@ import Teacher from "./Teacher";
 import Student from "./Student";
 import SchoolClass from "./SchoolClass";
 class School {
-    constructor(name: string) {
+    constructor(name: string, schoolID: string) {
         this.name = name;
         this.address ='';
         this.teacherList = [];        
         this.studentList = [];
         this.classList = [];
+        this.schoolID = schoolID;
     }
     name;
     address: string;
+    schoolID: string;
     teacherList: Teacher[];
     studentList: Student[];
     classList: SchoolClass[];
 
     createClass(name:string ){
-        let newclass = new SchoolClass(name, this.name);
+        let newclass = new SchoolClass(name, this.name, this.schoolID);
         this.classList.push(newclass);
     }
 
@@ -24,7 +26,7 @@ class School {
         let newdate = new Date();
         let datestring = newdate.toISOString();
         let newid:string = this.name + this.studentList.length+datestring;
-        let newstudent = new Student(studentname, age, parent1, parent2, phone, email, newid, this.name);
+        let newstudent = new Student(studentname, age, parent1, parent2, phone, email, newid, this.name, this.schoolID);
         this.studentList.push(newstudent);
     }
 
