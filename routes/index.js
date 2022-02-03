@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const studentModel = require('../models/StudentModel');
+const schoolModel = require('../models/SchoolModel');
 
 //setup mongo
 var mongoose = require('mongoose');
@@ -38,6 +39,25 @@ router.post('/createstudent', function(req, res, next) {
   studentInstance.save(function(err){if (err) console.log(err);})
 
 });
+
+router.post('/createschool', function(req, res, next) {
+  let school = req.body;
+  let schoolInstance = new schoolModel({
+    name: school.name,
+    schoolID: school.schoolID,
+    address: school.address,
+    teacherList: school.teacherList,
+    studentList: school.studentList,
+    classList: school.classList
+    
+
+
+
+  })
+  schoolInstance.save(function(err){if (err) console.log(err);})
+
+});
+
 
 
 module.exports = router;
