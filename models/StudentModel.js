@@ -25,7 +25,8 @@ let studentSchema = new Schema({'name': String,
 'email': String,
 'classes': {type: Array},
 'studentID': String,
-'schoolName': String
+'schoolName': String,
+'schoolID': String
 
 });
 

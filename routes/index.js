@@ -34,7 +34,7 @@ router.get('/studentlist', function(req, res, next) {
 
 router.post('/createstudent', function(req, res, next) {
   let student = req.body;
-  let studentInstance = new studentModel({name: student.name, age: student.age, parent1: student.parent1, parent2: student.parent2, phone: student.phone, email: student.email, classes: student.classes, studentid: student.studentID, schoolName: student.schoolName});
+  let studentInstance = new studentModel({name: student.name, age: student.age, parent1: student.parent1, parent2: student.parent2, phone: student.phone, email: student.email, classes: student.classes, studentid: student.studentID, schoolName: student.schoolName, schoolID: student.schoolID});
   studentInstance.save(function(err){if (err) console.log(err);})
 
 });
