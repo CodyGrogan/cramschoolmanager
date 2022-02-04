@@ -55,16 +55,10 @@ const app = initializeApp(firebaseConfig);
 
 const analytics = getAnalytics(app);
 
-function authStateObserver(user: any) {
-  if (user) {
-    console.log("user is signed in")
-    
 
-  }
-}
 
 function initFirebaseAuth() {
-onAuthStateChanged(getAuth(), authStateObserver);
+//onAuthStateChanged(getAuth(), authStateObserver);
 
 }
 

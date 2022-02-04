@@ -66,7 +66,7 @@ router.put('/editschool', function(req, res, next){
   let school = req.body;
   console.log(school.schoolID);
 
- 
+ if (school.schoolID != 'testid'){
 
   schoolModel.findOne({schoolID: school.schoolID}, function (err, doc){
     if (err){console.log(err);
@@ -82,7 +82,33 @@ router.put('/editschool', function(req, res, next){
       }
     });
 
+  }
+  else{
+    console.log('user is not loggged in');
+  }
+
 });
+
+router.post('/getschoolinfo', function(req, res, next){   //this should use post request, later this will need to pass firebase JWT and schoolID
+                                                      //for authentication on server side
+
+  console.log('get school information')
+  let newschoolID = req.body.uid;
+  console.log(newschoolID);
+
+ 
+
+  schoolModel.findOne({schoolID: newschoolID}, function (err, doc){
+    if (err){console.log(err);
+    res.send(err)}
+    else{
+        res.json(doc);
+        
+      }
+    });
+
+});
+
 
 
 module.exports = router;

@@ -5,6 +5,7 @@ import ClassSummary from './ClassSummary';
 import ClassManager from './ClassManager';
 import SchoolClass from '../classes/SchoolClass';
 import Navbar from './Navbar';
+import {getAuth} from 'firebase/auth'
 
 
 function SchoolManager(props: any){
@@ -17,7 +18,10 @@ function SchoolManager(props: any){
     const [currentClass, setCurrentClass] = useState<SchoolClass>();
 
     async function editSchool(school: School){
-        console.log('adding student to database');
+
+        let user = getAuth().currentUser;
+        if (user){
+        console.log('adding school info to database');
         let jsonstring = JSON.stringify(school);
         let postpath: string = '/editschool';
 
@@ -35,7 +39,41 @@ function SchoolManager(props: any){
         .catch((error) => {
             console.error('Error:', error);
         });
+        
+        }
+        else{
+            console.log('user not signed in, cannot edit')
+        }
 
+    }
+
+    async function getSchoolData() {
+
+        let uid = getAuth().currentUser?.uid;
+        let obj = JSON.stringify({uid});
+        let postpath: string = '/getschoolinfo';
+
+        fetch(postpath, {
+            method: 'POST', 
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: obj,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        
+    }
+
+    async function syncSchool() {
+        await editSchool(schoolInfo);
+        
     }
 
     useEffect(()=>{
@@ -72,9 +110,10 @@ function SchoolManager(props: any){
 
     useEffect(()=>{   //this should fire whenever any change to data takes place
 
-
-        editSchool(schoolInfo);
+        
         if(schoolInfo.classList[0] !== undefined){
+            editSchool(schoolInfo);
+
             let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
             let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>
            setSummary([newjsx]);

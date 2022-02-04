@@ -11,8 +11,16 @@ import {
   signInWithEmailAndPassword
 } from 'firebase/auth';
 import School from '../classes/School';
+import { useEffect } from 'react';
 
 function Navbar(props: any){
+
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(getAuth(), navauthStateObserver);
+
+    return () => unsubscribe(); // unsubscribing from the listener when the component is unmounting. 
+}, []);
 
   async function signInEmail() {
     console.log("sign in email button pressed")
@@ -56,6 +64,40 @@ function Navbar(props: any){
     });
 
 }
+
+
+  async function getSchoolData() {
+
+    console.log('getting school data')
+    let uid = getAuth().currentUser?.uid;
+    console.log('uid is ' + uid);
+    let obj = JSON.stringify({uid});
+    let postpath: string = '/getschoolinfo';
+
+    fetch(postpath, {
+        method: 'POST', 
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: obj,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+
+        let newschool = new School(data.name, data.schoolID);
+        newschool.address = data.address;
+        newschool.classList = data.classList;
+        newschool.studentList = data.studentList;
+        newschool.teacherList = data.teacherList;
+        props.setSchool(newschool);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+    
+  }
 
 
   async function emailSignUp(){
@@ -130,6 +172,15 @@ function Navbar(props: any){
       signInButtonElement.hidden = true;
       signOutButtonElement.hidden = false;
 
+      try{
+        //getSchoolData();
+        console.log('get school')
+      }
+      catch{
+        console.log('unable to get data')
+      }
+     
+
     }
       
 
@@ -144,7 +195,6 @@ function Navbar(props: any){
           }
   }  
   
-onAuthStateChanged(getAuth(), navauthStateObserver);
 
 
     return(

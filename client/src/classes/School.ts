@@ -9,6 +9,9 @@ class School {
         this.studentList = [];
         this.classList = [];
         this.schoolID = schoolID;
+
+        this.createClass('My First Class');
+        //this.addStudent('Example Student', 0, 'Example Parent1', 'Example Paren2', 'Example Phone', 'Example Email');
     }
     name;
     address: string;
