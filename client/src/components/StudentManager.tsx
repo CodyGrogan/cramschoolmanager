@@ -56,8 +56,8 @@ function StudentManager(props: any){
 
        
         let name:string = (document.getElementById('inputName') as HTMLInputElement).value ;
-        let agestring:string = (document.getElementById('inputName') as HTMLInputElement).value;
-        let age:number = parseInt(agestring);;
+        let agestring:string = (document.getElementById('inputAge') as HTMLInputElement).value;
+        let age:number = parseInt(agestring);
         let phone:string = (document.getElementById('inputPhone') as HTMLInputElement).value ;
         let parent1:string = (document.getElementById('inputParent1') as HTMLInputElement).value ;
         let parent2:string = (document.getElementById('inputParent2') as HTMLInputElement).value ;
@@ -117,7 +117,7 @@ function StudentManager(props: any){
                         
                     </div>
                     <div className="mb-3">
-                        <label  className="form-label" id='inputName'>Age</label>
+                        <label  className="form-label">Age</label>
                         <input type="number" className="form-control" id="inputAge" aria-describedby="emailHelp"/>
                         
                     </div>
