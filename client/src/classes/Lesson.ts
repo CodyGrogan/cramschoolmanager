@@ -5,17 +5,20 @@ class Lesson{
         this.name = name;
         this.lessonplan = '';
         this.finished = false;
-        this.attendance = new Map();
+        this.attendance = [];
         this.lessonid = lessonid;
+        console.log('about to loop in Lesson Constructor');
         for (let i = 0; i < studentList.length; i++){
-            this.attendance.set(studentList[i], false);
+            let obj = {name: studentList[i], value: false}
+            this.attendance.push(obj);
+            console.log(this.attendance);
         }
 
     }
     num;
     date;
     lessonplan: string;
-    attendance: Map<string, boolean>;
+    attendance: any[];
     finished: boolean;
     name;
     lessonid: string;

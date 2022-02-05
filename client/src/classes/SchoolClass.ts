@@ -37,6 +37,10 @@ class SchoolClass{
             student.classes.push(this.name);
             this.studentList.push(student.name);
             this.existArr = Array.from(this.studentExists, ([name, value]) => ({ name, value }));
+
+            for (let i = 0; i< this.lessonList.length; i++){
+                this.addStudentToLesson(student, this.lessonList[i]);
+            }
         }
     }
 
@@ -68,7 +72,12 @@ class SchoolClass{
 
         }
        
+     }
     }
+
+    addStudentToLesson(student: Student, lesson: Lesson){
+        lesson.attendance.push({name: student.name, value: false});
+
     }
 
 }

@@ -10,17 +10,20 @@ function AttendanceTableStudent(props: any){
     let lessonList: Lesson[] = props.schoolClass.lessonList;
 
     function checkBox(name: string, index: number){
-        console.log('checkbox clicked')
+        console.log('checkbox clicked');
 
-        if (lessonList[index].attendance.get(name) === true){
-            lessonList[index].attendance.set(name, false);
+        let attenArr = lessonList[index].attendance;
+        let indexOfName = attenArr.findIndex(obj => obj.name == props.name);
+        
+        if (lessonList[index].attendance[indexOfName].value === true){
+            lessonList[index].attendance[indexOfName].value = false;
          
             
         
             
         }
         else{
-            lessonList[index].attendance.set(name, true);
+            lessonList[index].attendance[indexOfName].value = true;
 
         }
        
@@ -30,7 +33,13 @@ function AttendanceTableStudent(props: any){
     useEffect(()=>{
         for (let i = 0; i < props.lessonlength; i++){
 
-            if (lessonList[i].attendance.get(props.name)===true){
+            let attenArr = lessonList[i].attendance;
+            console.log(attenArr);
+            console.log(props.name);
+            let indexOfName = attenArr.findIndex(obj => obj.name == props.name);
+            
+
+            if (lessonList[i].attendance[indexOfName].value === true){
                 let newjsx = <td> <input id={i+'lesson'+props.name} type={'checkbox'} onClick={()=>checkBox(props.name, i)} defaultChecked/></td>
                 attendanceArray.push(newjsx);
             }
