@@ -65,13 +65,16 @@ router.put('/editschool', function(req, res, next){
   console.log('put school information')
   let school = req.body;
   console.log(school.schoolID);
+  let searchID = school.schoolID;
 
  if (school.schoolID != 'testid'){
 
-  schoolModel.findOne({schoolID: school.schoolID}, function (err, doc){
+  schoolModel.findOne({schoolID: searchID}, function (err, doc){
     if (err){console.log(err);
     res.send(err)}
     else{
+
+        
         doc.classList = school.classList;
         doc.teacherList = school.teacherList;
         doc.studentList = school.studentList;
