@@ -10,8 +10,17 @@ import {
   updateProfile,
   signInWithEmailAndPassword
 } from 'firebase/auth';
+import School from '../classes/School';
+import { useEffect } from 'react';
 
 function Navbar(props: any){
+
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(getAuth(), navauthStateObserver);
+
+    return () => unsubscribe(); // unsubscribing from the listener when the component is unmounting. 
+}, []);
 
   async function signInEmail() {
     console.log("sign in email button pressed")
@@ -33,6 +42,63 @@ function Navbar(props: any){
         });
         
   }
+
+  async function addSchool(newSchool: School) {
+    console.log('adding school to database');
+    let jsonstring = JSON.stringify(newSchool);
+    let postpath: string = '/createschool';
+
+    fetch(postpath, {
+        method: 'POST', 
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: jsonstring,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+}
+
+
+  async function getSchoolData() {
+
+    console.log('getting school data')
+    let uid = getAuth().currentUser?.uid;
+    console.log('uid is ' + uid);
+    let obj = JSON.stringify({uid});
+    let postpath: string = '/getschoolinfo';
+
+    fetch(postpath, {
+        method: 'POST', 
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: obj,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+
+        let newschool = new School(data.name, data.schoolID);
+        newschool.address = data.address;
+        newschool.loadClasses(data.classList);
+        newschool.studentList = data.studentList;
+        newschool.teacherList = data.teacherList;
+        props.setSchool(newschool);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+    
+  }
+
 
   async function emailSignUp(){
     //this function needs to use firebase to determine if the user has already signed up with this email.
@@ -62,7 +128,14 @@ function Navbar(props: any){
         }).then(() => {
           // Profile updated!
           // ...
-          console.log('displayname set')
+          console.log('displayname set');
+          let userid: string =getAuth().currentUser?.uid as string;
+          console.log(userid);
+          let newschool = new School('New School', userid);
+          addSchool(newschool);
+          console.log(newschool.name + 'has been created');
+          props.setSchool(newschool);
+
         }).catch((error) => {
           // An error occurred
           // ...
@@ -98,6 +171,16 @@ function Navbar(props: any){
    
       signInButtonElement.hidden = true;
       signOutButtonElement.hidden = false;
+
+      try{
+        getSchoolData();
+        console.log('get school')
+      }
+      catch{
+        console.log('unable to get data')
+      }
+     
+
     }
       
 
@@ -112,7 +195,6 @@ function Navbar(props: any){
           }
   }  
   
-onAuthStateChanged(getAuth(), navauthStateObserver);
 
 
     return(
@@ -183,21 +265,24 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                 </div>
                 <div className="modal-body">
                    
-                    <div className="mb-3">
+                  <form>
+
+                    <div className="mb-3 form-group">
                         <label  className="form-label" >Email</label>
                         <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
                         
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 form-group">
                         <label  className="form-label" id='passwordlabel'>Password</label>
                         <input type="password" className="form-control" id="loginPassword" aria-describedby="emailHelp"/>
                         
                     </div>
 
-                    <div className='loginDiv'>
+                    <div className='loginDiv form-group'>
                       <button type="button" onClick={()=>signInEmail()} className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Log In</button>
                     </div>
-                
+                  </form>
+
                    
                 
                 </div>
@@ -217,18 +302,20 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                 </div>
                 <div className="modal-body">
 
-                <div className="mb-3">
+
+              <form>
+                <div className="mb-3 form-group">
                         <label  className="form-label" >Name</label>
                         <input type="text" className="form-control" id="signupName" aria-describedby="emailHelp"/>
                         
                     </div>
                    
-                    <div className="mb-3">
+                    <div className="mb-3 form-group">
                         <label  className="form-label" >Email</label>
                         <input type="email" className="form-control" id="signupEmail" aria-describedby="emailHelp"/>
                         
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 form-group">
                         <label  className="form-label" id='loginPassword'>Password</label>
                         <input type="password" className="form-control" id="signupPassword" aria-describedby="emailHelp"/>
                         
@@ -237,7 +324,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                     <div className='loginDiv'>
                       <button onClick={()=>emailSignUp()} type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal">Sign Up</button>
                     </div>
-                
+                </form>
                    
                 
                 </div>

@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 
 
 function StudentPage(props: any){
-    let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'unknownid', 'unkown');
+    let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'unknownid', 'unknown', 'unknown');
     console.log(defstudent);
     const [student, setStudent] = useState<Student>(defstudent);
 
@@ -18,7 +18,7 @@ function StudentPage(props: any){
 
     return(
         <div>
-            <Navbar/>
+            <Navbar setSchool = {props.setSchool}/>
             {id}
        
         </div>

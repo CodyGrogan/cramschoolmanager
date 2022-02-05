@@ -8,7 +8,7 @@ function Home(props: any){
 
     return(
         <div>
-            <Navbar/>
+            <Navbar setSchool={props.setSchool}/>
             Homepage 
         </div>
     )
