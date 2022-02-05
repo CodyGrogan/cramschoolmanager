@@ -17,6 +17,16 @@ function SchoolManager(props: any){
     const [editTrue, setEditTrue] = useState<boolean>(false);
     const [currentClass, setCurrentClass] = useState<SchoolClass>();
 
+    useEffect(()=>{
+      let user = getAuth().currentUser;
+      if (user){
+          getSchoolData();
+      }
+    },
+    []);
+
+
+
     async function editSchool(school: School){
 
         let user = getAuth().currentUser;
@@ -49,10 +59,12 @@ function SchoolManager(props: any){
 
     async function getSchoolData() {
 
+        console.log('getting school data')
         let uid = getAuth().currentUser?.uid;
+        console.log('uid is ' + uid);
         let obj = JSON.stringify({uid});
         let postpath: string = '/getschoolinfo';
-
+    
         fetch(postpath, {
             method: 'POST', 
             headers: {
@@ -63,22 +75,26 @@ function SchoolManager(props: any){
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+    
+            let newschool = new School(data.name, data.schoolID);
+            newschool.address = data.address;
+            newschool.loadClasses(data.classList);
+            newschool.studentList = data.studentList;
+
+            props.setSchool(newschool);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-
+    
         
-    }
+      }
 
-    async function syncSchool() {
-        await editSchool(schoolInfo);
-        
-    }
+   
 
     useEffect(()=>{
         console.log('use effect fired')
-        //schoolInfo = props.school;
+        schoolInfo = props.school;
         let itemArr = [];
         for (let i = 0; i < schoolInfo.classList.length; i++){
             let jsx = <ListItem name ={schoolInfo.classList[i].name} index={i} setSelectedClass={setSelectedClass} />

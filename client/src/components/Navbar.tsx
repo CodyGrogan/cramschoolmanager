@@ -44,7 +44,7 @@ function Navbar(props: any){
   }
 
   async function addSchool(newSchool: School) {
-    console.log('adding student to database');
+    console.log('adding school to database');
     let jsonstring = JSON.stringify(newSchool);
     let postpath: string = '/createschool';
 
@@ -87,7 +87,7 @@ function Navbar(props: any){
 
         let newschool = new School(data.name, data.schoolID);
         newschool.address = data.address;
-        newschool.classList = data.classList;
+        newschool.loadClasses(data.classList);
         newschool.studentList = data.studentList;
         newschool.teacherList = data.teacherList;
         props.setSchool(newschool);
@@ -173,7 +173,7 @@ function Navbar(props: any){
       signOutButtonElement.hidden = false;
 
       try{
-        //getSchoolData();
+        getSchoolData();
         console.log('get school')
       }
       catch{

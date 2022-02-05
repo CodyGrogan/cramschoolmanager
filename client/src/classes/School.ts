@@ -33,6 +33,30 @@ class School {
         this.studentList.push(newstudent);
     }
 
+    loadClasses(data: any[]){
+        console.log('loading classes');
+        this.classList= [];
+        for (let i = 0; i < data.length; i++){
+            console.log(data[i].studentExists);
+            let thisname = data[i].name;
+            this.createClass(thisname);
+            let index = this.classList.length - 1;
+            this.classList[index].archived = data[i].archived;
+            this.classList[index].assignmentList = data[i].assignmentList;
+            this.classList[index].endDate = data[i].endDate;
+            this.classList[index].startDate = data[i].startDate;
+            this.classList[index].studentList = data[i].studentList;
+            this.classList[index].type = data[i].type;
+            this.classList[index].existArr = data[i].existArr;
+            this.classList[index].lessonList = data[i].lessonList;
+            this.classList[index].schoolID = data[i].schoolID;
+            this.classList[index].teacherList = data[i].teacherList;
+            this.classList[index].schoolName = data[i].schoolName;
+            this.classList[index].setMap();
+            console.log('class at' + index + 'is named' + this.classList[index].name)
+        }
+    }
+
 }
 
 export default School;
