@@ -26,7 +26,7 @@ function ClassManager(props: any){
         let date = new Date();
         let datestring = date.toISOString();
         let key = 'attentable' + datestring;
-        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
+        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass} setEditTrue={props.setEditTrue}/>
         setAttendanceChart(newchart);
         resetAssignmentGrades();
         populateStudentNames();
@@ -41,7 +41,7 @@ function ClassManager(props: any){
         let date = new Date();
         let datestring = date.toISOString();
         let key = 'attentable' + datestring;
-        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
+        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass} setEditTrue={props.setEditTrue}/>
         setAttendanceChart(newchart);
         resetAssignmentGrades();
         populateStudentNames();
@@ -109,7 +109,7 @@ function ClassManager(props: any){
         let date = new Date();
         let datestring = date.toISOString();
         let key = 'attentable' + datestring;
-        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass}/>
+        let newchart = <AttendanceTable key={key} schoolClass = {schoolClass} setEditTrue={props.setEditTrue}/>
         setAttendanceChart(newchart);
     }
 
@@ -117,7 +117,7 @@ function ClassManager(props: any){
         let date = new Date();
         let datestring = date.toISOString();
         let key = 'assignments' + datestring;
-        let newchart = <AssignmentTable key={key} schoolClass = {schoolClass}/>
+        let newchart = <AssignmentTable key={key} schoolClass = {schoolClass} setEditTrue={props.setEditTrue}/>
         setAssignmentTable(newchart);
     }
 

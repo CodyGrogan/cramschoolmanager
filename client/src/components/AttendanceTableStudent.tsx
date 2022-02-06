@@ -26,6 +26,8 @@ function AttendanceTableStudent(props: any){
             lessonList[index].attendance[indexOfName].value = true;
 
         }
+
+        props.setEditTrue(true);
        
 
     }
@@ -48,6 +50,8 @@ function AttendanceTableStudent(props: any){
                 attendanceArray.push(newjsx);
 
             }
+
+           
 
 
         }

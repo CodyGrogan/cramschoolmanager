@@ -21,9 +21,10 @@ function AssignmentTableStudent(props: any){
             if (value != null && value >= 0 && value <= 100){
 
             let gradeArr = assignmentList[index].grades;
-            let indexOfName = gradeArr.findIndex(obj => obj.name == props.name);
+            let indexOfName = gradeArr.findIndex(obj => obj.name == name);
 
             assignmentList[index].grades[indexOfName].value = value;
+            props.setEditTrue(true);
             
             }
             else{
@@ -45,7 +46,10 @@ function AssignmentTableStudent(props: any){
             if (value != null && value >= 0 && value <= 100){
             
                 let gradeArr = assignmentList[index].grades;
-                let indexOfName = gradeArr.findIndex(obj => obj.name == props.name);
+                let indexOfName = gradeArr.findIndex(obj => obj.name == name);
+                assignmentList[index].grades[indexOfName].value = value;
+                props.setEditTrue(true);
+
     
             
             }

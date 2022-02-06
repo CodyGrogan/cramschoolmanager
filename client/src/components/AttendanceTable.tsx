@@ -28,7 +28,7 @@ function AttendanceTable(props: any){
         }
 
         for (let i = 0; i < schoolClass.studentList.length; i++){
-            let newjsx = <AttendanceTableStudent name = {schoolClass.studentList[i]} lessonlength={lessonlength} schoolClass={schoolClass} />
+            let newjsx = <AttendanceTableStudent name = {schoolClass.studentList[i]} lessonlength={lessonlength} schoolClass={schoolClass} setEditTrue={props.setEditTrue} />
             studentArr.push(newjsx);
         }
 

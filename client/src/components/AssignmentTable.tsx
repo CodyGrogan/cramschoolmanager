@@ -1,7 +1,7 @@
 import SchoolClass from "../classes/SchoolClass";
 import { useState, useEffect } from "react";
 import AttendanceTableHead from "./AttendanceTableHead";
-import LessonTableStudent from "./AssignmentTableStudent";
+import AssignmentTableStudent from "./AssignmentTableStudent";
 import AssignmentTableHead from "./AssignmentTableHead";
 
 
@@ -31,7 +31,7 @@ function AssignmentTable(props: any){
         }
 
         for (let i = 0; i < schoolClass.studentList.length; i++){
-           let newjsx = <LessonTableStudent name = {schoolClass.studentList[i]} assignmentLength={assignmentLength} schoolClass={schoolClass} />
+           let newjsx = <AssignmentTableStudent name = {schoolClass.studentList[i]} assignmentLength={assignmentLength} schoolClass={schoolClass} setEditTrue={props.setEditTrue} />
            studentArr.push(newjsx);
         }
 
