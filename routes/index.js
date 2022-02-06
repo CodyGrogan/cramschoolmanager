@@ -74,13 +74,18 @@ router.put('/editschool', function(req, res, next){
     res.send(err)}
     else{
 
-        
-        doc.classList = school.classList;
+        try{
+          doc.classList = school.classList;
+
+        }
+        catch{
+          console.log('an error occured in saving class list')
+        }
         doc.teacherList = school.teacherList;
         doc.studentList = school.studentList;
         doc.name = school.name;
         doc.address = school.address; 
-        doc.save();
+        doc.update();
         
       }
     });
