@@ -41,6 +41,10 @@ class SchoolClass{
             for (let i = 0; i< this.lessonList.length; i++){
                 this.addStudentToLesson(student, this.lessonList[i]);
             }
+
+            for (let i = 0; i< this.assignmentList.length; i++){
+                this.addStudentToAssignment(student, this.assignmentList[i]);
+            }
         }
     }
 
@@ -77,6 +81,11 @@ class SchoolClass{
 
     addStudentToLesson(student: Student, lesson: Lesson){
         lesson.attendance.push({name: student.name, value: false});
+
+    }
+
+    addStudentToAssignment(student: Student, assignment: Assignment){
+        assignment.grades.push({name: student.name, value: 0});
 
     }
 

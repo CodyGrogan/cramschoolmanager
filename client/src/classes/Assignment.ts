@@ -3,14 +3,18 @@ class Assignment{
     constructor(date: string, name: string, studentList: string[]){
         this.name = name;
         this.duedate = date;
+        this.grades = [];
+        
         for (let i = 0; i < studentList.length; i++){
-            this.grades.set(studentList[i], 0);
+         
+            let obj = {name: studentList[i], value: 0}
+            this.grades.push(obj);
         }
         
     }
     name: string;
     duedate: string;
-    grades: Map<string, number> = new Map();
+    grades: any[];
 }
 
 export default Assignment;

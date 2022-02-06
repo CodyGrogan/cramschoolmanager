@@ -19,7 +19,11 @@ function AssignmentTableStudent(props: any){
             console.log(value);
             
             if (value != null && value >= 0 && value <= 100){
-            assignmentList[index].grades.set(name, value);
+
+            let gradeArr = assignmentList[index].grades;
+            let indexOfName = gradeArr.findIndex(obj => obj.name == props.name);
+
+            assignmentList[index].grades[indexOfName].value = value;
             
             }
             else{
@@ -39,7 +43,10 @@ function AssignmentTableStudent(props: any){
             console.log(value);
             
             if (value != null && value >= 0 && value <= 100){
-            assignmentList[index].grades.set(name, value);
+            
+                let gradeArr = assignmentList[index].grades;
+                let indexOfName = gradeArr.findIndex(obj => obj.name == props.name);
+    
             
             }
             else{
@@ -53,7 +60,11 @@ function AssignmentTableStudent(props: any){
     useEffect(()=>{
         for (let i = 0; i < assignmentList.length; i++){
 
-                let thisgrade = assignmentList[i].grades.get(props.name)?.toString();
+                    
+                let gradeArr = assignmentList[i].grades;
+                let indexOfName = gradeArr.findIndex(obj => obj.name == props.name);
+
+                let thisgrade = assignmentList[i].grades[indexOfName].value.toString();
           
                 let newjsx = <td> <input onKeyDown={enterKeyPressed} data-name={props.name} data-index={i} id={i+'assignment'+props.name+"end"+assignmentList[i].name} type={'number'} min={0} max={100}  placeholder={thisgrade}/>
                 
