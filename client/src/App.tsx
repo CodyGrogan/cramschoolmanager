@@ -135,7 +135,7 @@ function App() {
         <Route path='/' element={<Home setSchool={setSchool}/>}/>
         <Route path='school' element={<SchoolManager school={school} setSchool={setSchool}/>}/>
         <Route path='student' element={<StudentManager school={school} studentToView={studentToView} setStudentToView={setStudentToView} setSchool={setSchool} />}/>
-        <Route path='studentpage/:id' element={<StudentPage setSchool={setSchool} />} />
+        <Route path='studentpage/:id' element={<StudentPage setSchool={setSchool} school={school}/>} />
         <Route path='lessonpage/:id' element={<LessonPage setSchool={setSchool}/>} />
 
 
