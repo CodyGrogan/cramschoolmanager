@@ -1,7 +1,14 @@
+body{
+  background-color: #E5DBCF;
+
+}
+
 .App {
 
   overflow-x: hidden;
 }
+
+
 
 .App-logo {
   height: 40vmin;
@@ -32,7 +39,16 @@
 .school-section{
   outline: solid black 1px;
   margin: 5px;
+  background-color: #F8F4EF;
 
+}
+
+.signBtn:hover{
+  color: white !important;
+}
+
+.card{
+  background-color: #F8F4EF !important;
 }
 
 .list-box{
@@ -52,6 +68,14 @@
   justify-content: center;
 }
 
+.modal-content{
+  background-color: #F8F4EF;
+  
+}
+.modal-header{
+  background-color: #F0ECE8;
+}
+
 .inputDiv{
   margin: 5px;
   text-align: center;
@@ -62,6 +86,8 @@
   width: 100%;
   justify-content: center;
 }
+
+
 
 .tableoverflow{
   overflow-x: scroll !important;
