@@ -97,29 +97,83 @@ function StudentPage(props: any){
         <div>
             <Navbar setSchool = {props.setSchool}/>
            
+            <div className="container">
+            <div className="row justify-content-start">
+
+            <div className="col-sm-6">
+
             <div className="card">
                 <div className="card-header">
                 {student.name}
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">Student Information</h5>
-                    {student.age}
-                    {student.parent1}
-                    {student.parent2}
+                    <div>
 
-                    <div className="inputBox container">
-                <div className="col-sm">
-              <div className="inputDiv"> <label className="form-label">Age:</label><input className='form-control' id='classType' type={'text'} placeholder={student.age.toString()}></input><button className="btn btn-primary">Edit</button></div> 
-              <div className="inputDiv"> <label className="form-label">Parent 1:</label><input className='form-control' id='classType' type={'text'} placeholder={student.parent1}></input><button className="btn btn-primary">Edit</button></div> 
-              <div className="inputDiv"> <label className="form-label">Parent 2:</label><input className='form-control' id='classType' type={'text'} placeholder={student.parent2}></input><button className="btn btn-primary">Edit</button></div> 
+                        <table className="table">
+                            <thead>
+                           
+                             
+                              
 
-              </div>
-                
-                </div>
 
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                            <th>Parent 1</th> <td>{student.parent1}</td>
+                            </tr>   
+                            <tr> <th>Parent 2</th>   <td>{student.parent2}</td> </tr> 
+                            <tr> <th>Phone</th>  <td>{student.phone}</td> </tr> 
+                            <tr> <th>Email</th>    <td>{student.email}</td> </tr> 
+                              
+
+
+
+                            </tbody>
+                        </table>
+                       
+                    </div>
+
+                    <div className="accordion accordion-flush" id="accordionFlushExample">
+                        <div className="accordion-item">
+                            
+                            <h2 className="accordion-header" id="flush-headingOne">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Edit Student Information
+                            </button>
+                            </h2>
+
+                            <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body">
+
+                                <div className="inputBox container">
+                                    <div className="col-sm">
+                                        <div className="inputDiv"> <label className="form-label">Age:</label><input className='form-control' id='classType' type={'text'} placeholder={student.age.toString()}></input><button className="btn btn-primary">Edit</button></div> 
+                                        <div className="inputDiv"> <label className="form-label">Parent 1:</label><input className='form-control' id='classType' type={'text'} placeholder={student.parent1}></input><button className="btn btn-primary">Edit</button></div> 
+                                        <div className="inputDiv"> <label className="form-label">Parent 2:</label><input className='form-control' id='classType' type={'text'} placeholder={student.parent2}></input><button className="btn btn-primary">Edit</button></div> 
+                                        <div className="inputDiv"> <label className="form-label">Phone:</label><input className='form-control' id='classType' type={'text'} placeholder={student.phone}></input><button className="btn btn-primary">Edit</button></div> 
+                                        <div className="inputDiv"> <label className="form-label">Email:</label><input className='form-control' id='classType' type={'text'} placeholder={student.email}></input><button className="btn btn-primary">Edit</button></div> 
+
+
+
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                            </div>
+                        </div>  
+                    </div> 
+
+           
                     
                 </div>
             </div>
+
+            </div>
+
+            <div className="col-sm-6">
 
             <div className="card">
                 <div className="card-header">
@@ -133,6 +187,31 @@ function StudentPage(props: any){
 
                     
                 </div>
+            </div>
+
+
+
+            <div className="card">
+                    <div className="card-header">
+                    Attendance Summary
+                    </div>
+                    <div className="card-body">
+                        <h5 className="card-title">Attendance %</h5>
+                        <p>Attendance goes here</p>
+
+
+
+                        
+                    </div>
+                </div>
+
+            </div>
+
+
+    
+
+            </div>
+
             </div>
 
         </div>
