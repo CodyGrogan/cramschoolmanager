@@ -8,9 +8,9 @@ function ListItem(props: any){
     }
 
     return(
-        <li onClick={itemClicked} className="list-item">
+        <div onClick={itemClicked} className="list-item">
             {props.name}
-        </li>
+        </div>
     )
 }
 

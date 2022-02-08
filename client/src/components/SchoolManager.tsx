@@ -159,19 +159,29 @@ function SchoolManager(props: any){
         <div>
             <Navbar setSchool = {props.setSchool}/>
             class manager
-            <div className="row school-section">
-                <div className="col-sm-2 list-box"><ul>
+
+        <div className='container'>
+
+        <div className='row'>
+        <div className="col-sm-2 list-box">
+            
+                    <div className='class-list'>
                     {classList}
                     <button className='btn btn-primary' data-bs-toggle="modal" data-bs-target="#classModal">New Class</button>
-                    </ul></div>
-                <div className="col-sm-10">
+                    </div>
+        </div>
+
+            <div className="col-sm-10 ">
+               
+                <div className='school-section'>
                     
                     {summary} <br/>
                     {manager}
                 
                 </div>
             </div>
-
+            </div>
+        </div>
 
             <div className="modal fade" id="classModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
@@ -200,7 +210,7 @@ function SchoolManager(props: any){
             </div>
             </div>
 
-
+          
         </div>
     )
 }
