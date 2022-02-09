@@ -10,6 +10,11 @@ interface IGradeObj{
     gradeAvg: number;
 }
 
+interface IAttendanceObj{
+    className: string;
+    attendanceAvg: number;
+}
+
 
 //when the backend is implemented, use the student name and school name to check database for info
 
@@ -19,6 +24,7 @@ function StudentPage(props: any){
     
     const [student, setStudent] = useState<Student>(defstudent);
     const [avgGradeList, setAvgGradeList] = useState<JSX.Element[]>([]);
+    const [avgAttendList, setAvgAttendList] = useState<JSX.Element[]>([]);
 
     let { id } = useParams();
 
@@ -32,6 +38,12 @@ function StudentPage(props: any){
         let avgGradeArr = calcAvgGrade(school.classList, studentList[index]);
         let gradeJsx = gradeListBuilder(avgGradeArr);
         setAvgGradeList(gradeJsx);
+
+        
+        let avgAttendance = calcAvgAttendance(school.classList, studentList[index]);
+        let attendJSX = attendListBuild(avgAttendance);
+        setAvgAttendList(attendJSX);
+
         }
 
     },
@@ -48,6 +60,10 @@ function StudentPage(props: any){
         let gradeJsx = gradeListBuilder(avgGradeArr);
         setAvgGradeList(gradeJsx);
 
+        let avgAttendance = calcAvgAttendance(school.classList, studentList[index]);
+        let attendJSX = attendListBuild(avgAttendance);
+        setAvgAttendList(attendJSX);
+
         }
 
     },
@@ -62,17 +78,22 @@ function StudentPage(props: any){
             let grade: IGradeObj = {className: classList[i].name, gradeAvg: 0};
             let totalGrade = 0;
 
-            if (classList[i].assignmentList.length > 0){
-            for (let j = 0; j < classList[i].assignmentList.length; j++){
+            let classindex = thisStudent.classes.findIndex(obj => obj == classList[i].name);
+            
+            if (classindex >= 0){
 
-                let assignmentGrades = classList[i].assignmentList[j].grades;
-                let index = assignmentGrades.findIndex(obj => obj.name == thisStudent.name);
-                if (index >= 0){
-                let thisgrade = assignmentGrades[index].value;
-                totalGrade = totalGrade + parseInt(thisgrade);
-                console.log('total grade is' + totalGrade);
+                if (classList[i].assignmentList.length > 0){
+                for (let j = 0; j < classList[i].assignmentList.length; j++){
+
+                    let assignmentGrades = classList[i].assignmentList[j].grades;
+                    let index = assignmentGrades.findIndex(obj => obj.name == thisStudent.name);
+                    if (index >= 0){
+                    let thisgrade = assignmentGrades[index].value;
+                    totalGrade = totalGrade + parseInt(thisgrade);
+                    console.log('total grade is' + totalGrade);
+                    }
+                    
                 }
-                
             }
             let avg = totalGrade / classList[i].assignmentList.length;
             grade.gradeAvg = Math.floor(avg);
@@ -87,6 +108,82 @@ function StudentPage(props: any){
         let jsxArr = [];
         for (let i = 0; i < avgGradeArr.length; i++){
             let newJsx = <div>{avgGradeArr[i].className}: {avgGradeArr[i].gradeAvg}%: </div>
+            jsxArr.push(newJsx);
+        }
+
+        return jsxArr;
+    }
+
+
+    function calcAvgAttendance(classList: SchoolClass[], thisStudent: Student){
+
+        let attendArr = [];
+        
+       
+        for (let i = 0; i < classList.length; i++){
+
+            let classindex = thisStudent.classes.findIndex(obj => obj == classList[i].name);
+
+            if (classindex >= 0){
+
+                let attendance: IAttendanceObj = {className: classList[i].name, attendanceAvg: 0};
+                let attendScore = 0; //add 1 for each class student attended, then divide by length of lessons for attendance
+                let totalClasses = classList[i].lessonList.length;
+                if (classList[i].lessonList.length > 0){
+                for (let j = 0; j < classList[i].lessonList.length; j++){
+                
+                    let attend = classList[i].lessonList[j].attendance;
+                    let index = attend.findIndex(obj => obj.name == thisStudent.name);
+                    if (index >= 0){
+                        if (attend[index].value === true){
+                            
+                            console.log('student attended');
+                            console.log(classList[i].lessonList.length);
+                            attendScore = attendScore + 1;
+                            console.log('lesson at ' + j);
+                        
+                        }
+
+                        else{
+                             //check if class has not started yet
+                             console.log('checking for future')
+                             console.log('lesson at ' + j);
+
+                            let lessonDateString = classList[i].lessonList[j].date;
+                            console.log(lessonDateString);
+                            let lessonDate = new Date(lessonDateString);
+                            let today = new Date();
+                            console.log(lessonDate.getTime());
+                            console.log(today.getTime());
+                            
+                            if (lessonDate.getTime() > today.getTime()){
+                                totalClasses = totalClasses -1;
+                                console.log('class not started yet')
+                            }
+
+                            
+
+                        }
+                    }
+                    
+                }
+
+            }
+            let avg = attendScore / totalClasses;
+            avg = avg*100;
+            attendance.attendanceAvg = Math.floor(avg);
+            attendArr.push(attendance);
+        }
+        
+        }
+        return attendArr;
+    }
+
+
+    function attendListBuild(attendance: IAttendanceObj[]){
+        let jsxArr = [];
+        for (let i = 0; i < attendance.length; i++){
+            let newJsx = <div>{attendance[i].className}: {attendance[i].attendanceAvg}%: </div>
             jsxArr.push(newJsx);
         }
 
@@ -199,7 +296,7 @@ function StudentPage(props: any){
                         <h5 className="card-title">Attendance %</h5>
                         <p>Attendance goes here</p>
 
-
+                        {avgAttendList}
 
                         
                     </div>
