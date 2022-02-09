@@ -72,11 +72,13 @@ function StudentPage(props: any){
     function calcAvgGrade(classList: SchoolClass[], thisStudent: Student){
 
         let gradeArr = [];
+        
     
        
         for (let i = 0; i < classList.length; i++){
             let grade: IGradeObj = {className: classList[i].name, gradeAvg: 0};
             let totalGrade = 0;
+            let totalAssignments = classList[i].assignmentList.length;
 
             let classindex = thisStudent.classes.findIndex(obj => obj == classList[i].name);
             
@@ -89,13 +91,20 @@ function StudentPage(props: any){
                     let index = assignmentGrades.findIndex(obj => obj.name == thisStudent.name);
                     if (index >= 0){
                     let thisgrade = assignmentGrades[index].value;
+                    if (thisgrade == 0){
+                        let assignmentDate = new Date(classList[i].assignmentList[j].duedate);
+                        let today = new Date();
+                        if (assignmentDate.getTime()> today.getTime()){
+                            totalAssignments = totalAssignments - 1;
+                        }
+                    }
                     totalGrade = totalGrade + parseInt(thisgrade);
                     console.log('total grade is' + totalGrade);
                     }
                     
                 }
             }
-            let avg = totalGrade / classList[i].assignmentList.length;
+            let avg = totalGrade / totalAssignments;
             grade.gradeAvg = Math.floor(avg);
             gradeArr.push(grade);
         }
