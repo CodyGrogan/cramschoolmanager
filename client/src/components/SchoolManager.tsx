@@ -158,7 +158,6 @@ function SchoolManager(props: any){
     return(
         <div>
             <Navbar setSchool = {props.setSchool}/>
-            class manager
 
         <div className='container'>
 

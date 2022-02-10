@@ -189,9 +189,7 @@ function ClassManager(props: any){
     }
 
     return(
-        <div >
-            class manager
-
+        <div>
             <div className="row">
             <h3>Class Information</h3>
             <div className="col-10-sm">this will quick display information about the selected lesson <br/>

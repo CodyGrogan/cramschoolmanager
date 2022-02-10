@@ -44,7 +44,9 @@ ul{
   
   margin: 5px;
   background-color: #F8F4EF;
-  box-shadow: #282c34, 10;
+  
+  outline: #b3a99e solid 1px;
+  border-radius: 2px;
 
 }
 
@@ -60,8 +62,11 @@ ul{
   max-height: 400px;
  
   overflow-y: auto;
+  margin-top: 5px;
 
   background-color: #F8F4EF;
+  outline: #b3a99e solid 1px;
+  border-radius: 2px;
 }
 
 .class-list{
