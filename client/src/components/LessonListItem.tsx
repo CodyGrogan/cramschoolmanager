@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 
 function LessonListItem(props: any){
 
-    let linkstring = `/lessonpage/${props.lessonid}`
+    let linkstring = `/lessonpage/${props.lessonid}/${props.className}`
 
     return(
         <tr>

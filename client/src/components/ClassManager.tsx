@@ -147,6 +147,8 @@ function ClassManager(props: any){
             setLessonList(lessonlist);
             resetAttendance();
             resetAssignmentGrades();
+            props.setEditTrue(true);
+
         }
 
     }
@@ -163,6 +165,8 @@ function ClassManager(props: any){
             schoolClass.createAssignment(datestring, assignName);
             resetAssignmentList();
             resetAssignmentGrades();
+            props.setEditTrue(true);
+
             
 
         }

@@ -109,11 +109,18 @@ function App() {
     defSchool.classList[1].createAssignment('2022-01-05', 'Assignment2');
 
     defSchool.classList[0].createLesson('2022-01-01', 'Verbs Day 1');
+    defSchool.classList[0].lessonList[0].lessonplan = 'This is the lesson plan for verb day 1'
     defSchool.classList[0].createLesson('2022-01-02', 'Verbs Day 2');
+    defSchool.classList[0].lessonList[1].lessonplan = 'And this is the lesson plan for verb day 2'
+
 
     
     defSchool.classList[1].createLesson('2022-01-05', 'Verbs Day 1');
+    defSchool.classList[1].lessonList[0].lessonplan = 'This is the lesson plan for verb day 1'
+
     defSchool.classList[1].createLesson('2022-01-06', 'Verbs Day 2');
+    defSchool.classList[1].lessonList[1].lessonplan = 'And this is the lesson plan for verb day 2'
+
 
 
   
@@ -136,7 +143,7 @@ function App() {
         <Route path='school' element={<SchoolManager school={school} setSchool={setSchool}/>}/>
         <Route path='student' element={<StudentManager school={school} studentToView={studentToView} setStudentToView={setStudentToView} setSchool={setSchool} />}/>
         <Route path='studentpage/:id' element={<StudentPage setSchool={setSchool} school={school}/>} />
-        <Route path='lessonpage/:id' element={<LessonPage setSchool={setSchool}/>} />
+        <Route path='lessonpage/:id/:classname' element={<LessonPage setSchool={setSchool} school={school}/>} />
 
 
 
