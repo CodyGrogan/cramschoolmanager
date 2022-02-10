@@ -9,7 +9,7 @@ import Navbar from "./Navbar";
 function LessonPage(props: any){
     let { id, classname } = useParams();
   
-    let defLesson = new Lesson('unknown', 0, ['unknown'], 'unknown', 'unknown');
+    let defLesson = new Lesson('unknown', 0, ['unknown'], 'unknown', 'unknown', 'no plan');
     
     const [lesson, setLesson] = useState<Lesson>(defLesson);
 

@@ -53,10 +53,10 @@ class SchoolClass{
         this.teacherList.push(teacher.name);
     }
 
-    createLesson(dateString: string, lessonName: string){
+    createLesson(dateString: string, lessonName: string, lessonPlan: string){
 
         let newid = this.schoolName + dateString + lessonName + this.name;
-        let newLesson = new Lesson(dateString, this.lessonList.length+1, this.studentList, lessonName, newid);
+        let newLesson = new Lesson(dateString, this.lessonList.length+1, this.studentList, lessonName, newid, lessonPlan);
         this.lessonList.push(newLesson);
 
     }

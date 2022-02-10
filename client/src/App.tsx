@@ -108,18 +108,15 @@ function App() {
     defSchool.classList[1].createAssignment('2022-01-04', 'Assignment1');
     defSchool.classList[1].createAssignment('2022-01-05', 'Assignment2');
 
-    defSchool.classList[0].createLesson('2022-01-01', 'Verbs Day 1');
-    defSchool.classList[0].lessonList[0].lessonplan = 'This is the lesson plan for verb day 1'
-    defSchool.classList[0].createLesson('2022-01-02', 'Verbs Day 2');
-    defSchool.classList[0].lessonList[1].lessonplan = 'And this is the lesson plan for verb day 2'
+    defSchool.classList[0].createLesson('2022-01-01', 'Verbs Day 1', 'This is the lesson plan for verb day 1');
+    defSchool.classList[0].createLesson('2022-01-02', 'Verbs Day 2', 'And this is the lesson plan for verb day 2');
+    
 
 
     
-    defSchool.classList[1].createLesson('2022-01-05', 'Verbs Day 1');
-    defSchool.classList[1].lessonList[0].lessonplan = 'This is the lesson plan for verb day 1'
+    defSchool.classList[1].createLesson('2022-01-05', 'Verbs Day 1', 'This is the lesson plan for verb day 1');
 
-    defSchool.classList[1].createLesson('2022-01-06', 'Verbs Day 2');
-    defSchool.classList[1].lessonList[1].lessonplan = 'And this is the lesson plan for verb day 2'
+    defSchool.classList[1].createLesson('2022-01-06', 'Verbs Day 2', 'And this is the lesson plan for verb day 2');
 
 
 

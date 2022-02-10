@@ -137,7 +137,7 @@ function ClassManager(props: any){
             let num = schoolClass.lessonList.length + 2;  //starts counting from 1 not 0
 
           //  let newlesson = new Lesson(datestring, num, schoolClass.studentList, lessonName);
-            schoolClass.createLesson(datestring, lessonName);
+            schoolClass.createLesson(datestring, lessonName, lessonplan);
            // let index = schoolClass.lessonList.length - 1;
             //schoolClass.lessonList[index].lessonplan = lessonplan;
             let key = schoolClass.lessonList.length.toString() + 'lessonkey';

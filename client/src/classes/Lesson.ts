@@ -1,5 +1,5 @@
 class Lesson{
-    constructor(date: string, num: number, studentList: string[], name: string, lessonid: string){
+    constructor(date: string, num: number, studentList: string[], name: string, lessonid: string, lessonPlan: string){
         this.num = num;
         this.date = date;
         this.name = name;
@@ -7,6 +7,7 @@ class Lesson{
         this.finished = false;
         this.attendance = [];
         this.lessonid = lessonid;
+        this.lessonplan = lessonPlan;
         console.log('about to loop in Lesson Constructor');
         for (let i = 0; i < studentList.length; i++){
             let obj = {name: studentList[i], value: false}
