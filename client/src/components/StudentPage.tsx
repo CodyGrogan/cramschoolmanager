@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom';
 import Navbar from "./Navbar";
 import School from "../classes/School";
 import SchoolClass from "../classes/SchoolClass";
+import {getAuth} from 'firebase/auth'
 
 interface IGradeObj{ 
     className: string;
@@ -25,6 +26,27 @@ function StudentPage(props: any){
     const [student, setStudent] = useState<Student>(defstudent);
     const [avgGradeList, setAvgGradeList] = useState<JSX.Element[]>([]);
     const [avgAttendList, setAvgAttendList] = useState<JSX.Element[]>([]);
+
+
+    
+    let deftableJSX =   <table className="table">
+            <thead>
+            </thead>
+
+            <tbody>
+            <tr>
+            <th>Parent 1</th> <td>{student.parent1}</td>
+            </tr>   
+            <tr> <th>Parent 2</th>   <td>{student.parent2}</td> </tr> 
+            <tr> <th>Phone</th>  <td>{student.phone}</td> </tr> 
+            <tr> <th>Email</th>    <td>{student.email}</td> </tr> 
+            </tbody>
+        </table>;
+
+    const [tableJSX, setTableJSX] = useState<JSX.Element>(deftableJSX)
+
+
+
 
     let { id } = useParams();
 
@@ -68,6 +90,12 @@ function StudentPage(props: any){
 
     },
     [props.school]);
+
+    useEffect(()=>{
+        setTableJSX(deftableJSX);
+
+    },
+    [student, tableJSX, deftableJSX])
 
     function calcAvgGrade(classList: SchoolClass[], thisStudent: Student){
 
@@ -199,6 +227,84 @@ function StudentPage(props: any){
         return jsxArr;
     }
 
+
+    function updateStudentInfo(){
+
+        let school: School = props.school;
+        let studentList = school.studentList;
+        let index = studentList.findIndex(obj => obj.studentID === id);
+        if (index >= 0){
+         let thisStudent = studentList[index]        
+         let newAge = (document.getElementById('ageInput') as HTMLInputElement).value;
+         console.log(newAge);
+            if (newAge !== '' &&  newAge != null){
+                    let age = parseInt(newAge);
+                    if (age >= 0){
+                    thisStudent.age = age;
+                    }
+
+            }
+            let newParent1 = (document.getElementById('parent1Input') as HTMLInputElement).value;
+            if (newParent1 !== '' && newParent1 != null){
+                thisStudent.parent1 = newParent1;
+
+             }
+            let newParent2 = (document.getElementById('parent2Input') as HTMLInputElement).value;
+            if (newParent2 !== '' && newParent2 != null){
+                thisStudent.parent2 = newParent2;
+
+             }
+            let newPhone = (document.getElementById('phoneInput') as HTMLInputElement).value;
+            if (newPhone !== '' && newPhone != null){
+                thisStudent.phone = newPhone;
+
+             }
+            let newEmail = (document.getElementById('emailInput') as HTMLInputElement).value;
+            if (newEmail !== '' && newEmail != null){
+                thisStudent.email = newEmail;
+
+             }
+
+             setStudent(thisStudent);
+             setTableJSX(deftableJSX);
+
+             //update database
+
+             editSchool(school)
+         }
+
+    }
+
+    async function editSchool(school: School){
+
+        let user = getAuth().currentUser;
+        if (user){
+        console.log('adding school info to database');
+        let jsonstring = JSON.stringify(school);
+        let postpath: string = '/editschool';
+
+        fetch(postpath, {
+            method: 'PUT', 
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: jsonstring,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        
+        }
+        else{
+            console.log('user not signed in, cannot edit')
+        }
+
+    }
+
     return(
         <div>
             <Navbar setSchool = {props.setSchool}/>
@@ -216,28 +322,7 @@ function StudentPage(props: any){
                     <h5 className="card-title">Student Information</h5>
                     <div>
 
-                        <table className="table">
-                            <thead>
-                           
-                             
-                              
-
-
-                            </thead>
-
-                            <tbody>
-                            <tr>
-                            <th>Parent 1</th> <td>{student.parent1}</td>
-                            </tr>   
-                            <tr> <th>Parent 2</th>   <td>{student.parent2}</td> </tr> 
-                            <tr> <th>Phone</th>  <td>{student.phone}</td> </tr> 
-                            <tr> <th>Email</th>    <td>{student.email}</td> </tr> 
-                              
-
-
-
-                            </tbody>
-                        </table>
+                      {tableJSX}
                        
                     </div>
 
@@ -255,11 +340,11 @@ function StudentPage(props: any){
 
                                 <div className="inputBox container">
                                     <div className="col-sm">
-                                        <div className="inputDiv"> <label className="form-label">Age:</label><input className='form-control' id='classType' type={'text'} placeholder={student.age.toString()}></input><button className="btn btn-primary">Edit</button></div> 
-                                        <div className="inputDiv"> <label className="form-label">Parent 1:</label><input className='form-control' id='classType' type={'text'} placeholder={student.parent1}></input><button className="btn btn-primary">Edit</button></div> 
-                                        <div className="inputDiv"> <label className="form-label">Parent 2:</label><input className='form-control' id='classType' type={'text'} placeholder={student.parent2}></input><button className="btn btn-primary">Edit</button></div> 
-                                        <div className="inputDiv"> <label className="form-label">Phone:</label><input className='form-control' id='classType' type={'text'} placeholder={student.phone}></input><button className="btn btn-primary">Edit</button></div> 
-                                        <div className="inputDiv"> <label className="form-label">Email:</label><input className='form-control' id='classType' type={'text'} placeholder={student.email}></input><button className="btn btn-primary">Edit</button></div> 
+                                        <div className="inputDiv"> <label className="form-label">Age:</label><input className='form-control' id='ageInput' type={'number'} min={0} placeholder={student.age.toString()}></input></div> 
+                                        <div className="inputDiv"> <label className="form-label">Parent 1:</label><input className='form-control' id='parent1Input' type={'text'} placeholder={student.parent1}></input></div> 
+                                        <div className="inputDiv"> <label className="form-label">Parent 2:</label><input className='form-control' id='parent2Input' type={'text'} placeholder={student.parent2}></input></div> 
+                                        <div className="inputDiv"> <label className="form-label">Phone:</label><input className='form-control' id='phoneInput' type={'text'} placeholder={student.phone}></input></div> 
+                                        <div className="inputDiv"> <label className="form-label">Email:</label><input className='form-control' id='emailInput' type={'text'} placeholder={student.email}></input><button onClick={()=>updateStudentInfo()} className="btn btn-primary">Edit</button></div> 
 
 
 
@@ -303,7 +388,7 @@ function StudentPage(props: any){
                     </div>
                     <div className="card-body">
                         <h5 className="card-title">Attendance %</h5>
-                        <p>Attendance goes here</p>
+                
 
                         {avgAttendList}
 
