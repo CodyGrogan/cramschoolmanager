@@ -134,11 +134,24 @@ function SchoolManager(props: any){
             let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>
            setSummary([newjsx]);
            setManager([newmanager]);
+           resetClassList();
         }
         setEditTrue(false);
 
     },
     [editTrue]);
+
+    function resetClassList(){
+        let itemArr = [];
+        for (let i = 0; i < schoolInfo.classList.length; i++){
+            let jsx = <ListItem name ={schoolInfo.classList[i].name} index={i} setSelectedClass={setSelectedClass} />
+            itemArr.push(jsx);
+
+        }
+        setClassList(itemArr);
+        setEditTrue(true);
+
+    }
 
     function newClass(){
         let name:string = (document.getElementById('inputClassName') as HTMLInputElement).value ;
