@@ -62,20 +62,26 @@ function ClassManager(props: any){
             break;
         case 'StartDate':
             
-            let dateinfo = (document.getElementById('StartDate') as HTMLInputElement).value
+            let dateinfo = (document.getElementById('StartDate') as HTMLInputElement).value;
             let newdate = new Date(dateinfo);
             let datestring = newdate.toISOString().split('T')[0];
             schoolClass.startDate = datestring;
             break;
         case 'EndDate':
             
-            let enddateinfo = (document.getElementById('EndDate') as HTMLInputElement).value
+            let enddateinfo = (document.getElementById('EndDate') as HTMLInputElement).value;
             let endnewdate = new Date(enddateinfo);
             let enddatestring = endnewdate.toISOString().split('T')[0];
             schoolClass.endDate = enddatestring;
             break;
-            
+        
+        case 'Name':
+            let newName = (document.getElementById('className') as HTMLInputElement).value;
+            schoolClass.changeName(schoolInfo, newName); 
+            console.log('new name is' + newName);
+ 
         }
+        
 
         props.setEditTrue(true);
 
@@ -200,6 +206,8 @@ function ClassManager(props: any){
             
                 <div className="inputBox container">
                 <div className="col-sm">
+                <div className="inputDiv"> <label className="form-label">Name:</label><input className='form-control' id='className' type={'text'} placeholder={schoolClass.name}></input><button onClick={()=> editPressed('Name')} className="btn btn-primary">Edit</button></div> 
+
               <div className="inputDiv"> <label className="form-label">Type:</label><input className='form-control' id='classType' type={'text'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
               <div className="inputDiv"> <label className="form-label">Start:</label><input className='form-control' id='StartDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
               </div>

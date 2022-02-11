@@ -2,6 +2,7 @@ import Teacher from "./Teacher";
 import Student from "./Student";
 import Lesson from "./Lesson";
 import Assignment from "./Assignment";
+import School from "./School";
 
 class SchoolClass{
     constructor(name: string, schoolname: string, schoolID: string){
@@ -86,6 +87,25 @@ class SchoolClass{
 
     addStudentToAssignment(student: Student, assignment: Assignment){
         assignment.grades.push({name: student.name, value: 0});
+
+    }
+
+    changeName(school: School, newName: string){
+        //student objs need to be updated with the new class name.
+        //so each student who is enrolled in this class must have their classlist updated with the new name.
+
+        for (let i = 0; i < this.studentList.length; i++){
+            let index = school.studentList.findIndex(obj => obj.name === this.studentList[i]);
+                if (index >= 0){
+                let classIndex = school.studentList[index].classes.indexOf(this.name);
+                    if (classIndex >= 0){
+                    school.studentList[index].classes[classIndex] = newName;
+                    }
+                }
+
+        }
+
+        this.name = newName;
 
     }
 
