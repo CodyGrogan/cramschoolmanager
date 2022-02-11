@@ -3,6 +3,7 @@ import School from "../classes/School";
 import Student from "../classes/Student";
 import Navbar from "./Navbar";
 import StudentTableItem from "./StudentTableItem";
+import {getAuth} from 'firebase/auth';
 
 function StudentManager(props: any){
     let school: School = props.school;
@@ -68,7 +69,39 @@ function StudentManager(props: any){
             let index = school.studentList.length -1;
             buildStudentTable();
             addStudent(school.studentList[index]);
-            
+            editSchool(school);
+        }
+
+    }
+
+    async function editSchool(school: School){
+
+        let user = getAuth().currentUser;
+        if (user){
+        console.log('adding school info to database');
+        let jsonstring = JSON.stringify(school);
+        let postpath: string = '/editschool';
+
+        fetch(postpath, {
+            method: 'PUT', 
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: jsonstring,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            //show toast should go here  after update route to send 200 response
+            //showToast();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        
+        }
+        else{
+            console.log('user not signed in, cannot edit')
         }
 
     }
