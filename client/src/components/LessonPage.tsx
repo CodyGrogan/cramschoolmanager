@@ -57,20 +57,24 @@ function LessonPage(props: any){
         <div>
             <Navbar setSchool = {props.setSchool}/>
 
-            <div className="card">
-                <div className="card-header">
-                <h2> {lesson.name} </h2>
-                </div>
-                <div className="card-body">
-                    <h5 className="card-title">{lesson.date}</h5>
-                    
-                    {lesson.lessonplan}
-
-
-
-                    
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-12'>                        
+                        <div className="card">
+                            <div className="card-header">
+                            <h2> {lesson.name} </h2>
+                            </div>
+                            <div className="card-body">
+                                <h5 className="card-title">{lesson.date}</h5>
+                                
+                                {lesson.lessonplan}
+  
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
 
 
         </div>
