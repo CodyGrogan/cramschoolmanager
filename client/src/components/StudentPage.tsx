@@ -27,7 +27,8 @@ function StudentPage(props: any){
     const [student, setStudent] = useState<Student>(defstudent);
     const [avgGradeList, setAvgGradeList] = useState<JSX.Element[]>([]);
     const [avgAttendList, setAvgAttendList] = useState<JSX.Element[]>([]);
-
+    const [editTrue, setEditTrue] = useState<boolean>(false);
+    const [hideToast, setHideToast] = useState<boolean>(false);
 
     
     let deftableJSX =   <table className="table">
@@ -67,6 +68,9 @@ function StudentPage(props: any){
         let attendJSX = attendListBuild(avgAttendance);
         setAvgAttendList(attendJSX);
 
+        setEditTrue(true);
+
+
         }
 
     },
@@ -79,6 +83,7 @@ function StudentPage(props: any){
         let index = studentList.findIndex(obj => obj.studentID === id);
         if (index >= 0){
         setStudent(studentList[index]);
+        setEditTrue(true);
         let avgGradeArr = calcAvgGrade(school.classList, studentList[index]);
         let gradeJsx = gradeListBuilder(avgGradeArr);
         setAvgGradeList(gradeJsx);
@@ -86,6 +91,7 @@ function StudentPage(props: any){
         let avgAttendance = calcAvgAttendance(school.classList, studentList[index]);
         let attendJSX = attendListBuild(avgAttendance);
         setAvgAttendList(attendJSX);
+       
 
         }
 
@@ -93,11 +99,22 @@ function StudentPage(props: any){
     [props.school]);
 
     useEffect(()=>{
+        if (editTrue == true){
+        setEditTrue(false);
         setTableJSX(deftableJSX);
-
+        }
     },
-    [student, tableJSX, deftableJSX])
+    [editTrue]);
 
+    useEffect(()=>{
+        if (hideToast == true){
+        setHideToast(false);
+       
+        }
+    },
+    [hideToast]);
+
+   
     function calcAvgGrade(classList: SchoolClass[], thisStudent: Student){
 
         let gradeArr = [];
@@ -267,7 +284,8 @@ function StudentPage(props: any){
              }
 
              setStudent(thisStudent);
-             setTableJSX(deftableJSX);
+             setEditTrue(true);
+
              showToast();  //temporary
 
              //update database
@@ -295,7 +313,8 @@ function StudentPage(props: any){
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            //show toast should go here
+            //show toast should go here  after update route to send 200 response
+            //showToast();
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -312,6 +331,8 @@ function StudentPage(props: any){
     function showToast(){
         let toast = document.getElementById('editToast') as HTMLElement;
         toast.hidden = false;
+        setHideToast(true);
+
 
     }
 
@@ -415,9 +436,8 @@ function StudentPage(props: any){
 
             </div>
 
-         
-         <EditToast />
-
+           
+            <EditToast hideToast={hideToast}/>
              </div>
     )
 }
