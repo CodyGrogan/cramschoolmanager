@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import School from "../classes/School";
 import SchoolClass from "../classes/SchoolClass";
 import {getAuth} from 'firebase/auth'
+import EditToast from "./EditToast";
 
 interface IGradeObj{ 
     className: string;
@@ -267,6 +268,7 @@ function StudentPage(props: any){
 
              setStudent(thisStudent);
              setTableJSX(deftableJSX);
+             showToast();  //temporary
 
              //update database
 
@@ -293,6 +295,7 @@ function StudentPage(props: any){
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            //show toast should go here
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -302,6 +305,13 @@ function StudentPage(props: any){
         else{
             console.log('user not signed in, cannot edit')
         }
+
+    }
+
+
+    function showToast(){
+        let toast = document.getElementById('editToast') as HTMLElement;
+        toast.hidden = false;
 
     }
 
@@ -405,7 +415,10 @@ function StudentPage(props: any){
 
             </div>
 
-        </div>
+         
+         <EditToast />
+
+             </div>
     )
 }
 
