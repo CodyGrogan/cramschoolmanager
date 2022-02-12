@@ -6,9 +6,12 @@ import ClassManager from './ClassManager';
 import SchoolClass from '../classes/SchoolClass';
 import Navbar from './Navbar';
 import {getAuth} from 'firebase/auth'
+import EditToast from './EditToast';
 
 
 function SchoolManager(props: any){
+    const [hideToast, setHideToast] = useState<Boolean>(false);
+
     const [classList, setClassList] = useState<JSX.Element[]>();
     const [selectedClass, setSelectedClass] = useState<any>(0);
     let schoolInfo: School = props.school;
@@ -17,6 +20,7 @@ function SchoolManager(props: any){
     const [editTrue, setEditTrue] = useState<boolean>(false);
     const [currentClass, setCurrentClass] = useState<SchoolClass>();
 
+    
     useEffect(()=>{
       let user = getAuth().currentUser;
       if (user){
@@ -34,6 +38,7 @@ function SchoolManager(props: any){
         console.log('adding school info to database');
         let jsonstring = JSON.stringify(school);
         let postpath: string = '/editschool';
+        
 
         fetch(postpath, {
             method: 'PUT', 
@@ -49,6 +54,8 @@ function SchoolManager(props: any){
         .catch((error) => {
             console.error('Error:', error);
         });
+
+        showToast();
         
         }
         else{
@@ -105,7 +112,7 @@ function SchoolManager(props: any){
 
         if(schoolInfo.classList[0] !== undefined){
        let newjsx = <ClassSummary class = {schoolInfo.classList[0]} />
-       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo} />
+       let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo} setHideToast={setHideToast} />
        setSummary([newjsx]);
        setManager([newmanager]);
 
@@ -116,7 +123,7 @@ function SchoolManager(props: any){
     useEffect(()=>{
         if(schoolInfo.classList[0] !== undefined){
         let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
-        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass] } setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>
+        let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass] } setEditTrue = {setEditTrue} schoolInfo = {schoolInfo} setHideToast={setHideToast}/>
        setSummary([newjsx]);
        setManager([newmanager]);
         }
@@ -126,6 +133,7 @@ function SchoolManager(props: any){
 
     useEffect(()=>{   //this should fire whenever any change to data takes place
 
+        if (editTrue == true){
         
         if(schoolInfo.classList[0] !== undefined){
             editSchool(schoolInfo);
@@ -135,11 +143,23 @@ function SchoolManager(props: any){
            setSummary([newjsx]);
            setManager([newmanager]);
            resetClassList();
+           
         }
         setEditTrue(false);
 
+        }
+
     },
     [editTrue]);
+
+
+    useEffect(()=>{
+        if (hideToast == true){
+        setHideToast(false);
+       
+        }
+    },
+    [hideToast]);
 
     function resetClassList(){
         let itemArr = [];
@@ -166,6 +186,14 @@ function SchoolManager(props: any){
         }
         setClassList(itemArr);
         setEditTrue(true);
+    }
+
+    function showToast(){
+        let toast = document.getElementById('editToast') as HTMLElement;
+        toast.hidden = false;
+        setHideToast(true);
+
+
     }
 
     return(
@@ -222,6 +250,7 @@ function SchoolManager(props: any){
             </div>
             </div>
 
+                <EditToast hideToast={hideToast} />
           
         </div>
     )
