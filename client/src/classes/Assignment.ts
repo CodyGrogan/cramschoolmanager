@@ -1,4 +1,9 @@
 
+interface GradeObj{
+    name: string,
+    value: number
+}
+
 class Assignment{
     constructor(date: string, name: string, studentList: string[]){
         this.name = name;
@@ -7,14 +12,14 @@ class Assignment{
         
         for (let i = 0; i < studentList.length; i++){
          
-            let obj = {name: studentList[i], value: 0}
+            let obj: GradeObj = {name: studentList[i], value: 0}
             this.grades.push(obj);
         }
         
     }
     name: string;
     duedate: string;
-    grades: any[];
+    grades: GradeObj[];
 }
 
 export default Assignment;
