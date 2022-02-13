@@ -32,12 +32,21 @@ function ClassSummary(props: any){
   
       let gradeArr: Grade[] = [];
     
-      if (schoolClass.assignmentList.length > 0 && schoolClass.studentList.length > 0){
+      if (schoolClass.assignmentList.length > 0 && schoolClass.studentList.length > 0 && studentIndex < schoolClass.studentList.length){
         setStudentName(schoolClass.studentList[studentIndex]);
     
         for (let i = 0; i < schoolClass.assignmentList.length; i ++){
+
+          let selectedStudentGrade: number;
+          if (schoolClass.assignmentList[i].grades[studentIndex].value != undefined ){
     
-          let selectedStudentGrade = schoolClass.assignmentList[i].grades[studentIndex].value;
+          selectedStudentGrade = schoolClass.assignmentList[i].grades[studentIndex].value;
+          }
+          else{
+            selectedStudentGrade = 0;
+            setStudentIndex(0);
+          }
+
           let avgGrade: number = 0;
     
           for (let j = 0; j < schoolClass.assignmentList[i].grades.length; j++){
@@ -65,6 +74,7 @@ function ClassSummary(props: any){
     }
 
     useEffect(()=>{
+      setStudentIndex(0);
       setChartData();
       populateStudentNames();
 
@@ -81,7 +91,13 @@ function ClassSummary(props: any){
       setChart([chartJSX]);
 
     },
-    [classGradeArr, studentIndex]);
+    [classGradeArr]);
+
+    useEffect(()=>{
+      setChartData();
+
+    },
+    [studentIndex])
 
     
 
