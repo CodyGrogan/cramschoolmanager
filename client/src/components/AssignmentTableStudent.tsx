@@ -15,7 +15,7 @@ function AssignmentTableStudent(props: any){
             let target = e.target;
             let index = target.getAttribute("data-index");
             let name = target.getAttribute("data-name");
-            let value = target.value;
+            let value = parseInt(target.value);
             console.log(value);
             
             if (value != null && value >= 0 && value <= 100){

@@ -2,7 +2,7 @@
 //one line will show class average grade and the other the selected students grade
 
 import React, { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label } from 'recharts';
 import SchoolClass from '../classes/SchoolClass';
 
 const data = [
@@ -73,8 +73,8 @@ let defGrade: Grade = {
 let defGradeArr: any = [defGrade];
 
 type chartProps = {
-    data: Grade[]
-
+    data: Grade[];
+    studentName: string;
 }
 
 
@@ -100,17 +100,22 @@ export default class StudentGradesChart extends PureComponent<chartProps, state>
           margin={{
             top: 5,
             right: 30,
-            left: 20,
+            left: 40,
             bottom: 5,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis type="number" domain={[0, 100]} />
+          <XAxis dataKey="name" >
+            
+
+          </XAxis>
+          <YAxis type="number" domain={[0, 100]} >
+            <Label value="Grade" offset={-20} position="left" />
+          </YAxis>
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="avgGrade" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="selectedStudentGrade" stroke="#82ca9d" />
+          <Line type="monotone" name='Average Grade' dataKey="avgGrade" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" name={this.props.studentName} dataKey="selectedStudentGrade" stroke="#ff8229" />
          
         </LineChart>
       </ResponsiveContainer>
