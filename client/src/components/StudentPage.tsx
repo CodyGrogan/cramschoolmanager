@@ -144,7 +144,7 @@ function StudentPage(props: any){
                             totalAssignments = totalAssignments - 1;
                         }
                     }
-                    totalGrade = totalGrade + parseInt(thisgrade);
+                    totalGrade = totalGrade + thisgrade;
                     console.log('total grade is' + totalGrade);
                     }
                     
