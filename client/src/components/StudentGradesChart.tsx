@@ -92,7 +92,7 @@ export default class StudentGradesChart extends PureComponent<chartProps, state>
 
   render() {
     return (
-      <ResponsiveContainer width={'100%'} height={500}>
+      <ResponsiveContainer width={'100%'} height={300}>
         <LineChart
           width={500}
           height={300}
@@ -106,7 +106,7 @@ export default class StudentGradesChart extends PureComponent<chartProps, state>
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis type="number" domain={[0, 100]} />
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="avgGrade" stroke="#8884d8" activeDot={{ r: 8 }} />

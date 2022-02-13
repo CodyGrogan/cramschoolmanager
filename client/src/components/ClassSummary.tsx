@@ -1,6 +1,4 @@
 import SchoolClass from "../classes/SchoolClass";
-
-import TestChart from "./TestChart";
 import StudentGradesChart from "./StudentGradesChart";
 import {useState, useEffect} from 'react';
 
@@ -26,6 +24,7 @@ function ClassSummary(props: any){
 
     const [studentIndex, setStudentIndex] = useState<number>(0);
     const [classGradeArr, setClassGradeArr] = useState<Grade[]>(defGradeArr);
+    const [chart, setChart] = useState<JSX.Element[]>([]);
 
     function setChartData(){
   
@@ -52,7 +51,12 @@ function ClassSummary(props: any){
     
         }
 
-        setClassGradeArr(gradeArr);
+        setClassGradeArr(gradeArr)
+       
+      }
+
+      else{
+        setClassGradeArr(defGradeArr);
       }
     
     }
@@ -61,8 +65,15 @@ function ClassSummary(props: any){
       setChartData();
 
     },
-    [schoolClass])
+    [props.class])
 
+    useEffect(()=>{
+      let chartJSX = <StudentGradesChart  data={classGradeArr}/>;
+
+      setChart([chartJSX]);
+
+    },
+    [classGradeArr])
 
     return(
         <div>
@@ -81,7 +92,7 @@ function ClassSummary(props: any){
         <br/>
         
     
-      <StudentGradesChart  data={classGradeArr}/>
+      {chart}
           
           </div>
     )

@@ -36,8 +36,7 @@ function AttendanceTableStudent(props: any){
         for (let i = 0; i < props.lessonlength; i++){
 
             let attenArr = lessonList[i].attendance;
-            console.log(attenArr);
-            console.log(props.name);
+            
             let indexOfName = attenArr.findIndex(obj => obj.name == props.name);
             
 
