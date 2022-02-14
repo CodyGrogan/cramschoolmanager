@@ -206,22 +206,22 @@ function ClassManager(props: any){
             
                 <div className="inputBox container">
                 <div className="col-sm">
-                <div className="inputDiv"> <label className="form-label">Name:</label><input className='form-control' id='className' type={'text'} placeholder={schoolClass.name}></input><button onClick={()=> editPressed('Name')} className="btn btn-primary">Edit</button></div> 
+                <div className="inputDiv"> <label className="form-label">Name:</label><input className='form-control' id='className' type={'text'} placeholder={schoolClass.name}></input><button onClick={()=> editPressed('Name')} className="btn btn-primary btn-sm">Edit</button></div> 
 
-              <div className="inputDiv"> <label className="form-label">Type:</label><input className='form-control' id='classType' type={'text'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('Type')} className="btn btn-primary">Edit</button></div> 
-              <div className="inputDiv"> <label className="form-label">Start:</label><input className='form-control' id='StartDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('StartDate')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label className="form-label">Type:</label><input className='form-control' id='classType' type={'text'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('Type')} className="btn btn-primary btn-sm">Edit</button></div> 
+              <div className="inputDiv"> <label className="form-label">Start:</label><input className='form-control' id='StartDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('StartDate')} className="btn btn-primary btn-sm">Edit</button></div> 
               </div>
               
 
               <div className="col-sm">
-              <div className="inputDiv"> <label className="form-label">End:</label><input className='form-control' id='EndDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('EndDate')} className="btn btn-primary">Edit</button></div> 
+              <div className="inputDiv"> <label className="form-label">End:</label><input className='form-control' id='EndDate' type={'date'} placeholder={schoolClass.type}></input><button onClick={()=> editPressed('EndDate')} className="btn btn-primary btn-sm">Edit</button></div> 
               <div className="inputDiv">
                 <label className="form-label">Add Students</label>
                 <select className="form-select" id='selectStudent'>
                     {optionArr}
 
                 </select>
-                <button className="btn btn-primary" onClick={()=>addStudentButton()}>Add Student</button>
+                <button className="btn btn-primary btn-sm" onClick={()=>addStudentButton()}>Add Student</button>
                 </div>
               </div>
                 

@@ -142,19 +142,25 @@ function ClassSummary(props: any){
           <div className="row">
             <div className="col-sm-4">
 
-              <h2>{schoolClass.name}</h2>  
-          
-              <h3>{schoolClass.type}</h3>
-                Total Students: {schoolClass.studentList.length}
-              <br/>
-              Teachers: {schoolClass.teacherList}
-              <br/>
-              Average Grade: 
-              <br/>
-              Start Date: {schoolClass.startDate}
-              <br/>
-              End Date:   {schoolClass.endDate}
-              <br/>
+              <div className="card">
+                <div className="card-header">
+                   <h2>{schoolClass.name}</h2>  
+                </div>
+                <div className="card-body">
+                <h3 className="card-title">{schoolClass.type}</h3> 
+                  
+                    Total Students: {schoolClass.studentList.length}
+                  <br/>
+                  Teachers: {schoolClass.teacherList}
+                  <br/>
+                  Average Grade: 
+                  <br/>
+                  Start Date: {schoolClass.startDate}
+                  <br/>
+                  End Date:   {schoolClass.endDate}
+                  <br/>
+                </div> 
+              </div>
 
             </div>
 
@@ -163,11 +169,11 @@ function ClassSummary(props: any){
 
           <div className="inputDiv">
                 <label className="form-label">Average Grade Chart</label>
-                <select className="form-select" id='selectStudentChart'>
+                <select className="form-select" id='selectStudentChart' onChange={()=>pickStudent()}>
                     {optionArr}
 
                 </select>
-                <button className="btn btn-primary btn-sm" onClick={()=>pickStudent()}>Show on Chart</button>
+                
                 </div>
             
             {chart}
