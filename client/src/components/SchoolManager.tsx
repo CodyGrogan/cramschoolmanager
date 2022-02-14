@@ -19,6 +19,7 @@ function SchoolManager(props: any){
     const [manager, setManager] = useState<JSX.Element[]>();
     const [editTrue, setEditTrue] = useState<boolean>(false);
     const [currentClass, setCurrentClass] = useState<SchoolClass>();
+    const [renderNum, setRenderNum] = useState<number>(0);
 
     
     useEffect(()=>{
@@ -122,7 +123,7 @@ function SchoolManager(props: any){
 
     useEffect(()=>{
         if(schoolInfo.classList[0] !== undefined){
-        let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
+        let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} editTrue={editTrue} />
         let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass] } setEditTrue = {setEditTrue} schoolInfo = {schoolInfo} setHideToast={setHideToast}/>
        setSummary([newjsx]);
        setManager([newmanager]);
@@ -134,11 +135,15 @@ function SchoolManager(props: any){
     useEffect(()=>{   //this should fire whenever any change to data takes place
 
         if (editTrue == true){
+
+            console.log('an edit happened')
         
         if(schoolInfo.classList[0] !== undefined){
             editSchool(schoolInfo);
+            let renNum = renderNum + 1;
+            setRenderNum(renNum);
 
-            let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} />
+            let newjsx = <ClassSummary class = {schoolInfo.classList[selectedClass]} editTrue={editTrue} renderNum={renNum}  />
             let newmanager = <ClassManager class = {schoolInfo.classList[selectedClass]} setEditTrue = {setEditTrue} schoolInfo = {schoolInfo}/>
            setSummary([newjsx]);
            setManager([newmanager]);

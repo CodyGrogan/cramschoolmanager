@@ -74,13 +74,14 @@ function ClassSummary(props: any){
     }
 
     useEffect(()=>{
+      console.log('class data changed')
       setStudentIndex(0);
       setChartData();
       populateStudentNames();
 
 
     },
-    [props.class])
+    [schoolClass]);
 
     useEffect(()=>{
       
@@ -97,7 +98,20 @@ function ClassSummary(props: any){
       setChartData();
 
     },
-    [studentIndex])
+    [studentIndex]);
+
+    useEffect(()=>{
+      
+      console.log('editTrue detected in class summary' + props.renderNum);
+      setStudentIndex(0);
+      setChartData();
+      populateStudentNames();
+     
+     
+      
+
+    },
+    [props.renderNum]);
 
     
 
@@ -108,6 +122,7 @@ function ClassSummary(props: any){
       let index = schoolClass.studentList.indexOf(studentName);
       setStudentIndex(index);
       setChartData();
+      console.log(props.editTrue + 'prop is this')
 
     }
 
