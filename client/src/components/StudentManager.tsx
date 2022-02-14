@@ -63,9 +63,10 @@ function StudentManager(props: any){
         let parent1:string = (document.getElementById('inputParent1') as HTMLInputElement).value ;
         let parent2:string = (document.getElementById('inputParent2') as HTMLInputElement).value ;
         let email:string = (document.getElementById('inputEmail') as HTMLInputElement).value ;
+        let gender:string = (document.getElementById('genderSelect') as HTMLInputElement).value ;
 
         if (name != null && name != ''){
-            school.addStudent(name, age, parent1, parent2, phone, email);
+            school.addStudent(name, age, parent1, parent2, phone, email,gender);
             let index = school.studentList.length -1;
             buildStudentTable();
             addStudent(school.studentList[index]);
@@ -152,6 +153,15 @@ function StudentManager(props: any){
                     <div className="mb-3">
                         <label  className="form-label">Age</label>
                         <input type="number" className="form-control" id="inputAge" aria-describedby="emailHelp"/>
+                        
+                    </div>
+
+                    <div className="mb-3">
+                        <label  className="form-label">Gender</label>
+                        <select id='genderSelect' className="form-select">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
                         
                     </div>
 

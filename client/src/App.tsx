@@ -68,7 +68,7 @@ function App() {
 
   initFirebaseAuth();
   let defaultSchool = new School('def', 'testid');
-  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown', 'unknown', 'unknown');
+  let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'uknown', 'unknown', 'unknown', 'male');
 
 
   const [school, setSchool] = useState<School>(defaultSchool);
@@ -93,11 +93,11 @@ function App() {
     let defSchool = new School('myschool', 'testid');
 
 
-    defSchool.addStudent('billy', 11, 'john', 'mary', '123456', 'hello@fake.com');
-    defSchool.addStudent('sally', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
-    defSchool.addStudent('paul', 11, 'john', 'mary', '123456', 'hello@fake.com');
-    defSchool.addStudent('jenny', 12, 'stan', 'jill', '987655', 'hello2@fake.com');
-    defSchool.addStudent('alfred', 12, 'jose', 'josie', '456123', 'hello3@fake.com');
+    defSchool.addStudent('billy', 11, 'john', 'mary', '123456', 'hello@fake.com', 'Male');
+    defSchool.addStudent('sally', 12, 'stan', 'jill', '987655', 'hello2@fake.com', 'Female');
+    defSchool.addStudent('paul', 11, 'john', 'mary', '123456', 'hello@fake.com', 'Male');
+    defSchool.addStudent('jenny', 12, 'stan', 'jill', '987655', 'hello2@fake.com', 'Female');
+    defSchool.addStudent('alfred', 12, 'jose', 'josie', '456123', 'hello3@fake.com', 'Male');
 
     defSchool.createClass('myclass')
     defSchool.createClass('myotherclass')

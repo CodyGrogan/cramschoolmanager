@@ -22,7 +22,7 @@ interface IAttendanceObj{
 
 
 function StudentPage(props: any){
-    let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'unknownid', 'unknown', 'unknown');
+    let defstudent: Student = new Student('unknown', 0, 'unknown','unknown','unknown','unknown', 'unknownid', 'unknown', 'unknown', 'male');
     
     const [student, setStudent] = useState<Student>(defstudent);
     const [avgGradeList, setAvgGradeList] = useState<JSX.Element[]>([]);
@@ -42,6 +42,7 @@ function StudentPage(props: any){
             <tr> <th>Parent 2</th>   <td>{student.parent2}</td> </tr> 
             <tr> <th>Phone</th>  <td>{student.phone}</td> </tr> 
             <tr> <th>Email</th>    <td>{student.email}</td> </tr> 
+            <tr> <th>Gender</th>    <td>{student.gender}</td> </tr>
             </tbody>
         </table>;
 
