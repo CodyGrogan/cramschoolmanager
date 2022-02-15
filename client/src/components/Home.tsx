@@ -1,3 +1,4 @@
+import GenderPieChart from "./GenderPieChart";
 import Navbar from "./Navbar";
 
 
@@ -5,11 +6,13 @@ import Navbar from "./Navbar";
 function Home(props: any){
 
  
-
+   
     return(
         <div>
             <Navbar setSchool={props.setSchool}/>
             Homepage 
+
+            
         </div>
     )
 }
