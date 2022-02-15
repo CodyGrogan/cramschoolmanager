@@ -9,6 +9,7 @@ import AssignmentList from "./AssignmentList";
 import AssignmentTable from "./AssignmentTable";
 import AttendanceTable from "./AttendanceTable";
 import LessonList from "./LessonList";
+import GenderPieChart from "./GenderPieChart";
 
 function ClassManager(props: any){
 
@@ -17,6 +18,7 @@ function ClassManager(props: any){
     const [assignmentTable, setAssignmentTable] = useState<JSX.Element>();
     const [lessonList, setLessonList] = useState<JSX.Element>();
     const [assignmentList, setAssignmentList] = useState<JSX.Element>();
+    const [genderChart, setGenderChart] = useState<JSX.Element[]>([]);
 
     let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
@@ -32,6 +34,7 @@ function ClassManager(props: any){
         populateStudentNames();
         resetLessonList();
         resetAssignmentList();
+        getGenderData();
 
     },
     [])
@@ -47,6 +50,7 @@ function ClassManager(props: any){
         populateStudentNames();
         resetLessonList();
         resetAssignmentList();
+        getGenderData();
 
 
        
@@ -107,6 +111,7 @@ function ClassManager(props: any){
         props.setEditTrue(true);
         resetAttendance();
         resetAssignmentGrades();
+        getGenderData();
 
 
     }
@@ -196,6 +201,21 @@ function ClassManager(props: any){
         
 
             setAssignmentList(list);
+    }
+
+    function getGenderData(){
+        interface GenderData{
+            name: string,
+            value: number;
+        }
+        
+        let data1: GenderData = {name:'Male', value: schoolClass.maleStudents}
+        let data2: GenderData = {name:'Female', value: schoolClass.femaleStudents}
+        let data: GenderData[] = [data1, data2];
+
+        let genderJSX = <GenderPieChart data={data}/>;
+        setGenderChart([genderJSX]);
+    
     }
 
     return(
@@ -310,6 +330,28 @@ function ClassManager(props: any){
                     </div>
                    
                 </div> 
+
+                <div className="accordion-item">
+                        <h2 className="accordion-header" id="flush-headingFive">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Class Data and Charts
+                        </button>
+                        </h2>
+                        <div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        <div className="accordion-body">
+
+                        
+                            <div >
+                                <h4>Gender Ratio</h4>
+                              {genderChart}
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div> 
+
+          
             </div>    
                           
             </div>

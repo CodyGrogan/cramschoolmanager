@@ -52,6 +52,8 @@ class School {
             this.classList[index].schoolID = data[i].schoolID;
             this.classList[index].teacherList = data[i].teacherList;
             this.classList[index].schoolName = data[i].schoolName;
+            this.classList[index].maleStudents = data[i].schoolName.maleStudents;
+            this.classList[index].femaleStudents = data[i].schoolName.femaleStudents;
             this.classList[index].setMap();
             console.log('class at' + index + 'is named' + this.classList[index].name)
         }

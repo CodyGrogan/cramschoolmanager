@@ -15,6 +15,7 @@ class SchoolClass{
         this.schoolName = schoolname;
         this.schoolID = schoolID;
         this.existArr = [];
+        
         this.setMap();
     }
     archived: boolean;
@@ -30,6 +31,8 @@ class SchoolClass{
     schoolName:string;
     schoolID: string;
     existArr: any[];
+    maleStudents: number = 0;
+    femaleStudents: number = 0;
 
     addStudent(student: Student){
 
@@ -37,6 +40,13 @@ class SchoolClass{
             this.studentExists.set(student.name, true);
             student.classes.push(this.name);
             this.studentList.push(student.name);
+            if (student.gender == 'Male'){
+                this.maleStudents = this.maleStudents + 1;
+            }
+            else{
+                this.femaleStudents = this.femaleStudents + 1;
+            }
+
             this.existArr = Array.from(this.studentExists, ([name, value]) => ({ name, value }));
 
             for (let i = 0; i< this.lessonList.length; i++){
