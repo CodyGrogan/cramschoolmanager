@@ -24,6 +24,7 @@ import {
 import { initializeApp } from "firebase/app";
 
 import { getAnalytics } from "firebase/analytics";
+import AssignmentPage from './components/AssignmentPage';
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -141,6 +142,7 @@ function App() {
         <Route path='student' element={<StudentManager school={school} studentToView={studentToView} setStudentToView={setStudentToView} setSchool={setSchool} />}/>
         <Route path='studentpage/:id' element={<StudentPage setSchool={setSchool} school={school}/>} />
         <Route path='lessonpage/:id/:classname' element={<LessonPage setSchool={setSchool} school={school}/>} />
+        <Route path='assignmentpage/:id/:classname' element={<AssignmentPage setSchool={setSchool} school={school}/>} />
 
 
 
