@@ -12,7 +12,7 @@ function AssignmentList(props: any){
     useEffect(()=>{
         assignmentArr = []
         for (let i = 0; i < schoolClass.assignmentList.length; i++){
-            let newjsx = <AssignmentListItem name = {schoolClass.assignmentList[i].name} date = {schoolClass.assignmentList[i].duedate} schoolClass={schoolClass} />
+            let newjsx = <AssignmentListItem name = {schoolClass.assignmentList[i].name} id = {schoolClass.assignmentList[i].id} date = {schoolClass.assignmentList[i].duedate} schoolClass={schoolClass} />
             assignmentArr.push(newjsx);
 
         }

@@ -17,7 +17,7 @@ function AssignmentPage(props: any){
         let school: School = props.school;
         let index = school.classList.findIndex(obj => obj.name == classname);
         if (index >=0){
-        let lessonIndex = school.classList[index].assignmentList.findIndex(obj => obj.name == id);
+        let lessonIndex = school.classList[index].assignmentList.findIndex(obj => obj.id == id);
             if (lessonIndex >= 0){
                 setAssignment(school.classList[index].assignmentList[lessonIndex]);
             }
@@ -30,7 +30,7 @@ function AssignmentPage(props: any){
      
         let index = school.classList.findIndex(obj => obj.name == classname);
         if (index >=0){
-        let lessonIndex = school.classList[index].assignmentList.findIndex(obj => obj.name == id);
+        let lessonIndex = school.classList[index].assignmentList.findIndex(obj => obj.id == id);
             if (lessonIndex >= 0){
                 setAssignment(school.classList[index].assignmentList[lessonIndex]);
             }
@@ -60,8 +60,7 @@ function AssignmentPage(props: any){
             <Navbar setSchool={props.setSchool}/>
            
             Assignment Page
-            {id} <br/>
-            {classname}
+          <br/>
 
             {assignmentJSX}
          
