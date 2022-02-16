@@ -249,7 +249,7 @@ function SchoolManager(props: any){
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newClass()}>Add Student</button>
+                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=> newClass()}>Create Class</button>
                 </div>
                 </div>
             </div>
