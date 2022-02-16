@@ -88,7 +88,7 @@ interface Grade {
         <div>
             <Navbar setSchool={props.setSchool}/>
            <div className="container">
-            Assignment Page
+         
           <br/>
 
             {assignmentJSX}
