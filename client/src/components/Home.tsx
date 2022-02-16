@@ -1,6 +1,6 @@
 import GenderPieChart from "./GenderPieChart";
 import Navbar from "./Navbar";
-
+import GradeBarChart from "./GradeBarChart";
 
 
 function Home(props: any){
@@ -12,7 +12,7 @@ function Home(props: any){
             <Navbar setSchool={props.setSchool}/>
             Homepage 
 
-            
+         
         </div>
     )
 }
