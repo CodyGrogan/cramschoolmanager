@@ -15,6 +15,8 @@ class SchoolClass{
         this.schoolName = schoolname;
         this.schoolID = schoolID;
         this.existArr = [];
+        this.maleStudents = 0;
+        this.femaleStudents = 0;
         
         this.setMap();
     }
@@ -31,8 +33,8 @@ class SchoolClass{
     schoolName:string;
     schoolID: string;
     existArr: any[];
-    maleStudents: number = 0;
-    femaleStudents: number = 0;
+    maleStudents: number;
+    femaleStudents: number;
 
     addStudent(student: Student){
 

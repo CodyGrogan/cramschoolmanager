@@ -204,6 +204,8 @@ function ClassManager(props: any){
     }
 
     function getGenderData(){
+
+        console.log('getting gender data')
         interface GenderData{
             name: string,
             value: number;
