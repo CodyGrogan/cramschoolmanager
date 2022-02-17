@@ -22,7 +22,9 @@ function LessonPage(props: any){
         if (index >=0){
             let lessonList = classList[index].lessonList;
             let lessonIndex = lessonList.findIndex(obj => obj.lessonid === id);
+            if (lessonIndex >=0){
             setLesson(lessonList[lessonIndex]);
+            }
 
 
         }
@@ -41,7 +43,9 @@ function LessonPage(props: any){
         if (index >=0){
             let lessonList = classList[index].lessonList;
             let lessonIndex = lessonList.findIndex(obj => obj.lessonid === id);
-            setLesson(lessonList[lessonIndex]);
+            if (lessonIndex >=0){
+                setLesson(lessonList[lessonIndex]);
+                }
 
 
         }
