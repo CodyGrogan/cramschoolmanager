@@ -48,15 +48,15 @@ function SchoolManager(props: any){
             },
             body: jsonstring,
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
+        .then(response => {
+            console.log(response)
+            showToast();
+            })
         .catch((error) => {
             console.error('Error:', error);
         });
 
-        showToast();
+       
         
         }
         else{

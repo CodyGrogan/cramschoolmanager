@@ -81,6 +81,7 @@ router.put('/editschool', function(req, res, next){
           doc.name = school.name;
           doc.address = school.address; 
           doc.save(function(err){if (err) console.log(err);});
+          res.send(200);
 
         }
         catch{

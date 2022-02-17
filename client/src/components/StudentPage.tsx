@@ -286,11 +286,6 @@ function StudentPage(props: any){
 
              setStudent(thisStudent);
              setEditTrue(true);
-
-             showToast();  //temporary
-
-             //update database
-
              editSchool(school)
          }
 
@@ -311,12 +306,10 @@ function StudentPage(props: any){
             },
             body: jsonstring,
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            //show toast should go here  after update route to send 200 response
-            //showToast();
-        })
+        .then(response => {
+            console.log(response)
+            showToast();
+            })
         .catch((error) => {
             console.error('Error:', error);
         });
