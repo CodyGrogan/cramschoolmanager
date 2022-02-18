@@ -308,8 +308,11 @@ function StudentPage(props: any){
         })
         .then(response => {
             console.log(response)
-            showToast();
-            })
+            if (response.ok === true){
+                
+                showToast();
+            }
+        })
         .catch((error) => {
             console.error('Error:', error);
         });
