@@ -65,6 +65,7 @@ function StudentManager(props: any){
     }
 
     function createStudent(){
+        console.log('create student button clicked')
 
        
         let name:string = (document.getElementById('inputName') as HTMLInputElement).value ;
@@ -76,7 +77,17 @@ function StudentManager(props: any){
         let email:string = (document.getElementById('inputEmail') as HTMLInputElement).value ;
         let gender:string = (document.getElementById('genderSelect') as HTMLInputElement).value ;
 
+        if (isNaN(age)){
+            age = 0;
+            console.log(age)
+            
+        }
+
         if (name != null && name != ''){
+            console.log('creating student')
+
+            console.log(age)
+
             school.addStudent(name, age, parent1, parent2, phone, email,gender);
             let index = school.studentList.length -1;
             buildStudentTable();
