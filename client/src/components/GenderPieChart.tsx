@@ -1,10 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 }
-];
+
 
 const COLORS = ['#0088FE', '#ed4e93'];
 
@@ -55,12 +52,12 @@ export default class GenderPieChart extends PureComponent<chartProps, state>{
             dataKey="value"
             
           >
-            {data.map((entry, index) => (
+            {this.props.data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
             
           </Pie>
-          <Tooltip formatter={(value: any, name: any, props: any) => [name]} />
+          <Tooltip formatter={(value: any, name: any, props: any) => [value]} />
           <Legend margin={{ top: 0, left: 0, right: 0, bottom: 0 }} />
         </PieChart>
       </ResponsiveContainer>
