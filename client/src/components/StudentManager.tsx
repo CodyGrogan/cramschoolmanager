@@ -4,6 +4,7 @@ import Student from "../classes/Student";
 import Navbar from "./Navbar";
 import StudentTableItem from "./StudentTableItem";
 import {getAuth} from 'firebase/auth';
+import EditToast from "./EditToast";
 
 function StudentManager(props: any){
     let school: School = props.school;
@@ -11,6 +12,8 @@ function StudentManager(props: any){
     studentList = school.studentList;
     let jsxarr: JSX.Element[] = [];
     const [tableData, setTableData] = useState<JSX.Element[]>();
+    const [hideToast, setHideToast] = useState<boolean>(false);
+
 
 
    function buildStudentTable(){
@@ -30,6 +33,14 @@ function StudentManager(props: any){
         buildStudentTable();
     },
     [studentList]);
+
+    useEffect(()=>{
+        if (hideToast == true){
+        setHideToast(false);
+       
+        }
+    },
+    [hideToast]);
 
     async function addStudent(newstudent: Student) {
         console.log('adding student to database');
@@ -90,11 +101,12 @@ function StudentManager(props: any){
             },
             body: jsonstring,
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            //show toast should go here  after update route to send 200 response
-            //showToast();
+        .then(response => {
+            console.log(response)
+            if (response.ok === true){
+                
+                showToast();
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -104,6 +116,14 @@ function StudentManager(props: any){
         else{
             console.log('user not signed in, cannot edit')
         }
+
+    }
+
+    function showToast(){
+        let toast = document.getElementById('editToast') as HTMLElement;
+        toast.hidden = false;
+        setHideToast(true);
+
 
     }
     
@@ -198,6 +218,7 @@ function StudentManager(props: any){
             </div>
 
         </div>
+        <EditToast hideToast={hideToast}/>
         </div>
     )
 }

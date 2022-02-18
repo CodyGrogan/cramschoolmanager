@@ -84,8 +84,12 @@ function LessonPage(props: any){
             body: jsonstring,
         })
         .then(response => {
-            console.log(response)
+            console.log(response);
+            if (response.ok === true){
+                
             showToast();
+            }
+        
             })
         .catch((error) => {
             console.error('Error:', error);
