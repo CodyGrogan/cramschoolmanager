@@ -3,14 +3,41 @@
 import React, { PureComponent } from 'react';
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ZAxis } from 'recharts';
 
-const data = [
-  { name: 'Bill', x: 100, y: 100},
-  {name: 'Sally',  x: 95, y: 90 },
-  { name: 'Joe',  x: 80, y: 65},
-  
-];
 
-export default class GradeAttendChart extends PureComponent {
+ // format of data { name: 'Bill', attend: 100, grade: 100},
+
+
+interface ScatterGrade {
+  name: string;
+ 
+  avgGrade: number;
+
+}
+
+interface ScatterAttendance{
+    name: string,
+    avgAttendance: number;
+}
+let defGrade: ScatterGrade = {
+  name: 'unknown',
+  avgGrade: 0,
+
+
+}
+
+type ScatterData = {
+    grade: number,
+    attend: number,
+    name: string
+
+}
+
+type chartProps = {
+  data: ScatterData[];
+  
+}
+
+export default class GradeAttendChart extends PureComponent<chartProps> {
 
 
   render() {
@@ -27,12 +54,12 @@ export default class GradeAttendChart extends PureComponent {
           }}
         >
           <CartesianGrid />
-          <XAxis type="number" dataKey="x" name="Attendance %"  domain={[0, 100]} />
-          <YAxis type="number" dataKey="y" name="Grade %"   domain={[0, 100]}/>
+          <XAxis type="number" dataKey="attend" name="Attendance %"  domain={[0, 100]} />
+          <YAxis type="number" dataKey="grade" name="Grade %"   domain={[0, 100]}/>
           <ZAxis type="category" dataKey="name" name="Name"/>
 
           <Tooltip cursor={{ strokeDasharray: '3 3' }}  />
-          <Scatter name="A school" data={data} fill='#0088FE' />
+          <Scatter name="A school" data={this.props.data} fill='#0088FE' />
         </ScatterChart>
       </ResponsiveContainer>
     );

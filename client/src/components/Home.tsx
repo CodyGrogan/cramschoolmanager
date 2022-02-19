@@ -13,7 +13,7 @@ function Home(props: any){
             <Navbar setSchool={props.setSchool}/>
             Homepage 
 
-            <GradeAttendChart/>
+        
 
          
         </div>

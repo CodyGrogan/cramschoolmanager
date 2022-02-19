@@ -11,6 +11,7 @@ import AttendanceTable from "./AttendanceTable";
 import LessonList from "./LessonList";
 import GenderPieChart from "./GenderPieChart";
 import { type } from "os";
+import GradeAttendChart from "./GradeAttendChart";
 interface ScatterGrade {
     name: string;
    
@@ -30,8 +31,9 @@ interface ScatterGrade {
   }
 
   type ScatterData = {
-      grade: ScatterGrade[],
-      attend: ScatterAttendance[]
+      grade: number,
+      attend: number,
+      name: string
 
   }
 
@@ -44,8 +46,8 @@ function ClassManager(props: any){
     const [assignmentTable, setAssignmentTable] = useState<JSX.Element>();
     const [lessonList, setLessonList] = useState<JSX.Element>();
     const [assignmentList, setAssignmentList] = useState<JSX.Element>();
-    const [genderChart, setGenderChart] = useState<JSX.Element[]>([]);
-    const [scatterData, setScatterData] = useState<ScatterData>();
+    const [genderChart, setGenderChart] = useState<JSX.Element[]>();
+    const [scatterChart, setScatterChart] = useState<JSX.Element[]>();
 
     let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
@@ -62,6 +64,8 @@ function ClassManager(props: any){
         resetLessonList();
         resetAssignmentList();
         getGenderData();
+        getScatterChartData();
+
 
     },
     [])
@@ -78,11 +82,14 @@ function ClassManager(props: any){
         resetLessonList();
         resetAssignmentList();
         getGenderData();
+        getScatterChartData();
 
 
        
     },
     [props.class])
+
+
 
     function editPressed(inputType: String){
         switch(inputType){
@@ -249,61 +256,75 @@ function ClassManager(props: any){
 
 
     function getScatterChartData(){
+
+        console.log('getting scatter chart data')
   
-        let gradeArr: ScatterGrade[] = [];
+        let gradeArr: number[] = [];
         let attendArr: ScatterAttendance[] = [];
+        let data: ScatterData[] = []
 
         //get grade data
       
-        if (schoolClass.assignmentList.length > 0 && schoolClass.studentList.length > 0){
+        if (schoolClass.assignmentList.length > 0 && schoolClass.studentList.length > 0 && schoolClass.lessonList.length>0){
          
+            console.log('scatter chart if check passed')
       
-          for (let i = 0; i < schoolClass.assignmentList.length; i ++){
-  
-  
-            let avgGrade: number = 0;
-      
-            for (let j = 0; j < schoolClass.assignmentList[i].grades.length; j++){
-               avgGrade = avgGrade + schoolClass.assignmentList[i].grades[j].value;
+         
+       
+
+          for (let i = 0; i < schoolClass.studentList.length; i++){
+            let attended: number = 0;
+            let grade: number = 0;
+
+            // get grades
+            for (let j = 0; j < schoolClass.assignmentList.length; j++){
+                let index = schoolClass.assignmentList[j].grades.findIndex(obj => obj.name == schoolClass.studentList[i]);
+                grade = grade + schoolClass.assignmentList[j].grades[index].value;
+                console.log(grade);
             }
-            avgGrade = avgGrade/ schoolClass.studentList.length;
-      
-            let newGrade: ScatterGrade = {
-                name: schoolClass.studentList[i],
-                
-                avgGrade: avgGrade
-            }
-            gradeArr.push(newGrade);
-      
-          }
-        }
+            
+            grade = grade / schoolClass.assignmentList.length;
+            console.log(grade);
+            
+            gradeArr.push(grade);
+            
+            
+            //get attendance data
 
-        //get attendance data
-
-        if (schoolClass.lessonList.length>0 && schoolClass.studentList.length > 0){
-            for (let i = 0; i < schoolClass.studentList.length; i++){
-                let attended: number = 0;
-
-                for (let j = 0; j < schoolClass.lessonList.length; j++){
-                    let index = schoolClass.lessonList[j].attendance.findIndex(obj => obj.name == schoolClass.studentList[i]);
-                    if (schoolClass.lessonList[j].attendance[index].value === true){
-                        attended = attended+1;
-                    }
+            for (let j = 0; j < schoolClass.lessonList.length; j++){
+                let index = schoolClass.lessonList[j].attendance.findIndex(obj => obj.name == schoolClass.studentList[i]);
+                if (schoolClass.lessonList[j].attendance[index].value === true){
+                    attended = attended+1;
                 }
-                let attendedPct = attended / schoolClass.lessonList.length;
-                attendedPct = attendedPct*100;
-                let newAttendance: ScatterAttendance = {name: schoolClass.studentList[i], avgAttendance: attendedPct};
-                attendArr.push(newAttendance);
-
-                
             }
+            let attendedPct = attended / schoolClass.lessonList.length;
+            attendedPct = attendedPct*100;
+            let newAttendance: ScatterAttendance = {name: schoolClass.studentList[i], avgAttendance: attendedPct};
+            attendArr.push(newAttendance);
+
+            
         }
 
-        let data: ScatterData = {
-            grade: gradeArr,
-            attend: attendArr
+        for (let i = 0; i < schoolClass.studentList.length; i++){
+        let newdata: ScatterData = {
+            grade: gradeArr[i],
+            attend: attendArr[i].avgAttendance,
+            name: schoolClass.studentList[i]
         }
-        setScatterData(data);
+        data.push(newdata);
+        }
+        console.log('at end of get scatter data');
+        console.log(data);
+        let ScatterChartJSX = <GradeAttendChart data={data} />
+        setScatterChart([ScatterChartJSX])
+
+        }
+        else{
+            setScatterChart([]);
+        }
+
+    
+     
           
       
       }
@@ -434,6 +455,10 @@ function ClassManager(props: any){
                             <div >
                                 <h4>Gender Ratio</h4>
                               {genderChart}
+
+                              <h4>Attendance To Grade Scatter Chart</h4>
+                              {scatterChart}
+                              <button className="btn btn-primary btn-sm" onClick={()=>getScatterChartData()}>Reset Chart</button>
 
                             </div>
                         </div>
