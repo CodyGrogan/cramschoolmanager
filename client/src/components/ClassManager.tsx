@@ -10,7 +10,33 @@ import AssignmentTable from "./AssignmentTable";
 import AttendanceTable from "./AttendanceTable";
 import LessonList from "./LessonList";
 import GenderPieChart from "./GenderPieChart";
+import { type } from "os";
+interface ScatterGrade {
+    name: string;
+   
+    avgGrade: number;
+  
+  }
 
+  interface ScatterAttendance{
+      name: string,
+      avgAttendance: number;
+  }
+  let defGrade: ScatterGrade = {
+    name: 'unknown',
+    avgGrade: 0,
+
+  
+  }
+
+  type ScatterData = {
+      grade: ScatterGrade[],
+      attend: ScatterAttendance[]
+
+  }
+
+  let defGradeArr: any = [defGrade];
+  
 function ClassManager(props: any){
 
     const [attendanceChart, setAttendanceChart] = useState<JSX.Element>();
@@ -19,6 +45,7 @@ function ClassManager(props: any){
     const [lessonList, setLessonList] = useState<JSX.Element>();
     const [assignmentList, setAssignmentList] = useState<JSX.Element>();
     const [genderChart, setGenderChart] = useState<JSX.Element[]>([]);
+    const [scatterData, setScatterData] = useState<ScatterData>();
 
     let schoolInfo: School = props.schoolInfo;
     let schoolClass: SchoolClass = props.class;
@@ -219,6 +246,67 @@ function ClassManager(props: any){
         setGenderChart([genderJSX]);
     
     }
+
+
+    function getScatterChartData(){
+  
+        let gradeArr: ScatterGrade[] = [];
+        let attendArr: ScatterAttendance[] = [];
+
+        //get grade data
+      
+        if (schoolClass.assignmentList.length > 0 && schoolClass.studentList.length > 0){
+         
+      
+          for (let i = 0; i < schoolClass.assignmentList.length; i ++){
+  
+  
+            let avgGrade: number = 0;
+      
+            for (let j = 0; j < schoolClass.assignmentList[i].grades.length; j++){
+               avgGrade = avgGrade + schoolClass.assignmentList[i].grades[j].value;
+            }
+            avgGrade = avgGrade/ schoolClass.studentList.length;
+      
+            let newGrade: ScatterGrade = {
+                name: schoolClass.studentList[i],
+                
+                avgGrade: avgGrade
+            }
+            gradeArr.push(newGrade);
+      
+          }
+        }
+
+        //get attendance data
+
+        if (schoolClass.lessonList.length>0 && schoolClass.studentList.length > 0){
+            for (let i = 0; i < schoolClass.studentList.length; i++){
+                let attended: number = 0;
+
+                for (let j = 0; j < schoolClass.lessonList.length; j++){
+                    let index = schoolClass.lessonList[j].attendance.findIndex(obj => obj.name == schoolClass.studentList[i]);
+                    if (schoolClass.lessonList[j].attendance[index].value === true){
+                        attended = attended+1;
+                    }
+                }
+                let attendedPct = attended / schoolClass.lessonList.length;
+                attendedPct = attendedPct*100;
+                let newAttendance: ScatterAttendance = {name: schoolClass.studentList[i], avgAttendance: attendedPct};
+                attendArr.push(newAttendance);
+
+                
+            }
+        }
+
+        let data: ScatterData = {
+            grade: gradeArr,
+            attend: attendArr
+        }
+        setScatterData(data);
+          
+      
+      }
 
     return(
         <div>

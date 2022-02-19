@@ -1,3 +1,4 @@
+
 class Lesson{
     constructor(date: string, num: number, studentList: string[], name: string, lessonid: string, lessonPlan: string){
         this.num = num;
