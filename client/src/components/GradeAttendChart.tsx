@@ -1,7 +1,7 @@
 // this component will create a scatter plot chart with attendance on the x axis and grades on the y axis.
 
 import React, { PureComponent } from 'react';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ZAxis } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ZAxis, Label } from 'recharts';
 
 
  // format of data { name: 'Bill', attend: 100, grade: 100},
@@ -54,8 +54,12 @@ export default class GradeAttendChart extends PureComponent<chartProps> {
           }}
         >
           <CartesianGrid />
-          <XAxis type="number" dataKey="attend" name="Attendance %"  domain={[0, 100]} />
-          <YAxis type="number" dataKey="grade" name="Grade %"   domain={[0, 100]}/>
+          <XAxis type="number" dataKey="attend" name="Attendance %"  domain={[0, 100]} >
+             <Label value="Attendance" offset={5} position="bottom" />
+          </XAxis>
+          <YAxis type="number" dataKey="grade" name="Grade %"   domain={[0, 100]}>
+          <Label value="Grade" offset={-26} position="left" />
+            </YAxis>
           <ZAxis type="category" dataKey="name" name="Name"/>
 
           <Tooltip cursor={{ strokeDasharray: '3 3' }}  />
