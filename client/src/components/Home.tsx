@@ -15,7 +15,7 @@ function Home(props: any){
             <Navbar setSchool={props.setSchool}/>
         
             <HomeAnimation/>
-         
+
         </div>
     )
 }

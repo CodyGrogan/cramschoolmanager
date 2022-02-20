@@ -1,4 +1,4 @@
-import {ScrollContainer, ScrollPage, Animator, batch, Fade, Sticky, MoveOut, ZoomIn, ZoomOut, FadeIn, StickyIn, FadeOut} from 'react-scroll-motion';
+import {ScrollContainer, ScrollPage, Animator, batch, Fade, Sticky, MoveOut, ZoomIn, ZoomOut, FadeIn, StickyIn} from 'react-scroll-motion';
 
 const ZoomInScrollOut = batch(Sticky(), FadeIn(), ZoomIn())
 
@@ -18,17 +18,19 @@ function HomeAnimation(props){
         
             <Animator animation={batch(Fade(), Sticky(), MoveOut(0, -200))}>
                 <h2>Organize your School</h2>
-                <img src={stockPhoto1} />
+                <img width={'300px'} src={stockPhoto1} />
             </Animator>
             </ScrollPage>
+
+            
 
 
         <ScrollPage page={1}>
         
-            <Animator animation={batch(Fade(), Sticky(), MoveOut(0, -200))}>
+            <Animator animation={batch(Fade(), Sticky())}>
                 <div>
                 <h2>Simplify gradebook management and focus on what matters</h2>
-                <img src={stockPhoto2} />
+                <img width={'300px'} src={stockPhoto2} />
                 </div>
 
             </Animator>
@@ -36,7 +38,30 @@ function HomeAnimation(props){
 
         <ScrollPage page={2}>
         
-        <Animator animation={batch(Fade(),  Sticky(), MoveOut(200, -800))}>
+        <Animator animation={batch( Sticky(), MoveOut(0, -200))}>
+            <div>
+            <h2>Simplify gradebook management and focus on what matters</h2>
+            <img  width={'300px'} src={stockPhoto2} />
+            </div>
+
+        </Animator>
+    </ScrollPage>
+
+        <ScrollPage page={3}>
+        
+        <Animator animation={batch(Fade(), Sticky())}>
+            <div>
+            <h2>Provide easy access to lesson plans</h2>
+            <img height={'300px'} src={stockPhoto3} />
+            </div>
+        </Animator>
+        </ScrollPage>
+
+        
+
+        <ScrollPage page={4}>
+        
+        <Animator animation={batch( Sticky(), MoveOut(200, -200))}>
             <div>
             <h2>Provide easy access to lesson plans</h2>
             <img height={'300px'} src={stockPhoto3} />
@@ -46,11 +71,12 @@ function HomeAnimation(props){
 
  
 
-        <ScrollPage page={3}>
+        <ScrollPage page={5}>
         
         <Animator animation={ZoomInScrollOut}>
             
-            <button className='btn btn-primary'><h2>Try Now!</h2></button>
+        <button type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signUpModal"><h1>Try Now!</h1></button>
+
         </Animator>
         </ScrollPage>
     
