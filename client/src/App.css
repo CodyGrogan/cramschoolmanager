@@ -131,6 +131,11 @@ ul{
 }
 
 
+.navbarSpace{
+  width: 100%;
+  height: 4rem;
+}
+
 
 .scrollContainer{
   display: flex;

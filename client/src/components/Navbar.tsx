@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 
 function Navbar(props: any){
 
-  const [loggedIn, setLoggedIn] = useState<boolean>(true);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   
   useEffect(() => {
@@ -74,6 +74,7 @@ function Navbar(props: any){
   
         }
         else{
+          setLoggedIn(false);
         console.log('user is not signed in')
       let button = document.getElementById('openNoClose');
       button?.click();
@@ -83,6 +84,7 @@ function Navbar(props: any){
 
       else{ 
         console.log('trying to close modal') 
+        console.log(loggedIn);
         let closebutton = document.getElementById('closeModalButton');
         closebutton?.click();
         setTimeout(()=>{
@@ -295,7 +297,7 @@ function Navbar(props: any){
   }
 
     return(
-      <div>
+      <div className='navbarSpace'>
        <nav className="navbar fixed-top  navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">Cram School Manager</a>
@@ -445,7 +447,7 @@ function Navbar(props: any){
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">Log In Required</h5>
-                    <button  id='closeModalButton' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button hidden={true} id='closeModalButton' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                 </div>
                 <div className="modal-body">
