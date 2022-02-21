@@ -15,26 +15,37 @@ import { useEffect, useState } from 'react';
 
 function Navbar(props: any){
 
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
 
   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(), navauthStateObserver);
+
+    let user = getAuth().currentUser;
+    if (user == null){
+      console.log('user is null')
+      setLoggedIn(false);
+    }
 
     if(props.homepage != true){
       console.log('not on homepage')
 
       if (loggedIn === false){
 
-      
+       
+        if(user != null){
           console.log('user signed in')
-     
+
+        }
+        else{
+          console.log('user is not signed in component mount')
+      let button = document.getElementById('openNoClose');
+      button?.click();
+        }
+
       }
 
-      else{  
-        let button = document.getElementById('closeModalButton');
-      button?.click();
-      }
+  
     }
     return () => unsubscribe(); // unsubscribing from the listener when the component is unmounting. 
 }, []);
@@ -50,23 +61,46 @@ function Navbar(props: any){
         
         {
           console.log('user signed in')
+          let button = document.getElementById('closeModalButton');
+          button?.click();
+          console.log('trying to close modal') 
+          let closebutton = document.getElementById('closeModalButton');
+          closebutton?.click();
+          setTimeout(()=>{
+            closebutton?.click();
+  
+          },
+          500)
+  
         }
         else{
-          console.log('user is not signed in')
+        console.log('user is not signed in')
       let button = document.getElementById('openNoClose');
       button?.click();
         }
 
       }
 
-      else{  
-        let button = document.getElementById('closeModalButton');
-      button?.click();
+      else{ 
+        console.log('trying to close modal') 
+        let closebutton = document.getElementById('closeModalButton');
+        closebutton?.click();
+        setTimeout(()=>{
+          closebutton?.click();
+
+        },
+        500)
+
+       
       }
     }
 
   },
-  [loggedIn])
+  [loggedIn]);
+
+  async function checkLoginStatus(){
+    
+  }
 
   async function signInEmail() {
     console.log("sign in email button pressed")
@@ -225,6 +259,7 @@ function Navbar(props: any){
       signOutButtonElement.hidden = false;
       setLoggedIn(true);
 
+
       try{
         getSchoolData();
         console.log('get school')
@@ -260,7 +295,8 @@ function Navbar(props: any){
   }
 
     return(
-       <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div>
+       <nav className="navbar fixed-top  navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">Cram School Manager</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -294,7 +330,13 @@ function Navbar(props: any){
   </div>
 
 
-  <div className="modal fade" id="loginOrSignup" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+
+
+
+</nav>
+
+<div className="modal fade" id="loginOrSignup" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -360,7 +402,7 @@ function Navbar(props: any){
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">Sign Up</h5>
-                    <button id='closeModalButton' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
 
@@ -403,6 +445,8 @@ function Navbar(props: any){
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">Log In Required</h5>
+                    <button  id='closeModalButton' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                 </div>
                 <div className="modal-body">
                    
@@ -426,9 +470,7 @@ function Navbar(props: any){
           
           
 
-
-
-</nav>
+</div>
     )
 }
 

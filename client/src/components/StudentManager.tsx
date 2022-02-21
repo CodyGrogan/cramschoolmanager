@@ -141,7 +141,7 @@ function StudentManager(props: any){
     return(
         <div>
              <Navbar setSchool={props.setSchool}/>
-             Student Manager
+  
 
         <div className="school-section">
            <div className="table-responsive">
