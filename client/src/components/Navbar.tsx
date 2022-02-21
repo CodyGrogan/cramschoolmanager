@@ -22,20 +22,46 @@ function Navbar(props: any){
     const unsubscribe = onAuthStateChanged(getAuth(), navauthStateObserver);
 
     if(props.homepage != true){
+      console.log('not on homepage')
 
-      let button = document.getElementById('openNoClose');
+      if (loggedIn === false){
+
+      
+          console.log('user signed in')
+     
+      }
+
+      else{  
+        let button = document.getElementById('closeModalButton');
       button?.click();
+      }
     }
     return () => unsubscribe(); // unsubscribing from the listener when the component is unmounting. 
 }, []);
 
   useEffect(()=>{
     if(props.homepage != true){
+      console.log('not on homepage')
 
       if (loggedIn === false){
+
+        let user = getAuth().currentUser;
+        if(user != null)
+        
+        {
+          console.log('user signed in')
+        }
+        else{
+          console.log('user is not signed in')
       let button = document.getElementById('openNoClose');
       button?.click();
+        }
 
+      }
+
+      else{  
+        let button = document.getElementById('closeModalButton');
+      button?.click();
       }
     }
 
@@ -334,7 +360,7 @@ function Navbar(props: any){
                 <div className="modal-content">
                 <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">Sign Up</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id='closeModalButton' type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
 
