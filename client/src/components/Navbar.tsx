@@ -226,7 +226,12 @@ function Navbar(props: any){
           }
   }  
   
+  function closeModal(){   //this needs to used when closing the mandatory sign in modal when not on the home page
+                          //without this the link to the home page is opened before the modal is closed if the user clicks slightly outside the button
+    let button = document.getElementById('closeNoClose');
+    button?.click();
 
+  }
 
     return(
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -239,7 +244,7 @@ function Navbar(props: any){
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active" to='/'>Home</Link>
+          <Link id='homeLink' className="nav-link active" to='/'>Home</Link>
         </li>
         
         <li className="nav-item">
@@ -371,17 +376,16 @@ function Navbar(props: any){
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Log In</h5>
-                    <Link className="nav-link active" to='/'><button id='closeNoClose' type="button" className="btn-primary btn-sm">Return Home</button></Link>
+                    <h5 className="modal-title" id="exampleModalLabel">Log In Required</h5>
                 </div>
                 <div className="modal-body">
                    
                     <div className='loginDiv'>
-                      <button type="button" className="btn btn-primary loginButton" data-bs-toggle="modal" data-bs-target="#logInModalNoClose">Log In</button>
+                          <p>You must be logged in to view this page.</p>
                     </div>
 
                     <div className='loginDiv'>
-                     <button type="button" className="btn btn-outline-primary loginButton"  data-bs-toggle="modal" data-bs-target="#signUpModalNoClose">Sign Up</button>
+                    <Link className="nav-link active"  to='/' onClick={()=>closeModal()}><button id='closeNoClose' type="button" data-bs-dismiss="modal" className="btn-primary btn-sm">Return Home</button></Link>
                     </div>
                    
                 
@@ -392,86 +396,8 @@ function Navbar(props: any){
             </div>
 
 
-            <div className="modal fade" id="logInModalNoClose"  data-bs-backdrop="static"  tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Log In</h5>
-                    <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#loginOrSignupNoClose" aria-label="Close">Back</button>
-                </div>
-                <div className="modal-body">
-                   
-                  <form>
-
-                    <div className="mb-3 form-group">
-                        <label  className="form-label" >Email</label>
-                        <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
-                        
-                    </div>
-                    <div className="mb-3 form-group">
-                        <label  className="form-label" id='passwordlabel'>Password</label>
-                        <input type="password" className="form-control" id="loginPassword" aria-describedby="emailHelp"/>
-                        
-                    </div>
-
-                    <div className='loginDiv form-group'>
-                      <button type="button" onClick={()=>signInEmail()} className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Log In</button>
-                    </div>
-                  </form>
-
-                   
-                
-                </div>
-              
-                </div>
-            </div>
-          </div>
-
-
-          
-
-          <div className="modal fade" id="signUpModalNoClose"  data-bs-backdrop="static"  tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLabel">Sign Up</h5>
-                    <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#loginOrSignupNoClose" aria-label="Close">Back</button>
-                </div>
-                <div className="modal-body">
-
-
-              <form>
-                <div className="mb-3 form-group">
-                        <label  className="form-label" >Name</label>
-                        <input type="text" className="form-control" id="signupName" aria-describedby="emailHelp"/>
-                        
-                    </div>
-                   
-                    <div className="mb-3 form-group">
-                        <label  className="form-label" >Email</label>
-                        <input type="email" className="form-control" id="signupEmail" aria-describedby="emailHelp"/>
-                        
-                    </div>
-                    <div className="mb-3 form-group">
-                        <label  className="form-label" id='loginPassword'>Password</label>
-                        <input type="password" className="form-control" id="signupPassword" aria-describedby="emailHelp"/>
-                        
-                    </div>
-
-                    <div className='loginDiv'>
-                      <button onClick={()=>emailSignUp()} type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal">Sign Up</button>
-                    </div>
-                </form>
-                   
-                
-                </div>
-              
-                </div>
-            </div>
-          </div>
-
             <button id='openNoClose' hidden={true}   data-bs-toggle="modal" data-bs-target="#loginOrSignupNoClose"></button>
-
+          
           
 
 
