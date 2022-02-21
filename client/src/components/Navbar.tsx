@@ -11,16 +11,36 @@ import {
   signInWithEmailAndPassword
 } from 'firebase/auth';
 import School from '../classes/School';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Navbar(props: any){
+
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(), navauthStateObserver);
 
+    if(props.homepage != true){
+
+      let button = document.getElementById('openNoClose');
+      button?.click();
+    }
     return () => unsubscribe(); // unsubscribing from the listener when the component is unmounting. 
 }, []);
+
+  useEffect(()=>{
+    if(props.homepage != true){
+
+      if (loggedIn === false){
+      let button = document.getElementById('openNoClose');
+      button?.click();
+
+      }
+    }
+
+  },
+  [loggedIn])
 
   async function signInEmail() {
     console.log("sign in email button pressed")
@@ -39,6 +59,8 @@ function Navbar(props: any){
           console.log(errorCode + errorMessage);
           console.log(email);
           alert("Wrong Email or Password")
+          let button = document.getElementById('openNoClose');
+          button?.click();
         });
         
   }
@@ -111,6 +133,8 @@ function Navbar(props: any){
 
     if (name.length < 1){
       alert("Name must have at least one character")
+      let button = document.getElementById('openNoClose');
+      button?.click();
     }
 
     else{
@@ -148,7 +172,9 @@ function Navbar(props: any){
         const errorMessage = error.message;
         // ..
 
-        alert("Invalid Email, Password Less than 6 characters, or Already Exists")
+        alert("Invalid Email, Password Less than 6 characters, or Already Exists");
+        let button = document.getElementById('openNoClose');
+      button?.click();
       });
     }
   }
@@ -171,6 +197,7 @@ function Navbar(props: any){
    
       signInButtonElement.hidden = true;
       signOutButtonElement.hidden = false;
+      setLoggedIn(true);
 
       try{
         getSchoolData();
@@ -189,8 +216,12 @@ function Navbar(props: any){
         var signInButtonElement = document.getElementById('sign-in') as HTMLInputElement;
         var signOutButtonElement = document.getElementById('sign-out') as HTMLInputElement;
         signOutButtonElement.addEventListener('click', signOutUser);
-            signInButtonElement.hidden = false;
-            signOutButtonElement.hidden = true;
+        signInButtonElement.hidden = false;
+        signOutButtonElement.hidden = true;
+        setLoggedIn(false);
+
+        let defSchool = new School('myschool', 'testid');
+        props.setSchool(defSchool);
             
           }
   }  
@@ -332,6 +363,116 @@ function Navbar(props: any){
                 </div>
             </div>
           </div>
+
+{//The following modals disable close buttons when not on the home page.
+}
+
+          <div className="modal fade" data-keyboard={"false"} data-bs-backdrop="static"  id="loginOrSignupNoClose" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Log In</h5>
+                    <Link className="nav-link active" to='/'><button id='closeNoClose' type="button" className="btn-primary btn-sm">Return Home</button></Link>
+                </div>
+                <div className="modal-body">
+                   
+                    <div className='loginDiv'>
+                      <button type="button" className="btn btn-primary loginButton" data-bs-toggle="modal" data-bs-target="#logInModalNoClose">Log In</button>
+                    </div>
+
+                    <div className='loginDiv'>
+                     <button type="button" className="btn btn-outline-primary loginButton"  data-bs-toggle="modal" data-bs-target="#signUpModalNoClose">Sign Up</button>
+                    </div>
+                   
+                
+                </div>
+             
+                </div>
+            </div>
+            </div>
+
+
+            <div className="modal fade" id="logInModalNoClose"  data-bs-backdrop="static"  tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Log In</h5>
+                    <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#loginOrSignupNoClose" aria-label="Close">Back</button>
+                </div>
+                <div className="modal-body">
+                   
+                  <form>
+
+                    <div className="mb-3 form-group">
+                        <label  className="form-label" >Email</label>
+                        <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
+                        
+                    </div>
+                    <div className="mb-3 form-group">
+                        <label  className="form-label" id='passwordlabel'>Password</label>
+                        <input type="password" className="form-control" id="loginPassword" aria-describedby="emailHelp"/>
+                        
+                    </div>
+
+                    <div className='loginDiv form-group'>
+                      <button type="button" onClick={()=>signInEmail()} className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#logInModal">Log In</button>
+                    </div>
+                  </form>
+
+                   
+                
+                </div>
+              
+                </div>
+            </div>
+          </div>
+
+
+          
+
+          <div className="modal fade" id="signUpModalNoClose"  data-bs-backdrop="static"  tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">Sign Up</h5>
+                    <button type="button" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#loginOrSignupNoClose" aria-label="Close">Back</button>
+                </div>
+                <div className="modal-body">
+
+
+              <form>
+                <div className="mb-3 form-group">
+                        <label  className="form-label" >Name</label>
+                        <input type="text" className="form-control" id="signupName" aria-describedby="emailHelp"/>
+                        
+                    </div>
+                   
+                    <div className="mb-3 form-group">
+                        <label  className="form-label" >Email</label>
+                        <input type="email" className="form-control" id="signupEmail" aria-describedby="emailHelp"/>
+                        
+                    </div>
+                    <div className="mb-3 form-group">
+                        <label  className="form-label" id='loginPassword'>Password</label>
+                        <input type="password" className="form-control" id="signupPassword" aria-describedby="emailHelp"/>
+                        
+                    </div>
+
+                    <div className='loginDiv'>
+                      <button onClick={()=>emailSignUp()} type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal">Sign Up</button>
+                    </div>
+                </form>
+                   
+                
+                </div>
+              
+                </div>
+            </div>
+          </div>
+
+            <button id='openNoClose' hidden={true}   data-bs-toggle="modal" data-bs-target="#loginOrSignupNoClose"></button>
+
+          
 
 
 

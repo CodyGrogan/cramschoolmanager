@@ -12,7 +12,7 @@ function Home(props: any){
    
     return(
         <div>
-            <Navbar setSchool={props.setSchool}/>
+            <Navbar setSchool={props.setSchool} homepage={true}/>
         
             <HomeAnimation/>
 
