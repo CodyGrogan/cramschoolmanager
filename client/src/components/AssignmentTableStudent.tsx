@@ -70,7 +70,7 @@ function AssignmentTableStudent(props: any){
 
                 let thisgrade = assignmentList[i].grades[indexOfName].value.toString();
           
-                let newjsx = <td> <input onKeyDown={enterKeyPressed} data-name={props.name} data-index={i} id={i+'assignment'+props.name+"end"+assignmentList[i].name} type={'number'} min={0} max={100}  placeholder={thisgrade}/>
+                let newjsx = <td> <input className="grade-input" onKeyDown={enterKeyPressed} data-name={props.name} data-index={i} id={i+'assignment'+props.name+"end"+assignmentList[i].name} type={'number'} min={0} max={100}  placeholder={thisgrade}/>
                 
                 <button className="btn-sm btn-primary" onClick={buttonPressed} data-name={props.name} data-inputid={i+'assignment'+props.name+"end"+assignmentList[i].name} data-index={i}>Submit</button>
                 </td>
