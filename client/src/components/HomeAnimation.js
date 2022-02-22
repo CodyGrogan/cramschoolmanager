@@ -47,6 +47,13 @@ function HomeAnimation(props){
         <ScrollPage page={1}>
 
             <div className='scrollPageContainer'>
+
+            <Animator animation={batch(Fade(), MoveIn(0, -200), MoveOut(0, 200))}>
+                <div>
+                <img className='intro-img img-back' width={'250px'} src={stockPhoto2} />
+                </div>
+
+            </Animator>
         
             <Animator animation={batch(Fade(), MoveOut(0, -200))}>
                 <div className='intro-div'>
@@ -55,12 +62,7 @@ function HomeAnimation(props){
                 </div>
 
             </Animator>
-            <Animator animation={batch(Fade(), MoveIn(0, 200), MoveOut(0, -200))}>
-                <div className='img-back'>
-                <img className='intro-img img-back' width={'250px'} src={stockPhoto2} />
-                </div>
-
-            </Animator>
+           
 
             
             
