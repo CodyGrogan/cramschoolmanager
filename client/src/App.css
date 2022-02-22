@@ -137,10 +137,26 @@ ul{
 }
 
 
-.scrollContainer{
+.scrollPageContainer{
   display: flex;
   justify-content: center;
   margin-top: 15%;
+  flex-wrap: wrap;
+}
+
+.intro-div{
+  display: flex;
+  align-items: flex-start;
+  background-color: #F8F4EF;
+  box-shadow: 5px 10px 5px #888888;
+}
+
+.intro-img{
+  border-radius: 100%;
+}
+
+.img-back{
+  z-index: -1;
 }
 
 @keyframes App-logo-spin {
