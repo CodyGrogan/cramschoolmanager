@@ -34,9 +34,26 @@ function HomeAnimation(props){
                 
                 </div>
             </Animator>
+      
 
             
             </div>
+
+            <br/>
+        <div className='centerButton homepage-div'>
+       
+        <p >Scroll Down to Learn More</p> <br/>
+       
+        </div>
+
+        <div className='centerButton homepage-div'>
+       
+       <div>
+       <span className='homepage-arrow material-icons'>
+       expand_more
+       </span>
+       </div>
+       </div>
 
 
             </ScrollPage>
