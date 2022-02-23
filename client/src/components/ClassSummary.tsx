@@ -151,10 +151,7 @@ function ClassSummary(props: any){
                   
                     Total Students: {schoolClass.studentList.length}
                   <br/>
-                  Teachers: {schoolClass.teacherList}
-                  <br/>
-                  Average Grade: 
-                  <br/>
+         
                   Start Date: {schoolClass.startDate}
                   <br/>
                   End Date:   {schoolClass.endDate}

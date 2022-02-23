@@ -332,8 +332,8 @@ function ClassManager(props: any){
     return(
         <div>
             <div className="row">
-            <h3>Class Information</h3>
-            <div className="col-10-sm">this will quick display information about the selected lesson <br/>
+            <h3>Edit Class Information</h3>
+            <div className="col-10-sm"> <br/>
             
                 <div className="inputBox container">
                 <div className="col-sm">
@@ -373,7 +373,6 @@ function ClassManager(props: any){
                         <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div className="accordion-body">
 
-                            this section will include a table with student names on the y axis, lesson nums on the x axis. There will be checkboxs showing if the student attended the class or not.
 
                             {attendanceChart}
 
@@ -390,7 +389,6 @@ function ClassManager(props: any){
                         <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                         <div className="accordion-body">
 
-                        this section will include a table with student names on the y axis, assignments on the x axis. The grade will be shown for each student for each assignment.
                         {assignmentTable}
 
                         </div>
@@ -405,12 +403,7 @@ function ClassManager(props: any){
                         </h2>
                         <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                         <div className="accordion-body">
-                                <div >The list of lessons will go here</div>
-                                <div >this will quick display information about the selected lesson.
-                                    clicking on the lesson name should open the lesson manager in a modal. 
-
-                                    
-                                </div>
+                     
                                 {lessonList}
                                 <button className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#studentModal">New Lesson</button>
 
@@ -427,10 +420,7 @@ function ClassManager(props: any){
                         <div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
                         <div className="accordion-body">
 
-                            <div >The list of assignments will go here</div>
-                            <div >this will quick display information about the selected asssignment
-                            clicking on the assignment name should open the assignment manager in a modal.
-
+                            <div >
                             {assignmentList}
 
                             <button className="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#assignmentModal">New Assignment</button>
