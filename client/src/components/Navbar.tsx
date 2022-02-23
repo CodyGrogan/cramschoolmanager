@@ -296,6 +296,14 @@ function Navbar(props: any){
 
   }
 
+  function demoSignIn(){
+    
+    let email = 'demo123123@demo123123.com';
+    let password = 'demopassword';
+    signInWithEmailAndPassword(getAuth(), email, password);
+
+  }
+
     return(
       <div className='navbarSpace'>
        <nav className="navbar fixed-top  navbar-expand-lg navbar-light bg-light">
@@ -354,6 +362,11 @@ function Navbar(props: any){
                     <div className='loginDiv'>
                      <button type="button" className="btn btn-outline-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</button>
                     </div>
+
+                    <p className='centerButton'>or</p>
+                <div className='centerButton'>
+                <button className='btn btn-primary' data-bs-dismiss="modal" onClick={()=> demoSignIn()} >Try a Demo!</button>
+                 </div>  
                    
                 
                 </div>
@@ -431,7 +444,11 @@ function Navbar(props: any){
                       <button onClick={()=>emailSignUp()} type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal">Sign Up</button>
                     </div>
                 </form>
-                   
+
+                <p className='centerButton'>or</p>
+                <div className='centerButton'>
+                <button className='btn btn-primary' data-bs-dismiss="modal" onClick={()=> demoSignIn()} >Try a Demo!</button>
+                 </div>  
                 
                 </div>
               
