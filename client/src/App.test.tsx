@@ -7,7 +7,7 @@ import Student from './classes/Student';
 
 test('renders homepagetext', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Homepage/i);
+  const linkElement = screen.getByText(/Welcome/i);
   expect(linkElement).toBeInTheDocument();
 });
 
@@ -40,4 +40,15 @@ test('if two students with same name added to class, dont add the student', () =
   newclass.addStudent(newstudent2);
   let length = newclass.studentList.length;
   expect(length).toBe(1);
+});
+
+
+test('expect navbar to be on Student page', ()=>{
+
+  render(<App />);
+  const linkElement = screen.getByText(/Students/i);
+  linkElement.click();
+  const navbar = screen.getByText(/Cram School Manager/i);
+  expect(navbar).toBeInTheDocument();
+
 });
