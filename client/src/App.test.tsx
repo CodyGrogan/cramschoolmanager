@@ -52,3 +52,20 @@ test('expect navbar to be on Student page', ()=>{
   expect(navbar).toBeInTheDocument();
 
 });
+
+
+
+test('expect return home button to appear when not logged in, clicking it returns to homepage', ()=>{
+
+  render(<App />);
+  const linkElement = screen.getByText(/Students/i);
+  linkElement.click();
+
+  const returnBtn = screen.getByText(/Return/i);
+  returnBtn.click();
+
+  const welcome = screen.getByText(/Welcome/i);
+
+  expect(welcome).toBeInTheDocument();
+
+});
