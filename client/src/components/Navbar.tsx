@@ -328,10 +328,10 @@ function Navbar(props: any){
        
        
       </ul>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#loginOrSignup" className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in"  >
+      <button type="button" data-bs-toggle="modal" data-bs-target="#loginOrSignup" className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in" data-testid='sign-in'  >
       <i className="material-icons">account_circle</i>Sign In
     </button>
-    <button hidden type="button" onClick={()=>signOutUser()} className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
+    <button hidden type="button" onClick={()=>signOutUser()} className="navbar-brand btn btn-warning signBtn" id='sign-out' data-testid='sign-out'>Sign Out</button>
 
 
     
@@ -459,7 +459,7 @@ function Navbar(props: any){
 {//The following modals disable close buttons when not on the home page.
 }
 
-          <div className="modal fade" data-keyboard={"false"} data-bs-backdrop="static"  id="loginOrSignupNoClose" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div data-testid="noclose" className="modal fade" data-keyboard={"false"} data-bs-backdrop="static"  id="loginOrSignupNoClose" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                 <div className="modal-header">

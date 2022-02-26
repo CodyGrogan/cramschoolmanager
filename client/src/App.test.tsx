@@ -69,3 +69,34 @@ test('expect return home button to appear when not logged in, clicking it return
   expect(welcome).toBeInTheDocument();
 
 });
+
+
+test('expect signout to be hidden', ()=>{
+
+  render(<App />);
+  const linkElement = screen.getByText(/Students/i);
+  linkElement.click();
+
+  const btn = screen.getByTestId(/sign-out/i);
+  expect(btn).not.toBeVisible();
+
+  
+
+  
+
+});
+
+test('expect sign in to be visible', ()=>{
+
+  render(<App />);
+  
+
+
+  const btn = screen.getByTestId(/sign-in/i);
+  expect(btn).toBeVisible();
+
+  
+
+  
+
+});
