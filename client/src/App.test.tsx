@@ -100,3 +100,30 @@ test('expect sign in to be visible', ()=>{
   
 
 });
+
+test('expect sign in be hidden when signed in', ()=>{
+
+  render(<App />);
+  
+
+  const btn = screen.getByTestId(/sign-in/i);
+  btn.click();
+
+  
+  const demo = screen.getByTestId(/demo/i);
+  demo.click();
+
+
+
+
+  setTimeout(() => {
+    expect(btn).not.toBeVisible();  //needs time to log in
+    
+  }, 2000);
+ 
+
+  
+
+  
+
+});

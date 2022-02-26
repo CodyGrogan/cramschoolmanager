@@ -365,7 +365,7 @@ function Navbar(props: any){
 
                     <p className='centerButton'>or</p>
                 <div className='centerButton'>
-                <button className='btn btn-primary' data-bs-dismiss="modal" onClick={()=> demoSignIn()} >Try a Demo!</button>
+                <button className='btn btn-primary' data-bs-dismiss="modal" onClick={()=> demoSignIn()} data-testid='demo' >Try a Demo!</button>
                  </div>  
                    
                 
