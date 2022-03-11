@@ -6,9 +6,9 @@
     "start": "node ./bin/www",
     "postinstall": "cd client && npm install",
     "build": "npm run build --prefix ./client"
-
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^15.0.0",
