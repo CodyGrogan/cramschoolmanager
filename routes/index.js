@@ -3,6 +3,21 @@ var router = express.Router();
 const studentModel = require('../models/StudentModel');
 const schoolModel = require('../models/SchoolModel');
 
+const { initializeApp } = require('firebase-admin/app');
+const {getAuth} = require('firebase-admin/auth')
+const admin = require('firebase-admin');
+
+//firebase admin
+
+let serviceAccount = JSON.parse(process.env.FIREBASE);
+
+const app = initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+
+});
+
+
+
 //setup mongo
 var mongoose = require('mongoose');
 var mongopassword = process.env.MONGOPASS;
