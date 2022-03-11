@@ -10,6 +10,9 @@ function HomeAnimation(props){
 
     return(
      <div>
+         <div className='fullPage'>
+
+         <div className='firstScrollPageContainer'>
 
        
                 <div  className='intro-div'>
@@ -17,7 +20,9 @@ function HomeAnimation(props){
                 <img className='intro-img' width={'250px'} src={stockPhoto1} /><br/>
                 
                 </div>
-                <div className='centerButton'>
+              
+                <div className='centerButton buttonDown'>
+    
                 <button type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signUpModal"><h1>Try Now!</h1></button>
                 </div>
             
@@ -31,6 +36,11 @@ function HomeAnimation(props){
        
         </div>
 
+        </div>
+
+        </div>
+
+
         <div className='centerButton homepage-div'>
        
        <div>
@@ -41,19 +51,15 @@ function HomeAnimation(props){
        </div>
 
 
-            
 
-       <br/>       <br/>       <br/>
-    
+            <div className='scrollPageContainer' >
 
-            <div data-aos='fade-left' >
-
-                <div>
+                <div data-aos='fade-left' >
                 <img className='intro-img img-back' width={'250px'} src={stockPhoto2} />
                 </div>
 
         
-                <div className='intro-div'>
+                <div className='intro-div' data-aos='fade-right' >
                 <h2>Simplify gradebook management and focus on what matters</h2>
            
                 </div>
@@ -66,7 +72,7 @@ function HomeAnimation(props){
 
 
     
-       <div  data-aos='fade-right' >
+       <div className='scrollPageContainer'  data-aos='fade-right' >
                 <div className='intro-div'>
                 <h2>Provide easy access to lesson plans</h2>
                 <img className='intro-img' height={'250px'} src={stockPhoto3}  />
@@ -78,11 +84,17 @@ function HomeAnimation(props){
       
 
  
-
+        <div className='scrollPageContainer' data-aos='fade-left'  >
             
-        <button data-aos='fade-left'  type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signUpModal"><h1>Try Now!</h1></button>
+        <button type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signUpModal"><h1>Try Now!</h1></button>
 
-
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
 
 
         </div>
