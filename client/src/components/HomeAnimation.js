@@ -24,32 +24,35 @@ function HomeAnimation(props){
                 <div className='centerButton buttonDown'>
     
                 <button type="button" className="btn btn-primary loginButton" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signUpModal"><h1>Try Now!</h1></button>
+                
+                 
+
+                    </div>
+
+                    <div className='centerButton'>
+                    
+                    <p >Scroll Down to Learn More</p> <br/>
+                    
+                    </div>
+
+                    <div className='centerButton'>
+                    
+                    <div>
+                    <span className='homepage-arrow material-icons'>
+                    expand_more
+                    </span>
+                    </div>
+                    </div>
+
+                
                 </div>
-            
-
-            
-
-            <br/>
-        <div className='centerButton homepage-div'>
+    
        
-        <p >Scroll Down to Learn More</p> <br/>
-       
-        </div>
-
-        </div>
 
         </div>
 
 
-        <div className='centerButton homepage-div'>
-       
-       <div>
-       <span className='homepage-arrow material-icons'>
-       expand_more
-       </span>
-       </div>
-       </div>
-
+     
 
 
             <div className='scrollPageContainer' >
