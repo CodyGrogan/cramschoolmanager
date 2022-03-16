@@ -154,8 +154,15 @@ function Navbar(props: any){
 
     console.log('getting school data')
     let uid = getAuth().currentUser?.uid;
+    
+    let token = await getAuth().currentUser?.getIdToken();
+
+    let UIDToken = [uid, token];
+
     console.log('uid is ' + uid);
-    let obj = JSON.stringify({uid});
+    let obj = JSON.stringify({UIDToken});
+    
+
     let postpath: string = '/getschoolinfo';
 
     fetch(postpath, {
