@@ -117,20 +117,35 @@ router.put('/editschool', function(req, res, next){
 router.post('/getschoolinfo', function(req, res, next){   //this should use post request, later this will need to pass firebase JWT and schoolID
                                                       //for authentication on server side
 
-  console.log('get school information')
+  console.log('get school information');
   let newschoolID = req.body.uid;
+  let token = req.body.token;
   console.log(newschoolID);
+
+  getAuth(app).verifyIdToken(token)
+    .then((decodedToken) => {
+        console.log('server side auth success')
+
+        schoolModel.findOne({schoolID: newschoolID}, function (err, doc){
+          if (err){console.log(err);
+          res.send(err)}
+          else{
+              res.json(doc);
+              
+            }
+          });
+        
+
+    })
+    .catch((error) => {
+        console.log('auth error');
+        console.log(error);
+    });
+
 
  
 
-  schoolModel.findOne({schoolID: newschoolID}, function (err, doc){
-    if (err){console.log(err);
-    res.send(err)}
-    else{
-        res.json(doc);
-        
-      }
-    });
+ 
 
 });
 
