@@ -175,6 +175,10 @@ ul{
   bottom: 25%;
 }
 
+.breakLine{
+  width: 100%;
+}
+
 .homepage-arrow{
   animation-name: arrow-animation;
   animation-duration: 4s;
