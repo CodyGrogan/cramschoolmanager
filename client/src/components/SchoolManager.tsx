@@ -38,7 +38,9 @@ function SchoolManager(props: any){
         let user = getAuth().currentUser;
         if (user){
         console.log('adding school info to database');
-        let jsonstring = JSON.stringify(school);
+        let token = await getAuth().currentUser?.getIdToken();
+
+        let jsonstring = JSON.stringify({school, token});
         let postpath: string = '/editschool';
         
 

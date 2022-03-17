@@ -78,39 +78,54 @@ router.post('/createschool', function(req, res, next) {
 router.put('/editschool', function(req, res, next){
 
   console.log('put school information')
-  let school = req.body;
+  let school = req.body.school;
+  let token = req.body.token;
   console.log(school.schoolID);
   let searchID = school.schoolID;
 
- if (school.schoolID != 'testid'){
+  getAuth(app).verifyIdToken(token)
+    .then((decodedToken) => {
+        console.log('server side auth success')
 
-  schoolModel.findOne({schoolID: searchID}, function (err, doc){
-    if (err){console.log(err);
-    res.send(err)}
-    else{
+       
+        if (school.schoolID != 'testid' && school.schoolID == decodedToken.uid){
 
-        try{
-          doc.classList = school.classList;
-          doc.teacherList = school.teacherList;
-          doc.studentList = school.studentList;
-          doc.name = school.name;
-          doc.address = school.address; 
-          doc.save(function(err){if (err) console.log(err);});
-          res.send(200);
-
-        }
-        catch{
-          console.log('an error occured in saving class list')
-        }
-
+          schoolModel.findOne({schoolID: searchID}, function (err, doc){
+            if (err){console.log(err);
+            res.send(err)}
+            else{
         
-      }
+                try{
+                  doc.classList = school.classList;
+                  doc.teacherList = school.teacherList;
+                  doc.studentList = school.studentList;
+                  doc.name = school.name;
+                  doc.address = school.address; 
+                  doc.save(function(err){if (err) console.log(err);});
+                  res.send(200);
+        
+                }
+                catch{
+                  console.log('an error occured in saving class list')
+                }
+        
+                
+              }
+            });
+        
+          }
+          else{
+            console.log('user is not loggged in');
+          }
+        
+
+    })
+    .catch((error) => {
+        console.log('auth error');
+        console.log(error);
     });
 
-  }
-  else{
-    console.log('user is not loggged in');
-  }
+ 
 
 });
 
@@ -124,6 +139,9 @@ router.post('/getschoolinfo', function(req, res, next){   //this should use post
 
   getAuth(app).verifyIdToken(token)
     .then((decodedToken) => {
+
+
+      if (newschoolID == decodedToken.uid){
         console.log('server side auth success')
 
         schoolModel.findOne({schoolID: newschoolID}, function (err, doc){
@@ -134,6 +152,12 @@ router.post('/getschoolinfo', function(req, res, next){   //this should use post
               
             }
           });
+
+        }
+
+        else{
+          console.log('UID and school id do not match');
+        }
         
 
     })
