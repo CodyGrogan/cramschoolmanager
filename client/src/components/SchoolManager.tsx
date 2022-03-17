@@ -22,6 +22,7 @@ function SchoolManager(props: any){
     const [renderNum, setRenderNum] = useState<number>(0);
 
     
+    
     useEffect(()=>{
       let user = getAuth().currentUser;
       if (user){
@@ -72,8 +73,14 @@ function SchoolManager(props: any){
 
         console.log('getting school data')
         let uid = getAuth().currentUser?.uid;
+        
+        let token = await getAuth().currentUser?.getIdToken();
+    
+    
         console.log('uid is ' + uid);
-        let obj = JSON.stringify({uid});
+        let obj = JSON.stringify({uid, token});
+        
+    
         let postpath: string = '/getschoolinfo';
     
         fetch(postpath, {
@@ -91,12 +98,13 @@ function SchoolManager(props: any){
             newschool.address = data.address;
             newschool.loadClasses(data.classList);
             newschool.studentList = data.studentList;
-
+            newschool.teacherList = data.teacherList;
             props.setSchool(newschool);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+    
     
         
       }
