@@ -1,5 +1,5 @@
 body{
-  background-color: #E5DBCF;
+  background-color: #cccccc;
 
 }
 
@@ -43,7 +43,7 @@ ul{
 .school-section{
   
   margin: 5px;
-  background-color: #F8F4EF;
+  background-color: #ffffff;
   
   outline: #b3a99e solid 1px;
   border-radius: 2px;
@@ -55,7 +55,7 @@ ul{
 }
 
 .card{
-  background-color: #F8F4EF !important;
+  background-color: #ffffff !important;
 }
 
 .list-box{
@@ -64,7 +64,7 @@ ul{
   overflow-y: auto;
   margin-top: 5px;
 
-  background-color: #F8F4EF;
+  background-color: #ffffff;
   outline: #b3a99e solid 1px;
   border-radius: 2px;
 }
@@ -154,7 +154,7 @@ ul{
 .intro-div{
   display: flex;
   align-items: flex-start;
-  background-color: #F8F4EF;
+  background-color: #ffffff;
   box-shadow: 5px 10px 5px #888888;
 }
 
